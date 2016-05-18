@@ -5,10 +5,20 @@
  */
 package LogoRefacto.model.Shapes;
 
+import LogoRefacto.model.Tortue;
+
 /**
  *
  * @author Vlad
  */
-public class Carre {
-    
+public class Carre implements MovePattern {
+
+    @Override
+    public void move(Tortue t) {
+        for (int i = 0; i < 4; i++) {
+            t.avancer(100);
+            t.droite(90);
+        }
+    }
+
 }
