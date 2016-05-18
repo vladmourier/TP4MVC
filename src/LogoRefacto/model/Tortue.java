@@ -17,16 +17,14 @@ public class Tortue {
 
     protected int x, y;
     protected int dir;
-    protected boolean crayon;
-    protected int coul;
 
-    public void setColor(int n) {
-        coul = n;
-    }
-
-    public int getColor() {
-        return coul;
-    }
+//    public void setColor(int n) {
+//        coul = n;
+//    }
+//
+//    public int getColor() {
+//        return coul;
+//    }
 
     public Tortue() {
         reset();
@@ -36,8 +34,6 @@ public class Tortue {
         x = 0;
         y = 0;
         dir = -90;
-        coul = 0;
-        crayon = true;
     }
 
     public void setPosition(int newX, int newY) {
@@ -61,21 +57,21 @@ public class Tortue {
         dir = (dir - ang) % 360;
     }
 
-    public void baisserCrayon() {
-        crayon = true;
-    }
-
-    public void leverCrayon() {
-        crayon = false;
-    }
-
-    public void couleur(int n) {
-        coul = n % 12;
-    }
-
-    public void couleurSuivante() {
-        couleur(coul + 1);
-    }
+//    public void baisserCrayon() {
+//        crayon = true;
+//    }
+//
+//    public void leverCrayon() {
+//        crayon = false;
+//    }
+//
+//    public void couleur(int n) {
+//        coul = n % 12;
+//    }
+//
+//    public void couleurSuivante() {
+//        couleur(coul + 1);
+//    }
 
     /** quelques classiques */
     public void carre() {
@@ -94,7 +90,7 @@ public class Tortue {
 
     public void spiral(int n, int k, int a) {
         for (int i = 0; i < k; i++) {
-            couleur(coul + 1);
+//            couleur(coul + 1);
             avancer(n);
             droite(360 / a);
             n = n + 1;
@@ -112,13 +108,13 @@ public class Tortue {
     public int getDir() {
         return dir;
     }
-
-    public boolean isCrayon() {
-        return crayon;
-    }
-
-    public int getCoul() {
-        return coul;
-    }
+//
+//    public boolean isCrayon() {
+//        return crayon;
+//    }
+//
+//    public int getCoul() {
+//        return coul;
+//    }
 
 }

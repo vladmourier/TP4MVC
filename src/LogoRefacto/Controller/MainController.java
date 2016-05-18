@@ -5,7 +5,7 @@
  */
 package LogoRefacto.Controller;
 
-import LogoRefacto.model.FeuilleDessin;
+import LogoRefacto.model.PopulationTortue;
 import LogoRefacto.model.Tortue;
 import LogoRefacto.view.MainView;
 import java.awt.Dimension;
@@ -18,10 +18,10 @@ import java.awt.event.ActionListener;
  */
 public class MainController implements ActionListener {
 
-    FeuilleDessin fcourante;
+    PopulationTortue fcourante;
     MainView mainV;
 
-    public MainController(FeuilleDessin fcourante, MainView mainV) {
+    public MainController(PopulationTortue fcourante, MainView mainV) {
         this.fcourante = fcourante;
         this.mainV = mainV;
     }

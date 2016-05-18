@@ -2,7 +2,7 @@ package LogoRefacto;
 
 // package logo;
 import LogoRefacto.Controller.MainController;
-import LogoRefacto.model.FeuilleDessin;
+import LogoRefacto.model.PopulationTortue;
 import LogoRefacto.model.Tortue;
 import LogoRefacto.view.FeuilleView;
 import LogoRefacto.view.MainView;
@@ -39,7 +39,7 @@ public class SimpleLogo {
         SwingUtilities.invokeLater(new Runnable() {
             public void run() {
                 Tortue t;
-                FeuilleDessin fd = new FeuilleDessin();
+                PopulationTortue fd = new PopulationTortue();
 
                 FeuilleView feuille = new FeuilleView();
 

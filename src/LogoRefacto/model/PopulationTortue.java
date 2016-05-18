@@ -13,11 +13,11 @@ import java.util.*;
  * @version 2.0
  */
 
-public class FeuilleDessin implements Iterator<Tortue> {
+public class PopulationTortue implements Iterator<Tortue> {
     private ArrayList<Tortue> tortues; // la liste des tortues enregistrees
     private Tortue courante;
     
-    public FeuilleDessin() {
+    public PopulationTortue() {
         tortues = new ArrayList<>();
     }
     
