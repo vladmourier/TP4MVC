@@ -5,10 +5,26 @@
  */
 package LogoRefacto.model.Shapes;
 
+import LogoRefacto.model.Tortue;
+
 /**
  *
  * @author Vlad
  */
-public class Polygone {
+public class Polygone implements MovePattern{
+
+    private int n, a;
+
+    public Polygone(int n, int a) {
+        this.n = n;
+        this.a = a;
+    }
+    
+    @Override
+    public void move(Tortue t) {
+        for (int j = 0; j < a; j++) {
+            t.avancer(n);
+            t.droite(360 / a);
+        }    }
     
 }

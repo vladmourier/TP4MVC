@@ -38,6 +38,14 @@ import javax.swing.KeyStroke;
  */
 public class MainView extends JFrame {
 
+    public static final String BTN_AVANCER = "Avancer"; 
+    public static final String BTN_DROITE = "Droite"; 
+    public static final String BTN_GAUCHE = "Gauche"; 
+    public static final String BTN_LEVER = "Lever"; 
+    public static final String BTN_BAISSER = "Baisser"; 
+//    public static final String BTN_AVANCER = "Avancer"; 
+    
+    
     private FeuilleView feuille;
     private JTextField inputValue;
 
