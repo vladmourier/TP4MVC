@@ -5,7 +5,7 @@
  */
 package LogoRefacto.view;
 
-import static LogoRefacto.SimpleLogo.HGAP;
+import static LogoRefacto.Application.HGAP;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
