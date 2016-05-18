@@ -83,17 +83,17 @@ public class TortueView {
     }
     
     public void avancer(int newX, int newY){
-        if (t.isCrayon()==true) {
+//        if (t.isCrayon()==true) {
             Segment seg = new Segment();
             
             seg.ptStart.x = t.getX();
             seg.ptStart.y = t.getY();
             seg.ptEnd.x = newX;
             seg.ptEnd.y = newY;
-            seg.color = decodeColor(t.getCoul());
+//            seg.color = decodeColor(t.getCoul());
             
             listSegments.add(seg);
-        }
+//        }
     }
     
     protected Color decodeColor(int c) {

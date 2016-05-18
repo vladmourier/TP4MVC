@@ -90,7 +90,7 @@ public class MainView extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 JComboBox cb = (JComboBox) e.getSource();
                 int n = cb.getSelectedIndex();
-                feuille..setColor(n);
+//                feuille.setColor(n);
             }
         });
 

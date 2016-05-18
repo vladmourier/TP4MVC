@@ -58,10 +58,10 @@ public class MainController implements ActionListener {
             } catch (NumberFormatException ex) {
                 System.err.println("ce n'est pas un nombre : " + mainV.getInputValue());
             }
-        } else if (c.equals("Lever")) {
-            fcourante.getCourante().leverCrayon();
-        } else if (c.equals("Baisser")) {
-            fcourante.getCourante().baisserCrayon();
+//        } else if (c.equals("Lever")) {
+//            fcourante.getCourante().leverCrayon();
+//        } else if (c.equals("Baisser")) {
+//            fcourante.getCourante().baisserCrayon();
         } // actions des boutons du bas
         else if (c.equals("Proc1")) {
             proc1();
