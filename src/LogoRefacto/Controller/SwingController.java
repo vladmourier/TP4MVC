@@ -5,6 +5,7 @@
  */
 package LogoRefacto.Controller;
 
+import LogoRefacto.view.MainView;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -12,11 +13,35 @@ import java.awt.event.ActionListener;
  *
  * @author Vlad
  */
-public class SwingController  implements ActionListener{
+public class SwingController implements ActionListener {
+
+    private MainController mc;
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        String c = e.getActionCommand();
+
+        // actions des boutons du haut
+        if (c.equals(MainView.CMD_BTN_AVANCER)) {
+        //TODO
+        } else if (c.equals(MainView.CMD_BTN_DROITE)) {
+            //TODO
+        } else if (c.equals(MainView.CMD_BTN_GAUCHE)) { 
+            //TODO
+        } else if (c.equals(MainView.CMD_BTN_LEVER)) {
+            //TODO
+        } else if (c.equals(MainView.CMD_BTN_BAISSER)) {
+            //TODO
+        } else if (c.equals(MainView.CMD_BTN_EFFACER)) {
+            //TODO
+        } else if (c.equals(MainView.CMD_BTN_QUITTER)) {
+            //TODO
+        } // actions des boutons du bas
+        else if (c.equals("Proc1")) {
+        } else if (c.equals("Proc2")) {
+        } else if (c.equals("Proc3")) {
+
+        }
     }
-    
-}
+
+    }

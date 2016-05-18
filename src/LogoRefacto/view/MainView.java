@@ -38,14 +38,14 @@ import javax.swing.KeyStroke;
  */
 public class MainView extends JFrame {
 
-    public static final String BTN_AVANCER = "Avancer"; 
-    public static final String BTN_DROITE = "Droite"; 
-    public static final String BTN_GAUCHE = "Gauche"; 
-    public static final String BTN_LEVER = "Lever"; 
-    public static final String BTN_BAISSER = "Baisser"; 
-//    public static final String BTN_AVANCER = "Avancer"; 
-    
-    
+    public static final String CMD_BTN_AVANCER = "Avancer";
+    public static final String CMD_BTN_DROITE = "Droite";
+    public static final String CMD_BTN_GAUCHE = "Gauche";
+    public static final String CMD_BTN_LEVER = "Lever";
+    public static final String CMD_BTN_BAISSER = "Baisser";
+    public static final String CMD_BTN_EFFACER = "Efacer";
+    public static final String CMD_BTN_QUITTER = "Quitter";
+
     private FeuilleView feuille;
     private JTextField inputValue;
 
@@ -77,11 +77,11 @@ public class MainView extends JFrame {
         toolBar.add(Box.createRigidArea(HGAP));
         inputValue = new JTextField("45", 5);
         toolBar.add(inputValue);
-        addButton(toolBar, "Avancer", "Avancer 50", null);
-        addButton(toolBar, "Droite", "Droite 45", null);
-        addButton(toolBar, "Gauche", "Gauche 45", null);
-        addButton(toolBar, "Lever", "Lever Crayon", null);
-        addButton(toolBar, "Baisser", "Baisser Crayon", null);
+        addButton(toolBar, CMD_BTN_AVANCER, "Avancer 50", null);
+        addButton(toolBar, CMD_BTN_DROITE, "Droite 45", null);
+        addButton(toolBar, CMD_BTN_GAUCHE, "Gauche 45", null);
+        addButton(toolBar, CMD_BTN_LEVER, "Lever Crayon", null);
+        addButton(toolBar, CMD_BTN_BAISSER, "Baisser Crayon", null);
 
         String[] colorStrings = {"noir", "bleu", "cyan", "gris fonce", "rouge",
             "vert", "gris clair", "magenta", "orange",
@@ -108,16 +108,16 @@ public class MainView extends JFrame {
         JMenu menuFile = new JMenu("File"); // on installe le premier menu
         menubar.add(menuFile);
 
-        addMenuItem(menuFile, "Effacer", "Effacer", KeyEvent.VK_N);
-        addMenuItem(menuFile, "Quitter", "Quitter", KeyEvent.VK_Q);
+        addMenuItem(menuFile, "Effacer", CMD_BTN_EFFACER, KeyEvent.VK_N);
+        addMenuItem(menuFile, "Quitter", CMD_BTN_QUITTER, KeyEvent.VK_Q);
 
         menuCommandes = new JMenu("Commandes"); // on installe le premier menu
         menubar.add(menuCommandes);
-        addMenuItem(menuCommandes, "Avancer", "Avancer", -1);
-        addMenuItem(menuCommandes, "Droite", "Droite", -1);
-        addMenuItem(menuCommandes, "Gauche", "Gauche", -1);
-        addMenuItem(menuCommandes, "Lever Crayon", "Lever", -1);
-        addMenuItem(menuCommandes, "Baisser Crayon", "Baisser", -1);
+        addMenuItem(menuCommandes, "Avancer", CMD_BTN_AVANCER, -1);
+        addMenuItem(menuCommandes, "Droite", CMD_BTN_DROITE, -1);
+        addMenuItem(menuCommandes, "Gauche", CMD_BTN_GAUCHE, -1);
+        addMenuItem(menuCommandes, "Lever Crayon", CMD_BTN_LEVER, -1);
+        addMenuItem(menuCommandes, "Baisser Crayon", CMD_BTN_BAISSER, -1);
 
         JMenu menuHelp = new JMenu("Aide"); // on installe le premier menu
         menubar.add(menuHelp);
