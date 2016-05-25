@@ -6,6 +6,7 @@
 package LogoRefacto.view;
 
 import static LogoRefacto.Application.HGAP;
+import LogoRefacto.Controller.Controller;
 import LogoRefacto.model.PopulationTortue;
 import LogoRefacto.model.Tortue;
 import java.awt.BorderLayout;
@@ -29,6 +30,7 @@ import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.JToolBar;
@@ -234,6 +236,15 @@ public class MainView extends JFrame implements IView {
     @Override
     public void addTortue(Tortue t) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public String showChooseBox() {
+        String[] option = {
+            Controller.MODE_MANUEL,
+            Controller.MODE_AUTO
+        };
+        int n = JOptionPane.showOptionDialog(this, "Sélectionnez le mode de fonctionnement", "Choix du mode", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, option, option[0]);
+        return  n != -1 ? option[n] : option[0];
     }
 
 }

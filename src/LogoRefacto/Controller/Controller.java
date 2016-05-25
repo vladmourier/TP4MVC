@@ -13,8 +13,13 @@ import LogoRefacto.model.Tortue;
  * @author Vlad
  */
 public interface Controller {
+    
+    public static final String MODE_MANUEL = "MANUEL";
+    public static final String MODE_AUTO = "AUTO";
 
     public void control();
+    
+    public String selectMode();
 
     public void clearView();
 

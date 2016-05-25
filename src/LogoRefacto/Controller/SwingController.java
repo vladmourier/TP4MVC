@@ -31,6 +31,13 @@ public class SwingController implements Controller, ActionListener {
     public SwingController(PopulationTortue fcourante, MainView mainV) {
         this.fcourante = fcourante;
         this.mainV = mainV;
+        switch(selectMode()){
+            case Controller.MODE_AUTO:
+                break;
+            case Controller.MODE_MANUEL:
+                //TODO
+                break;
+        }
     }
 
     @Override
@@ -138,6 +145,11 @@ public class SwingController implements Controller, ActionListener {
     @Override
     public void addTortue(Tortue t) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public String selectMode() {
+        return mainV.showChooseBox();
     }
 
 }
