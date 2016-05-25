@@ -100,9 +100,11 @@ public class SwingController implements Controller, ActionListener {
         Tortue tortue = new Tortue();
 
         // Deplacement de la tortue au centre de la feuille
-        tortue.setPosition(500 / 2, 400 / 2);
         fcourante.addTortue(tortue);
+        tortue.setPosition(500 / 2, 400 / 2);
+
         mainV.getFeuille().addTortueView(tortue);
+
     }
 
     // efface tout et reinitialise la feuille

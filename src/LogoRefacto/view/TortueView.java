@@ -24,17 +24,17 @@ public class TortueView extends JPanel implements Observer {
 
     Tortue t;
     protected ArrayList<Segment> listSegments; // Trace de la tortue
-
+    protected Graphics g;
     protected static final int rp = 10, rb = 5; // Taille de la pointe et de la base de la fleche
 
     public TortueView() {
         listSegments = new ArrayList<>();
     }
 
-    public TortueView(Tortue t) {
+    public TortueView(Tortue t, Graphics g) {
         this();
         this.t = new Tortue(t);
-        
+        this.g = g;
     }
 
     public TortueView(ArrayList<Segment> listSegments) {
@@ -48,7 +48,6 @@ public class TortueView extends JPanel implements Observer {
         t = new Tortue((Tortue) o);
         Segment s = new Segment(new Point(x, y), new Point(t.getX(), t.getY()));
         listSegments.add(s);
-        drawTurtle(getGraphics());
     }
 
     public void reset() {

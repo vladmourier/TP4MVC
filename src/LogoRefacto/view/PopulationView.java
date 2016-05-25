@@ -32,8 +32,7 @@ public class PopulationView extends JPanel implements Iterator<TortueView> {
     }
 
     public void addTortueView(Tortue t) {
-        
-        TortueView v = new TortueView(t);
+        TortueView v = new TortueView(t, getGraphics());
         t.addObserver(v);
         addTortueView(v);
     }

@@ -37,7 +37,9 @@ public class Tortue extends Observable {
     }
 
     public Tortue() {
-        reset();
+        x = 0;
+        y = 0;
+        dir = -90;
     }
 
     public void reset() {
