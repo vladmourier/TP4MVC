@@ -5,43 +5,118 @@
  */
 package LogoRefacto.Controller;
 
+import LogoRefacto.model.PopulationTortue;
+import LogoRefacto.model.Shapes.MovePattern;
+import LogoRefacto.model.Tortue;
 import LogoRefacto.view.MainView;
+import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.lang.reflect.Field;
+import java.util.ArrayList;
+import java.util.Observable;
+import java.util.Observer;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
  * @author Vlad
  */
-public class SwingController implements ActionListener {
+public class SwingController implements Controller, ActionListener {
 
-    private MainController mc;
+    PopulationTortue fcourante;
+    MainView mainV;
+
+    ActionEvent current;
+
+    public SwingController(PopulationTortue fcourante, MainView mainV) {
+        this.fcourante = fcourante;
+        this.mainV = mainV;
+    }
 
     @Override
-    public void actionPerformed(ActionEvent e) {
-        String c = e.getActionCommand();
+    public void control() {
+        String c = current.getActionCommand();
 
         // actions des boutons du haut
-        if (c.equals(MainView.CMD_BTN_AVANCER)) {
-        //TODO
-        } else if (c.equals(MainView.CMD_BTN_DROITE)) {
-            //TODO
-        } else if (c.equals(MainView.CMD_BTN_GAUCHE)) { 
-            //TODO
-        } else if (c.equals(MainView.CMD_BTN_LEVER)) {
-            //TODO
-        } else if (c.equals(MainView.CMD_BTN_BAISSER)) {
-            //TODO
-        } else if (c.equals(MainView.CMD_BTN_EFFACER)) {
-            //TODO
-        } else if (c.equals(MainView.CMD_BTN_QUITTER)) {
-            //TODO
-        } // actions des boutons du bas
-        else if (c.equals("Proc1")) {
-        } else if (c.equals("Proc2")) {
-        } else if (c.equals("Proc3")) {
+        if (c.equals("Avancer")) {
+            System.out.println("command avancer");
+            try {
+                int v = Integer.parseInt(mainV.getInputValue());
+                fcourante.getCourante().avancer(v);
+                mainV.getFeuille().getCourante().avancer(fcourante.getCourante().getX(), fcourante.getCourante().getY());
+            } catch (NumberFormatException ex) {
+                System.err.println("ce n'est pas un nombre : " + mainV.getInputValue());
+            }
 
+        } else if (c.equals("Droite")) {
+            try {
+                int v = Integer.parseInt(mainV.getInputValue());
+                fcourante.getCourante().droite(v);
+            } catch (NumberFormatException ex) {
+                System.err.println("ce n'est pas un nombre : " + mainV.getInputValue());
+            }
+        } else if (c.equals("Gauche")) {
+            try {
+                int v = Integer.parseInt(mainV.getInputValue());
+                fcourante.getCourante().gauche(v);
+            } catch (NumberFormatException ex) {
+                System.err.println("ce n'est pas un nombre : " + mainV.getInputValue());
+            }
+        } // actions des boutons du bas
+        else if (c.equals("Effacer")) {
+            effacer();
+        } else if (c.equals("Quitter")) {
+            quitter();
+        } else {
+            Field[] forName = MovePattern.class.getDeclaredFields();
+            ArrayList<String> s = new ArrayList<>();
+            for (Field f : forName) {
+                s.add(f.getName());
+            }
+            if (s.contains(c)) {
+                try {
+                    fcourante.getCourante().drawPattern(c);
+                } catch (Exception ex) {
+                    Logger.getLogger(SwingController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
         }
     }
 
+    @Override
+    /**
+     * la gestion des actions des boutons
+     */
+    public void actionPerformed(ActionEvent e) {
+        current = e;
+        control();
+        mainV.repaint();
     }
+
+    public void createTortue() {
+        // Creation de la tortue
+        Tortue tortue = new Tortue();
+
+        // Deplacement de la tortue au centre de la feuille
+        tortue.setPosition(500 / 2, 400 / 2);
+        fcourante.addTortue(tortue);
+        mainV.getFeuille().addTortueView(tortue);
+    }
+
+    // efface tout et reinitialise la feuille
+    public void effacer() {
+        mainV.reset();
+        mainV.repaint();
+
+        // Replace la tortue au centre
+        Dimension size = mainV.getSize();
+        fcourante.getCourante().setPosition(size.width / 2, size.height / 2);
+    }
+
+    private void quitter() {
+        System.exit(0);
+    }
+
+}

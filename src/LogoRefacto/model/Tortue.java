@@ -1,5 +1,13 @@
 package LogoRefacto.model;
-/** ***********************************************************************
+
+import LogoRefacto.model.Shapes.Carre;
+import LogoRefacto.model.Shapes.MovePattern;
+import LogoRefacto.model.Shapes.Polygone;
+import LogoRefacto.model.Shapes.Spiral;
+import java.util.Observable;
+
+/**
+ * ***********************************************************************
  *
  * Un petit Logo minimal qui devra etre ameliore par la suite
  *
@@ -10,21 +18,23 @@ package LogoRefacto.model;
  * @version 2.0
  * @date 25/09/2001
  *
- ************************************************************************* */
-public class Tortue {
+ *************************************************************************
+ */
+public class Tortue extends Observable {
 
     public static final double ratioDegRad = 0.0174533; // Rapport radians/degres (pour la conversion)
 
     protected int x, y;
     protected int dir;
 
-//    public void setColor(int n) {
-//        coul = n;
-//    }
-//
-//    public int getColor() {
-//        return coul;
-//    }
+    public Tortue(Tortue t) {
+        int x = t.getX();
+        int y = t.getY();
+        int dir = t.getDir();
+        this.x = x;
+        this.y = y;
+        this.dir = dir;
+    }
 
     public Tortue() {
         reset();
@@ -34,11 +44,15 @@ public class Tortue {
         x = 0;
         y = 0;
         dir = -90;
+        setChanged();
+        notifyObservers();
     }
 
     public void setPosition(int newX, int newY) {
         x = newX;
         y = newY;
+        setChanged();
+        notifyObservers();
     }
 
     public void avancer(int dist) {
@@ -47,14 +61,53 @@ public class Tortue {
 
         x = newX;
         y = newY;
+        setChanged();
+        notifyObservers();
     }
 
     public void droite(int ang) {
         dir = (dir + ang) % 360;
+        setChanged();
+        notifyObservers();
     }
 
     public void gauche(int ang) {
         dir = (dir - ang) % 360;
+        setChanged();
+        notifyObservers();
+    }
+
+    /**
+     * quelques classiques
+     */
+    public void drawPattern(String MovePattern) throws Exception {
+        MovePattern mp;
+        switch (MovePattern) {
+            case Carre.CARRE:
+                mp = new Carre();
+                break;
+            case Carre.POLYGONE:
+                mp = new Polygone(60, 8);
+                break;
+            case Carre.SPIRALE:
+                mp = new Spiral(50, 40, 6);
+                break;
+            default:
+                throw new Exception("Pattern inconnu");
+        }
+        mp.move(this);
+    }
+
+    public int getX() {
+        return x;
+    }
+
+    public int getY() {
+        return y;
+    }
+
+    public int getDir() {
+        return dir;
     }
 
 //    public void baisserCrayon() {
@@ -72,42 +125,6 @@ public class Tortue {
 //    public void couleurSuivante() {
 //        couleur(coul + 1);
 //    }
-
-    /** quelques classiques */
-    public void carre() {
-        for (int i = 0; i < 4; i++) {
-            avancer(100);
-            droite(90);
-        }
-    }
-
-    public void poly(int n, int a) {
-        for (int j = 0; j < a; j++) {
-            avancer(n);
-            droite(360 / a);
-        }
-    }
-
-    public void spiral(int n, int k, int a) {
-        for (int i = 0; i < k; i++) {
-//            couleur(coul + 1);
-            avancer(n);
-            droite(360 / a);
-            n = n + 1;
-        }
-    }
-
-    public int getX() {
-        return x;
-    }
-
-    public int getY() {
-        return y;
-    }
-
-    public int getDir() {
-        return dir;
-    }
 //
 //    public boolean isCrayon() {
 //        return crayon;
@@ -116,5 +133,11 @@ public class Tortue {
 //    public int getCoul() {
 //        return coul;
 //    }
-
+//    public void setColor(int n) {
+//        coul = n;
+//    }
+//
+//    public int getColor() {
+//        return coul;
+//    }
 }

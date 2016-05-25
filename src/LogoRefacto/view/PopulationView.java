@@ -17,22 +17,25 @@ import javax.swing.JPanel;
  *
  * @author Vlad
  */
-public class FeuilleView extends JPanel implements Iterator<TortueView> {
+public class PopulationView extends JPanel implements Iterator<TortueView> {
 
     private ArrayList<TortueView> tortues; // la liste des tortues enregistrees
     private TortueView courante;
     
-    public FeuilleView() {
+    public PopulationView() {
         this.tortues = new ArrayList<>();
     }
 
-    public FeuilleView(ArrayList<TortueView> tortues) {
+    public PopulationView(ArrayList<TortueView> tortues) {
         this.tortues = tortues;
         courante = hasNext() ? this.next() : null;
     }
 
     public void addTortueView(Tortue t) {
-        addTortueView(new TortueView(t));
+        
+        TortueView v = new TortueView(t);
+        t.addObserver(v);
+        addTortueView(v);
     }
 
     public void addTortueView(TortueView t) {

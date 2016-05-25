@@ -12,12 +12,15 @@ import java.awt.Point;
 import java.awt.Polygon;
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.Observable;
+import java.util.Observer;
+import javax.swing.JPanel;
 
 /**
  *
  * @author Vlad
  */
-public class TortueView {
+public class TortueView extends JPanel implements Observer {
 
     Tortue t;
     protected ArrayList<Segment> listSegments; // Trace de la tortue
@@ -30,11 +33,22 @@ public class TortueView {
 
     public TortueView(Tortue t) {
         this();
-        this.t = t;
+        this.t = new Tortue(t);
+        
     }
 
     public TortueView(ArrayList<Segment> listSegments) {
         this.listSegments = listSegments;
+    }
+
+    @Override
+    public void update(Observable o, Object arg) {
+        int x = t.getX();
+        int y = t.getY();
+        t = new Tortue((Tortue) o);
+        Segment s = new Segment(new Point(x, y), new Point(t.getX(), t.getY()));
+        listSegments.add(s);
+        drawTurtle(getGraphics());
     }
 
     public void reset() {
@@ -80,22 +94,23 @@ public class TortueView {
         arrow.addPoint(p2.x, p2.y);
         graph.setColor(Color.green);
         graph.fillPolygon(arrow);
+        repaint();
     }
-    
-    public void avancer(int newX, int newY){
+
+    public void avancer(int newX, int newY) {
 //        if (t.isCrayon()==true) {
-            Segment seg = new Segment();
-            
-            seg.ptStart.x = t.getX();
-            seg.ptStart.y = t.getY();
-            seg.ptEnd.x = newX;
-            seg.ptEnd.y = newY;
+        Segment seg = new Segment();
+
+        seg.ptStart.x = t.getX();
+        seg.ptStart.y = t.getY();
+        seg.ptEnd.x = newX;
+        seg.ptEnd.y = newY;
 //            seg.color = decodeColor(t.getCoul());
-            
-            listSegments.add(seg);
+
+        listSegments.add(seg);
 //        }
     }
-    
+
     protected Color decodeColor(int c) {
         switch (c) {
             case 0:

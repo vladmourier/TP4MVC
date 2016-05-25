@@ -9,12 +9,6 @@ package LogoRefacto.Controller;
  *
  * @author Vlad
  */
-public class MainController {
-
-    public MainController(Controller mc) {
-        this.controller = mc;
-    }
-
-    private Controller controller;
-
+public interface Controller  {
+    public void control ();
 }

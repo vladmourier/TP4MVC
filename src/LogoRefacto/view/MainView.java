@@ -6,6 +6,8 @@
 package LogoRefacto.view;
 
 import static LogoRefacto.Application.HGAP;
+import LogoRefacto.model.PopulationTortue;
+import LogoRefacto.model.Tortue;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -36,7 +38,7 @@ import javax.swing.KeyStroke;
  *
  * @author Vlad
  */
-public class MainView extends JFrame {
+public class MainView extends JFrame implements IView {
 
     public static final String CMD_BTN_AVANCER = "Avancer";
     public static final String CMD_BTN_DROITE = "Droite";
@@ -46,7 +48,8 @@ public class MainView extends JFrame {
     public static final String CMD_BTN_EFFACER = "Efacer";
     public static final String CMD_BTN_QUITTER = "Quitter";
 
-    private FeuilleView feuille;
+    private PopulationView populationView;
+    private ProcedureBarView procedureBarView;
     private JTextField inputValue;
 
     // Boutons
@@ -56,8 +59,8 @@ public class MainView extends JFrame {
     private JPanel p2;
     private JMenu menuCommandes;
 
-    public MainView(FeuilleView feuille) {
-        this.feuille = feuille;
+    public MainView(PopulationView feuille) {
+        this.populationView = feuille;
         logoInit();
         feuille.paintComponent(getGraphics());
     }
@@ -127,22 +130,16 @@ public class MainView extends JFrame {
         setDefaultCloseOperation(EXIT_ON_CLOSE);
 
         // les boutons du bas
-        p2 = new JPanel(new GridLayout());
-        JButton b20 = new JButton("Proc1");
-        p2.add(b20);
-        JButton b21 = new JButton("Proc2");
-        p2.add(b21);
-        JButton b22 = new JButton("Proc3");
-        p2.add(b22);
+        procedureBarView = new ProcedureBarView();
 
-        getContentPane().add(p2, "South");
+        getContentPane().add(procedureBarView, "South");
 
-        feuille = new FeuilleView(); //500, 400);
-        feuille.setBackground(Color.white);
-        feuille.setSize(new Dimension(600, 400));
-        feuille.setPreferredSize(new Dimension(600, 400));
+        populationView = new PopulationView(); //500, 400);
+        populationView.setBackground(Color.white);
+        populationView.setSize(new Dimension(600, 400));
+        populationView.setPreferredSize(new Dimension(600, 400));
 
-        getContentPane().add(feuille, "Center");
+        getContentPane().add(populationView, "Center");
 
         pack();
         setVisible(true);
@@ -185,7 +182,7 @@ public class MainView extends JFrame {
     }
 
     public void reset() {
-        feuille.reset();
+        populationView.reset();
     }
 
     public String getInputValue() {
@@ -193,8 +190,8 @@ public class MainView extends JFrame {
         return (s);
     }
 
-    public FeuilleView getFeuille() {
-        return feuille;
+    public PopulationView getFeuille() {
+        return populationView;
     }
 
     public JToolBar getToolBar() {
@@ -205,8 +202,38 @@ public class MainView extends JFrame {
         return buttonPanel;
     }
 
-    public JPanel getP2() {
-        return p2;
+    public JPanel getProcedureBarView() {
+        return procedureBarView;
+    }
+
+    @Override
+    public void clearView() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void closeWindow() {
+        System.exit(0);
+    }
+
+    @Override
+    public void displayPopulation(PopulationTortue t) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void updatePopulation(PopulationTortue t) {
+        populationView.showTurtles(getGraphics());
+    }
+
+    @Override
+    public void updateTortue(Tortue t) {
+        populationView.showTurtles(getGraphics());
+    }
+
+    @Override
+    public void addTortue(Tortue t) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 }

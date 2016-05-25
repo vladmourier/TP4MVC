@@ -2,9 +2,10 @@ package LogoRefacto;
 
 // package logo;
 import LogoRefacto.Controller.MainController;
+import LogoRefacto.Controller.SwingController;
 import LogoRefacto.model.PopulationTortue;
 import LogoRefacto.model.Tortue;
-import LogoRefacto.view.FeuilleView;
+import LogoRefacto.view.PopulationView;
 import LogoRefacto.view.MainView;
 import java.awt.*;
 
@@ -41,31 +42,33 @@ public class Application {
                 Tortue t;
                 PopulationTortue fd = new PopulationTortue();
 
-                FeuilleView feuille = new FeuilleView();
+                PopulationView feuille = new PopulationView();
 
                 MainView mv = new MainView(feuille);
+                
+                SwingController sc = new SwingController(fd, mv);
 
-                MainController mc = new MainController(fd, mv);
+                MainController mc = new MainController(sc);
 
                 for (Component c : mv.getToolBar().getComponents()) {
                     if (c instanceof JButton) {
-                        ((JButton) c).addActionListener(mc);
+                        ((JButton) c).addActionListener(sc);
                     }
                 }
 
                 for (Component c : mv.getButtonPanel().getComponents()) {
                     if (c instanceof JButton) {
-                        ((JButton) c).addActionListener(mc);
+                        ((JButton) c).addActionListener(sc);
                     }
                 }
 
-                for (Component c : mv.getP2().getComponents()) {
+                for (Component c : mv.getProcedureBarView().getComponents()) {
                     if (c instanceof JButton) {
-                        ((JButton) c).addActionListener(mc);
+                        ((JButton) c).addActionListener(sc);
                     }
                 }
                 
-                mc.createTortue();
+                sc.createTortue();
                 
                 mv.setVisible(true);
 

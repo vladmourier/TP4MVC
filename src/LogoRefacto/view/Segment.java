@@ -23,6 +23,29 @@ public class Segment {
         ptEnd = new Point(0, 0);
     }
 
+    public Segment(Point ptStart, Point ptEnd) {
+        this.ptStart = ptStart;
+        this.ptEnd = ptEnd;
+    }
+
+    public Point getPtStart() {
+        return ptStart;
+    }
+
+    public void setPtStart(Point ptStart) {
+        this.ptStart = ptStart;
+    }
+
+    public Point getPtEnd() {
+        return ptEnd;
+    }
+
+    public void setPtEnd(Point ptEnd) {
+        this.ptEnd = ptEnd;
+    }
+    
+    
+
     public void drawSegment(Graphics graph) {
         if (graph == null) {
             return;

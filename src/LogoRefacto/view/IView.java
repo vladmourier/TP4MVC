@@ -14,7 +14,7 @@ import LogoRefacto.model.Tortue;
  */
 public interface IView {
     
-    public void clearViewx();
+    public void clearView();
     public void closeWindow();
     public void displayPopulation(PopulationTortue t);
     public void updatePopulation(PopulationTortue t);

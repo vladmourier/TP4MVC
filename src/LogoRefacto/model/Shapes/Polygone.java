@@ -11,7 +11,7 @@ import LogoRefacto.model.Tortue;
  *
  * @author Vlad
  */
-public class Polygone implements MovePattern{
+public class Polygone extends MovePattern{
 
     private int n, a;
 

@@ -11,7 +11,7 @@ import LogoRefacto.model.Tortue;
  *
  * @author Vlad
  */
-public class Spiral implements MovePattern {
+public class Spiral extends MovePattern {
 
     private int n, k, a;
 

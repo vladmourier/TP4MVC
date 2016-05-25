@@ -11,7 +11,7 @@ import LogoRefacto.model.Tortue;
  *
  * @author Vlad
  */
-public class Carre implements MovePattern {
+public class Carre extends MovePattern {
 
     @Override
     public void move(Tortue t) {

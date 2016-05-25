@@ -11,6 +11,9 @@ import LogoRefacto.model.Tortue;
  *
  * @author Vlad
  */
-public interface MovePattern {
-    public void move(Tortue t);
+public abstract class MovePattern {
+    public static final String CARRE = "CARRE";
+    public static final String POLYGONE = "POLYGONE";
+    public static final String SPIRALE = "SPIRALE";
+    public abstract void move(Tortue t);
 }
