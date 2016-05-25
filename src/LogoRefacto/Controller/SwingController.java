@@ -14,8 +14,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
-import java.util.Observable;
-import java.util.Observer;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -66,9 +64,9 @@ public class SwingController implements Controller, ActionListener {
             }
         } // actions des boutons du bas
         else if (c.equals("Effacer")) {
-            effacer();
+            clearView();
         } else if (c.equals("Quitter")) {
-            quitter();
+            closeWindow();
         } else {
             Field[] forName = MovePattern.class.getDeclaredFields();
             ArrayList<String> s = new ArrayList<>();
@@ -107,8 +105,8 @@ public class SwingController implements Controller, ActionListener {
 
     }
 
-    // efface tout et reinitialise la feuille
-    public void effacer() {
+    @Override
+    public void clearView() {
         mainV.reset();
         mainV.repaint();
 
@@ -117,8 +115,29 @@ public class SwingController implements Controller, ActionListener {
         fcourante.getCourante().setPosition(size.width / 2, size.height / 2);
     }
 
-    private void quitter() {
+    @Override
+    public void closeWindow() {
         System.exit(0);
+    }
+
+    @Override
+    public void displayPopulation(PopulationTortue t) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void updatePopulation(PopulationTortue t) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void updateTortue(Tortue t) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void addTortue(Tortue t) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 }

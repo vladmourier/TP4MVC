@@ -5,10 +5,26 @@
  */
 package LogoRefacto.Controller;
 
+import LogoRefacto.model.PopulationTortue;
+import LogoRefacto.model.Tortue;
+
 /**
  *
  * @author Vlad
  */
-public interface Controller  {
-    public void control ();
+public interface Controller {
+
+    public void control();
+
+    public void clearView();
+
+    public void closeWindow();
+
+    public void displayPopulation(PopulationTortue t);
+
+    public void updatePopulation(PopulationTortue t);
+
+    public void updateTortue(Tortue t);
+
+    public void addTortue(Tortue t);
 }
