@@ -39,13 +39,14 @@ public class MainListener implements ActionListener {
     public MainListener(AbstractController mc, MainView mainV) {
         mainController = mc;
         this.mainView = mainV;
-        /*switch(selectMode()){
+        switch(selectMode()){
             case AbstractController.MODE_AUTO:
+                mainController.setMode(AbstractController.MODE_AUTO);
                 break;
             case AbstractController.MODE_MANUEL:
-                //TODO
+                mainController.setMode(AbstractController.MODE_MANUEL);
                 break;
-        }*/
+        }
     }
 
     
@@ -133,5 +134,7 @@ public class MainListener implements ActionListener {
         }
         return mp;
    }
-
+    public String selectMode() {
+        return mainView.showChooseBox();
+    }
 }
