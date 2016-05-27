@@ -5,39 +5,23 @@
  */
 package LogoRefacto.view;
 
-import static LogoRefacto.Application.HGAP;
-import LogoRefacto.Controller.MainController;
 import LogoRefacto.model.PopulationTortue;
 import LogoRefacto.model.Tortue;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Event;
-import java.awt.GridLayout;
-import java.awt.Insets;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
-import javax.swing.BorderFactory;
-import javax.swing.Box;
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JComboBox;
-import javax.swing.JComponent;
 import javax.swing.JFrame;
 import static javax.swing.JFrame.EXIT_ON_CLOSE;
-import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.JTextField;
 import javax.swing.JToolBar;
 import javax.swing.KeyStroke;
 import LogoRefacto.Controller.AbstractController;
-import java.util.Observable;
-import java.util.Observer;
 
 /**
  *
@@ -55,17 +39,15 @@ public class MainView extends JFrame implements IView {
 
     private PopulationView populationView;
     private ProcedureBarView procedureBarView;
-    private JTextField inputValue;
 
     // Boutons
-    private JToolBar toolBar;
+    private ManualCommandsView toolBar;
     private JPanel buttonPanel;
     // les boutons du bas
-    private JPanel p2;
     private JMenu menuCommandes;
 
     public MainView(AbstractController controller) {
-        
+
         populationView = new PopulationView();
         Init();
         populationView.paintComponent(getGraphics());
@@ -77,41 +59,11 @@ public class MainView extends JFrame implements IView {
         getContentPane().setLayout(new BorderLayout(10, 10));
 
         // Boutons
-        toolBar = new JToolBar();
+        toolBar = new ManualCommandsView();
         buttonPanel = new JPanel();
         buttonPanel.add(toolBar);
 
         getContentPane().add(buttonPanel, "North");
-
-        addButton(toolBar, "Effacer", "Nouveau dessin", "/icons/index.png");
-
-        toolBar.add(Box.createRigidArea(HGAP));
-        inputValue = new JTextField("45", 5);
-        toolBar.add(inputValue);
-        addButton(toolBar, CMD_BTN_AVANCER, "Avancer 50", null);
-        addButton(toolBar, CMD_BTN_DROITE, "Droite 45", null);
-        addButton(toolBar, CMD_BTN_GAUCHE, "Gauche 45", null);
-        addButton(toolBar, CMD_BTN_LEVER, "Lever Crayon", null);
-        addButton(toolBar, CMD_BTN_BAISSER, "Baisser Crayon", null);
-
-        String[] colorStrings = {"noir", "bleu", "cyan", "gris fonce", "rouge",
-            "vert", "gris clair", "magenta", "orange",
-            "gris", "rose", "jaune"};
-
-        // Create the combo box
-        toolBar.add(Box.createRigidArea(HGAP));
-        JLabel colorLabel = new JLabel("   Couleur: ");
-        toolBar.add(colorLabel);
-        JComboBox colorList = new JComboBox(colorStrings);
-        toolBar.add(colorList);
-
-        colorList.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                JComboBox cb = (JComboBox) e.getSource();
-                int n = cb.getSelectedIndex();
-//                feuille.setColor(n);
-            }
-        });
 
         // Menus
         JMenuBar menubar = new JMenuBar();
@@ -153,27 +105,6 @@ public class MainView extends JFrame implements IView {
         setVisible(true);
     }
 
-    //utilitaires pour installer des boutons et des menus
-    private void addButton(JComponent p, String name, String tooltiptext, String imageName) {
-        JButton b;
-        if ((imageName == null) || (imageName.equals(""))) {
-            b = (JButton) p.add(new JButton(name));
-        } else {
-            java.net.URL u = this.getClass().getResource(imageName);
-            if (u != null) {
-                ImageIcon im = new ImageIcon(u);
-                b = (JButton) p.add(new JButton(im));
-            } else {
-                b = (JButton) p.add(new JButton(name));
-            }
-            b.setActionCommand(name);
-        }
-
-        b.setToolTipText(tooltiptext);
-        b.setBorder(BorderFactory.createRaisedBevelBorder());
-        b.setMargin(new Insets(0, 0, 0, 0));
-    }
-
     private void addMenuItem(JMenu m, String label, String command, int key) {
         JMenuItem menuItem;
         menuItem = new JMenuItem(label);
@@ -194,8 +125,7 @@ public class MainView extends JFrame implements IView {
     }
 
     public String getInputValue() {
-        String s = inputValue.getText();
-        return (s);
+        return toolBar.getInputValue();
     }
 
     public PopulationView getFeuille() {
@@ -250,9 +180,42 @@ public class MainView extends JFrame implements IView {
             AbstractController.MODE_AUTO
         };
         int n = JOptionPane.showOptionDialog(this, "Sélectionnez le mode de fonctionnement", "Choix du mode", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, option, option[0]);
-        return  n != -1 ? option[n] : option[0];
+        return n != -1 ? option[n] : option[0];
     }
 
+//    public void SetColor()
+    protected Color decodeColor(int c) {
+        switch (c) {
+            case 0:
+                return (Color.black);
+            case 1:
+                return (Color.blue);
+            case 2:
+                return (Color.cyan);
+            case 3:
+                return (Color.darkGray);
+            case 4:
+                return (Color.red);
+            case 5:
+                return (Color.green);
+            case 6:
+                return (Color.lightGray);
+            case 7:
+                return (Color.magenta);
+            case 8:
+                return (Color.orange);
+            case 9:
+                return (Color.gray);
+            case 10:
+                return (Color.pink);
+            case 11:
+                return (Color.yellow);
+            default:
+                return (Color.black);
+        }
+    }
     
-
+    public void setColor(int n){
+        populationView.setCurrentColor(decodeColor(n));
+    }
 }

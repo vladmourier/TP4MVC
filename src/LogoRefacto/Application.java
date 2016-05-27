@@ -2,18 +2,14 @@ package LogoRefacto;
 
 // package logo;
 import LogoRefacto.Controller.MainController;
-import LogoRefacto.view.MainListener;
-import LogoRefacto.model.PopulationTortue;
-import LogoRefacto.model.Tortue;
-import LogoRefacto.view.PopulationView;
+import LogoRefacto.view.listeners.MainListener;
 import LogoRefacto.view.MainView;
+import LogoRefacto.view.listeners.ManualCommandsListener;
+import LogoRefacto.view.listeners.ProcedureBarListener;
 import java.awt.*;
 
 import javax.swing.*;
 
-import java.awt.event.*;
-import java.util.*;
-import java.io.*;
 
 /** ***********************************************************************
  *
@@ -46,9 +42,15 @@ public class Application {
                 
                 MainListener sc = new MainListener(mc, mv);
                 
+                ProcedureBarListener pbl = new ProcedureBarListener(mc);
+                
+                ManualCommandsListener mcl = new ManualCommandsListener(mc , mv);
+                
                 for (Component c : mv.getToolBar().getComponents()) {
                     if (c instanceof JButton) {
-                        ((JButton) c).addActionListener(sc);
+                        ((JButton) c).addActionListener(mcl);
+                    } else if (c instanceof JComboBox){
+                        ((JComboBox) c).addActionListener(mcl);
                     }
                 }
 
@@ -60,7 +62,7 @@ public class Application {
 
                 for (Component c : mv.getProcedureBarView().getComponents()) {
                     if (c instanceof JButton) {
-                        ((JButton) c).addActionListener(sc);
+                        ((JButton) c).addActionListener(pbl);
                     }
                 }
                 

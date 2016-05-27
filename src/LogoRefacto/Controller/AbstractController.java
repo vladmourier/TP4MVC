@@ -8,7 +8,6 @@ package LogoRefacto.Controller;
 import LogoRefacto.model.PopulationTortue;
 import LogoRefacto.model.Shapes.MovePattern;
 import LogoRefacto.model.Tortue;
-import LogoRefacto.view.MainView;
 import java.util.Observable;
 
 /**

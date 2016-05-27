@@ -22,10 +22,10 @@ public class Spiral extends MovePattern {
     }
 
     @Override
-    public void move(Tortue t) {
+    protected void move(Tortue t) {
         for (int i = 0; i < k; i++) {
-            t.avancer(n);
-            t.droite(360 / a);
+            abstractController.avancerTortue(t, n);
+            abstractController.droiteTortue(t, 360/a);
             n = n + 1;
         }
     }

@@ -24,6 +24,7 @@ import javax.swing.JPanel;
 public class PopulationView extends JPanel implements Observer{
 
     private ArrayList<TortueView> tortuesView; // la liste des tortues enregistrees
+    private Color currentColor = Color.BLACK;
     
     public PopulationView() {
         this.tortuesView = new ArrayList<>();
@@ -51,7 +52,7 @@ public class PopulationView extends JPanel implements Observer{
     @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
-        Color c = g.getColor();
+        Color c = currentColor != null ? currentColor : g.getColor();
 
         Dimension dim = getSize();
         g.setColor(Color.white);
@@ -84,7 +85,7 @@ public class PopulationView extends JPanel implements Observer{
             if(currentTortues.contains(updatedTortue))
             {
                 int index = currentTortues.indexOf(updatedTortue);
-                tortuesView.get(index).updatePosition(updatedTortue.getX(), updatedTortue.getY(), updatedTortue.getDir());
+                tortuesView.get(index).updatePosition(updatedTortue.getX(), updatedTortue.getY(), updatedTortue.getDir(), currentColor);
             }else {
                 addTortue(updatedTortue);
             }
@@ -105,7 +106,7 @@ public class PopulationView extends JPanel implements Observer{
         {
             if(v.getTortue().equals(t))
             {
-                v.updatePosition(t.getX(), t.getY(), t.getDir());
+                v.updatePosition(t.getX(), t.getY(), t.getDir(), currentColor);
                 repaint();
                 return;
             }
@@ -123,6 +124,8 @@ public class PopulationView extends JPanel implements Observer{
         }
         return list;
     }
-    
-    
+
+    public void setCurrentColor(Color color) {
+        this.currentColor = color;
+    }
 }

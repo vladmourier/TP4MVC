@@ -93,11 +93,11 @@ public class Tortue {
             default:
                 throw new Exception("Pattern inconnu");
         }
-        mp.move(this);
+        mp.moveTurtle(this);
     }
     
-    public void drawPattern(MovePattern mp){
-        mp.move(this);
+    public void drawPattern(MovePattern mp) throws Exception{
+        mp.moveTurtle(this);
     }
 
     public int getX() {

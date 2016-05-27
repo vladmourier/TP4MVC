@@ -15,8 +15,8 @@ import java.awt.Point;
  */
 public class Segment {
 
-    public Point ptStart, ptEnd;
-    public Color color;
+    private Point ptStart, ptEnd;
+    private Color color = Color.BLACK;
 
     public Segment() {
         ptStart = new Point(0, 0);
@@ -53,5 +53,13 @@ public class Segment {
 
         graph.setColor(color);
         graph.drawLine(ptStart.x, ptStart.y, ptEnd.x, ptEnd.y);
+    }
+
+    public Color getColor() {
+        return color;
+    }
+
+    public void setColor(Color color) {
+        this.color = color;
     }
 }

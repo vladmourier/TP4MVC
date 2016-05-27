@@ -8,9 +8,9 @@ package LogoRefacto.Controller;
 import LogoRefacto.model.PopulationTortue;
 import LogoRefacto.model.Shapes.MovePattern;
 import LogoRefacto.model.Tortue;
-import LogoRefacto.view.PopulationView;
 import java.util.Iterator;
-import java.util.Observable;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -62,8 +62,12 @@ public class MainController extends AbstractController{
     
     @Override
     public void doPatternTortue(Tortue t, MovePattern mp) {
-       getTortue(t).drawPattern(mp);
-       notifyView();      
+        try {
+            getTortue(t).drawPattern(mp);      
+            notifyView();
+        } catch (Exception ex) {
+            Logger.getLogger(MainController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     
     @Override
@@ -125,7 +129,5 @@ public class MainController extends AbstractController{
     public PopulationTortue getPopulation() {
         return populationTortue;
     }
-
-   
 
 }

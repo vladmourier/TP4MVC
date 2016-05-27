@@ -5,6 +5,7 @@
  */
 package LogoRefacto.model.Shapes;
 
+import LogoRefacto.Controller.AbstractController;
 import LogoRefacto.model.Tortue;
 
 /**
@@ -15,5 +16,17 @@ public abstract class MovePattern {
     public static final String CARRE = "CARRE";
     public static final String POLYGONE = "POLYGONE";
     public static final String SPIRALE = "SPIRALE";
-    public abstract void move(Tortue t);
+    
+    protected AbstractController abstractController;
+    
+    public void moveTurtle(Tortue t) throws Exception{
+        if(abstractController == null) throw new Exception("Erreur, aucun contrôleur pour cette action");
+        move(t);
+    }
+    
+    protected abstract void move(Tortue t);
+
+    public void setAbstractController(AbstractController abstractController) {
+        this.abstractController = abstractController;
+    }
 }
