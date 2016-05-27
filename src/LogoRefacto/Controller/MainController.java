@@ -16,90 +16,88 @@ import java.util.logging.Logger;
  *
  * @author Vlad
  */
-public class MainController extends AbstractController{
+public class MainController extends AbstractController {
 
     private PopulationTortue populationTortue;
     private Iterator<Tortue> itTortue;
     private Tortue tortueCourante;
-    
-    
+
     public MainController() {
         populationTortue = new PopulationTortue();
         itTortue = populationTortue.iterator();
     }
 
-    public Tortue getTortue(Tortue t)
-    {
+    public Tortue getTortue(Tortue t) {
         return populationTortue.getTortue(t);
     }
-   
+
     @Override
-    public void addTortue(Tortue t)
-    {
+    public void addTortue(Tortue t) {
         populationTortue.addTortue(t);
         notifyView();
     }
-    
+
+    @Override
+    public void removeTortue(Tortue t) {
+        populationTortue.removeTortue(t);
+        notifyView();
+    }
+
     @Override
     public void avancerTortue(Tortue t, int dist) {
         getTortue(t).avancer(dist);
         notifyView();
     }
-    
+
     @Override
     public void droiteTortue(Tortue t, int dist) {
         getTortue(t).droite(dist);
         notifyView();
     }
-    
-    
+
     @Override
     public void gaucheTortue(Tortue t, int dist) {
         getTortue(t).gauche(dist);
         notifyView();
     }
 
-    
     @Override
     public void doPatternTortue(Tortue t, MovePattern mp) {
         try {
-            getTortue(t).drawPattern(mp);      
+            getTortue(t).drawPattern(mp);
             notifyView();
         } catch (Exception ex) {
             Logger.getLogger(MainController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
+
     @Override
     public Tortue nextTortue() {
-        if(itTortue.hasNext())
-        {
+        if (itTortue.hasNext()) {
             tortueCourante = itTortue.next();
-        }else if(populationTortue.size()>0)
-        {
+        } else if (populationTortue.size() > 0) {
             itTortue = populationTortue.iterator();
-            tortueCourante= itTortue.next();
-        }else
-            tortueCourante= null;
+            tortueCourante = itTortue.next();
+        } else {
+            tortueCourante = null;
+        }
         return tortueCourante;
     }
-    
+
     @Override
-    public Tortue getTortueCourante()
-    {
-       return tortueCourante;
-                
+    public Tortue getTortueCourante() {
+        return tortueCourante;
+
     }
-    
+
     private void notifyView() {
         setChanged();
         notifyObservers();
     }
-    
 
     @Override
     public void setMode(String mode) {
-        switch(mode){
+        switch (mode) {
             case MODE_AUTO:
                 //TODO
                 break;
@@ -109,7 +107,6 @@ public class MainController extends AbstractController{
         }
     }
 
-    
     @Override
     public void initializePopulation() {
         populationTortue.clear();
@@ -118,7 +115,6 @@ public class MainController extends AbstractController{
         populationTortue.addTortue(tortueCourante);
         notifyView();
     }
-
 
     @Override
     public void closeApplication() {

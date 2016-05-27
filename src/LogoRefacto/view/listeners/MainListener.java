@@ -17,12 +17,6 @@ import java.awt.event.ActionListener;
  */
 public class MainListener implements ActionListener {
 
-    public static final String CMD_AVANCER = "Avancer";
-    public static final String CMD_DROITE = "Droite";
-    public static final String CMD_GAUCHE = "Gauche";
-    public static final String CMD_EFFACER = "Effacer";
-    public static final String CMD_QUITTER = "Quitter";
-    
     AbstractController mainController;
     MainView mainView;
 
@@ -44,36 +38,8 @@ public class MainListener implements ActionListener {
 
     public void update(Tortue tortueCourante) {
         String c = current.getActionCommand();
-        // actions des boutons du haut
-        if (c.equals(CMD_AVANCER)) {
-            try {
-                int v = Integer.parseInt(mainView.getInputValue());
-                mainController.avancerTortue(tortueCourante, v);
-            } catch (NumberFormatException ex) {
-                System.err.println("ce n'est pas un nombre : " + mainView.getInputValue());
-            }
-
-        } else if (c.equals(CMD_DROITE)) {
-            try {
-                int v = Integer.parseInt(mainView.getInputValue());
-                mainController.droiteTortue(tortueCourante, v);
-            } catch (NumberFormatException ex) {
-                System.err.println("ce n'est pas un nombre : " + mainView.getInputValue());
-            }
-        } else if (c.equals(CMD_GAUCHE)) {
-            try {
-                int v = Integer.parseInt(mainView.getInputValue());
-                mainController.gaucheTortue(tortueCourante, v);
-            } catch (NumberFormatException ex) {
-                System.err.println("ce n'est pas un nombre : " + mainView.getInputValue());
-            }
-        } // actions des boutons du bas
-        else if (c.equals(CMD_EFFACER)) {
-            mainController.initializePopulation();
-        } else if (c.equals(CMD_QUITTER)) {
+        if (c.equals(MainView.CMD_QUITTER)) {
             mainController.closeApplication();
-        } else {
-
         }
     }
 
@@ -83,7 +49,7 @@ public class MainListener implements ActionListener {
      */
     public void actionPerformed(ActionEvent e) {
         current = e;
-        update(mainController.getTortueCourante());
+//        update(mainController.getTortueCourante());
     }
 
     public void createTortue() {

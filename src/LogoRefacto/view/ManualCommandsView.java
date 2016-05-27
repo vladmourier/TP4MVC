@@ -6,14 +6,7 @@
 package LogoRefacto.view;
 
 import static LogoRefacto.Application.HGAP;
-import static LogoRefacto.view.MainView.CMD_BTN_AVANCER;
-import static LogoRefacto.view.MainView.CMD_BTN_BAISSER;
-import static LogoRefacto.view.MainView.CMD_BTN_DROITE;
-import static LogoRefacto.view.MainView.CMD_BTN_GAUCHE;
-import static LogoRefacto.view.MainView.CMD_BTN_LEVER;
 import java.awt.Insets;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.ImageIcon;
@@ -39,11 +32,11 @@ public class ManualCommandsView extends JToolBar {
         this.add(Box.createRigidArea(HGAP));
         inputValue = new JTextField("45", 5);
         this.add(inputValue);
-        addButton(this, CMD_BTN_AVANCER, "Avancer 50", null);
-        addButton(this, CMD_BTN_DROITE, "Droite 45", null);
-        addButton(this, CMD_BTN_GAUCHE, "Gauche 45", null);
-        addButton(this, CMD_BTN_LEVER, "Lever Crayon", null);
-        addButton(this, CMD_BTN_BAISSER, "Baisser Crayon", null);
+        addButton(this, MainView.CMD_AVANCER, "Avancer 50", null);
+        addButton(this, MainView.CMD_DROITE, "Droite 45", null);
+        addButton(this, MainView.CMD_GAUCHE, "Gauche 45", null);
+        addButton(this, MainView.CMD_CREER_TORTUE, "Créer tortue", null);
+        addButton(this, MainView.CMD_SUPPRIMER_TORTUE, "Supprimer tortue", null);
 
         String[] colorStrings = {"noir", "bleu", "cyan", "gris fonce", "rouge",
             "vert", "gris clair", "magenta", "orange",

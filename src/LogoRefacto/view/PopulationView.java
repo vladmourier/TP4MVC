@@ -91,11 +91,13 @@ public class PopulationView extends JPanel implements Observer{
             }
         }
         //Suppression des tortues non présentes :
+        ArrayList<TortueView> toDelete = new ArrayList<>();
         for(TortueView t : tortuesView)
         {
             if(!p.contains(t.getTortue()))
-                tortuesView.remove(t);
+                toDelete.add(t);
         }
+        tortuesView.removeAll(toDelete);
         repaint();
         
     }
