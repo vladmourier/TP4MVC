@@ -5,6 +5,7 @@ import LogoRefacto.model.Shapes.MovePattern;
 import LogoRefacto.model.Shapes.Polygone;
 import LogoRefacto.model.Shapes.Spiral;
 import java.util.Observable;
+import java.util.Random;
 
 /**
  * ***********************************************************************
@@ -30,6 +31,14 @@ public class Tortue {
     
     private static int index=0;
 
+    public Tortue(int x, int y, int dir) {
+        this.x = x;
+        this.y = y;
+        this.dir = dir;
+        this.label = index;
+        index++;
+    }
+    
     public Tortue(Tortue t) {
         int x = t.getX();
         int y = t.getY();
@@ -157,10 +166,10 @@ public class Tortue {
             return false;
         }
         final Tortue other = (Tortue) obj;
-        if (this.label != other.label) {
-            return false;
+        if (this.label == other.label) {
+            return true;
         }
-        return true;
+        return false;
     }
 
     public void setDir(int dir) {

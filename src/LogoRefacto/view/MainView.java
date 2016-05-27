@@ -29,13 +29,13 @@ import LogoRefacto.Controller.AbstractController;
  */
 public class MainView extends JFrame implements IView {
 
-    public static final String CMD_BTN_AVANCER = "Avancer";
-    public static final String CMD_BTN_DROITE = "Droite";
-    public static final String CMD_BTN_GAUCHE = "Gauche";
-    public static final String CMD_BTN_LEVER = "Lever";
-    public static final String CMD_BTN_BAISSER = "Baisser";
-    public static final String CMD_BTN_EFFACER = "Effacer";
-    public static final String CMD_BTN_QUITTER = "Quitter";
+    public static final String CMD_AVANCER = "Avancer";
+    public static final String CMD_DROITE = "Droite";
+    public static final String CMD_GAUCHE = "Gauche";
+    public static final String CMD_EFFACER = "Effacer";
+    public static final String CMD_QUITTER = "Quitter";
+    public static final String CMD_CREER_TORTUE = "Créer tortue";
+    public static final String CMD_SUPPRIMER_TORTUE = "Supprimer tortue";
 
     private PopulationView populationView;
     private ProcedureBarView procedureBarView;
@@ -71,16 +71,20 @@ public class MainView extends JFrame implements IView {
         JMenu menuFile = new JMenu("File"); // on installe le premier menu
         menubar.add(menuFile);
 
-        addMenuItem(menuFile, "Effacer", CMD_BTN_EFFACER, KeyEvent.VK_N);
-        addMenuItem(menuFile, "Quitter", CMD_BTN_QUITTER, KeyEvent.VK_Q);
+        addMenuItem(menuFile, "Effacer", CMD_EFFACER, KeyEvent.VK_N);
+        addMenuItem(menuFile, "Quitter", CMD_QUITTER, KeyEvent.VK_Q);
 
         menuCommandes = new JMenu("Commandes"); // on installe le premier menu
         menubar.add(menuCommandes);
-        addMenuItem(menuCommandes, "Avancer", CMD_BTN_AVANCER, -1);
-        addMenuItem(menuCommandes, "Droite", CMD_BTN_DROITE, -1);
-        addMenuItem(menuCommandes, "Gauche", CMD_BTN_GAUCHE, -1);
-        addMenuItem(menuCommandes, "Lever Crayon", CMD_BTN_LEVER, -1);
-        addMenuItem(menuCommandes, "Baisser Crayon", CMD_BTN_BAISSER, -1);
+        addMenuItem(menuCommandes, "Avancer", CMD_AVANCER, -1);
+        addMenuItem(menuCommandes, "Droite", CMD_DROITE, -1);
+        addMenuItem(menuCommandes, "Gauche", CMD_GAUCHE, -1);
+        addMenuItem(menuCommandes, "Ajouter Tortue", CMD_CREER_TORTUE, -1);
+        addMenuItem(menuCommandes, "Supprimer Tortue", CMD_SUPPRIMER_TORTUE, -1);
+        
+        
+//        addMenuItem(menuCommandes, "Lever Crayon", CMD_LEVER, -1);
+//        addMenuItem(menuCommandes, "Baisser Crayon", CMD_BAISSER, -1);
 
         JMenu menuHelp = new JMenu("Aide"); // on installe le premier menu
         menubar.add(menuHelp);

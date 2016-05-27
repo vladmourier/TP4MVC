@@ -73,6 +73,11 @@ public class PopulationTortue implements Iterable<Tortue> {
         return tortues.contains(t);
     }
     
+    public boolean removeTortue (Tortue t){
+        return tortues.remove(t);
+    }
     
-    
+    public boolean removeTortue (int position){
+        return tortues.remove(position) != null;
+    }
 }

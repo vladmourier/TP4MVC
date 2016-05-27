@@ -18,8 +18,7 @@ public abstract class AbstractController extends Observable{
     
     public static final String MODE_MANUEL = "MANUEL";
     public static final String MODE_AUTO = "AUTO";
-    
-    
+        
     public abstract void setMode(String mode);
 
     
@@ -28,7 +27,7 @@ public abstract class AbstractController extends Observable{
     public abstract void closeApplication();
 
     public abstract void addTortue(Tortue t);
-    
+    public abstract void removeTortue(Tortue t);
     public abstract void avancerTortue(Tortue t, int v);
     public abstract void droiteTortue(Tortue t, int v);
     public abstract void gaucheTortue(Tortue t, int v);
