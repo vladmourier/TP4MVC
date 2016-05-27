@@ -2,7 +2,7 @@ package LogoRefacto;
 
 // package logo;
 import LogoRefacto.Controller.MainController;
-import LogoRefacto.Controller.SwingController;
+import LogoRefacto.view.MainListener;
 import LogoRefacto.model.PopulationTortue;
 import LogoRefacto.model.Tortue;
 import LogoRefacto.view.PopulationView;
@@ -39,17 +39,13 @@ public class Application {
     public static void main(String[] args) {
         SwingUtilities.invokeLater(new Runnable() {
             public void run() {
-                Tortue t;
-                PopulationTortue fd = new PopulationTortue();
-
-                PopulationView feuille = new PopulationView();
-
-                MainView mv = new MainView(feuille);
                 
-                SwingController sc = new SwingController(fd, mv);
-
-                MainController mc = new MainController(sc);
-
+                MainController mc = new MainController();
+                
+                MainView mv = new MainView(mc);
+                
+                MainListener sc = new MainListener(mc, mv);
+                
                 for (Component c : mv.getToolBar().getComponents()) {
                     if (c instanceof JButton) {
                         ((JButton) c).addActionListener(sc);
@@ -68,7 +64,7 @@ public class Application {
                     }
                 }
                 
-                sc.createTortue();
+               
                 
                 mv.setVisible(true);
 

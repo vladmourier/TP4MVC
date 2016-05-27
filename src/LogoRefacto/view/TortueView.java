@@ -7,6 +7,7 @@ package LogoRefacto.view;
 
 import LogoRefacto.model.Tortue;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Point;
 import java.awt.Polygon;
@@ -20,38 +21,26 @@ import javax.swing.JPanel;
  *
  * @author Vlad
  */
-public class TortueView extends JPanel implements Observer {
+public class TortueView {
 
     Tortue t;
     protected ArrayList<Segment> listSegments; // Trace de la tortue
-    protected Graphics g;
     protected static final int rp = 10, rb = 5; // Taille de la pointe et de la base de la fleche
 
     public TortueView() {
         listSegments = new ArrayList<>();
+        this.t = new Tortue();
     }
 
-    public TortueView(Tortue t, Graphics g) {
-        this();
+    public TortueView(Tortue t) {
+        listSegments = new ArrayList<>();
         this.t = new Tortue(t);
-        this.g = g;
     }
 
-    public TortueView(ArrayList<Segment> listSegments) {
-        this.listSegments = listSegments;
-    }
-
-    @Override
-    public void update(Observable o, Object arg) {
-        int x = t.getX();
-        int y = t.getY();
-        t = new Tortue((Tortue) o);
-        Segment s = new Segment(new Point(x, y), new Point(t.getX(), t.getY()));
-        listSegments.add(s);
-    }
-
+    
     public void reset() {
         listSegments.clear();
+        t.reset();
     }
 
     public void drawTurtle(Graphics graph) {
@@ -93,21 +82,20 @@ public class TortueView extends JPanel implements Observer {
         arrow.addPoint(p2.x, p2.y);
         graph.setColor(Color.green);
         graph.fillPolygon(arrow);
-        repaint();
     }
 
-    public void avancer(int newX, int newY) {
-//        if (t.isCrayon()==true) {
+    public void updatePosition(int newX, int newY, int dir) {
+        
         Segment seg = new Segment();
-
         seg.ptStart.x = t.getX();
         seg.ptStart.y = t.getY();
         seg.ptEnd.x = newX;
         seg.ptEnd.y = newY;
-//            seg.color = decodeColor(t.getCoul());
 
         listSegments.add(seg);
-//        }
+        
+        t.setPosition(newX, newY);
+        t.setDir(dir);
     }
 
     protected Color decodeColor(int c) {
@@ -140,4 +128,10 @@ public class TortueView extends JPanel implements Observer {
                 return (Color.black);
         }
     }
+    
+    public Tortue getTortue()
+    {
+        return t;
+    }
+            
 }

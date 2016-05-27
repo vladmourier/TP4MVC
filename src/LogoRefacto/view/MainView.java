@@ -6,7 +6,7 @@
 package LogoRefacto.view;
 
 import static LogoRefacto.Application.HGAP;
-import LogoRefacto.Controller.Controller;
+import LogoRefacto.Controller.MainController;
 import LogoRefacto.model.PopulationTortue;
 import LogoRefacto.model.Tortue;
 import java.awt.BorderLayout;
@@ -35,6 +35,9 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.JToolBar;
 import javax.swing.KeyStroke;
+import LogoRefacto.Controller.AbstractController;
+import java.util.Observable;
+import java.util.Observer;
 
 /**
  *
@@ -47,7 +50,7 @@ public class MainView extends JFrame implements IView {
     public static final String CMD_BTN_GAUCHE = "Gauche";
     public static final String CMD_BTN_LEVER = "Lever";
     public static final String CMD_BTN_BAISSER = "Baisser";
-    public static final String CMD_BTN_EFFACER = "Efacer";
+    public static final String CMD_BTN_EFFACER = "Effacer";
     public static final String CMD_BTN_QUITTER = "Quitter";
 
     private PopulationView populationView;
@@ -61,13 +64,16 @@ public class MainView extends JFrame implements IView {
     private JPanel p2;
     private JMenu menuCommandes;
 
-    public MainView(PopulationView feuille) {
-        this.populationView = feuille;
-        logoInit();
-        feuille.paintComponent(getGraphics());
+    public MainView(AbstractController controller) {
+        
+        populationView = new PopulationView();
+        Init();
+        populationView.paintComponent(getGraphics());
+        controller.addObserver(populationView);
+        controller.initializePopulation();
     }
 
-    public void logoInit() {
+    public void Init() {
         getContentPane().setLayout(new BorderLayout(10, 10));
 
         // Boutons
@@ -240,11 +246,13 @@ public class MainView extends JFrame implements IView {
 
     public String showChooseBox() {
         String[] option = {
-            Controller.MODE_MANUEL,
-            Controller.MODE_AUTO
+            AbstractController.MODE_MANUEL,
+            AbstractController.MODE_AUTO
         };
         int n = JOptionPane.showOptionDialog(this, "Sélectionnez le mode de fonctionnement", "Choix du mode", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, option, option[0]);
         return  n != -1 ? option[n] : option[0];
     }
+
+    
 
 }

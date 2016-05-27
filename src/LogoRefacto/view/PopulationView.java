@@ -5,53 +5,52 @@
  */
 package LogoRefacto.view;
 
+import LogoRefacto.Controller.AbstractController;
+import LogoRefacto.model.PopulationTortue;
 import LogoRefacto.model.Tortue;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.util.ArrayList;
-import java.util.Iterator;
+import java.util.List;
+import java.util.Observable;
+import java.util.Observer;
 import javax.swing.JPanel;
 
 /**
  *
  * @author Vlad
  */
-public class PopulationView extends JPanel implements Iterator<TortueView> {
+public class PopulationView extends JPanel implements Observer{
 
-    private ArrayList<TortueView> tortues; // la liste des tortues enregistrees
-    private TortueView courante;
+    private ArrayList<TortueView> tortuesView; // la liste des tortues enregistrees
     
     public PopulationView() {
-        this.tortues = new ArrayList<>();
+        this.tortuesView = new ArrayList<>();
     }
 
-    public PopulationView(ArrayList<TortueView> tortues) {
-        this.tortues = tortues;
-        courante = hasNext() ? this.next() : null;
+    public PopulationView(ArrayList<Tortue> tortuesList) {
+        tortuesView = new ArrayList<>();
     }
 
-    public void addTortueView(Tortue t) {
-        TortueView v = new TortueView(t, getGraphics());
-        t.addObserver(v);
-        addTortueView(v);
+    public void addTortue(Tortue t) {
+        TortueView tv = new TortueView(t);
+        tortuesView.add(tv);
+       repaint();
+        
     }
 
-    public void addTortueView(TortueView t) {
-        tortues.add(t);
-        courante = courante == null ? t : courante;
-    }
 
     public void reset() {
-        for (TortueView t : tortues) {
+        for (TortueView t : tortuesView) {
             t.reset();
         }
+        repaint();
     }
 
     @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
-
         Color c = g.getColor();
 
         Dimension dim = getSize();
@@ -63,25 +62,66 @@ public class PopulationView extends JPanel implements Iterator<TortueView> {
     }
 
     public void showTurtles(Graphics g) {
-        for (Iterator it = tortues.iterator(); it.hasNext();) {
-            TortueView t = (TortueView) it.next();
+        for (TortueView t : tortuesView) {
             t.drawTurtle(g);
         }
+    }
+
+ 
+    @Override
+    public void update(Observable o, Object argTortue) {
+        AbstractController controller = (AbstractController) o;
+        updatePopulation(controller.getPopulation());            
+        
+    }
+    
+    public void updatePopulation(PopulationTortue p)
+    {
+        List<Tortue> currentTortues = getCurrentTortues();
+        //Mise à jour des tortues (et ajout si necessaire):
+        for(Tortue updatedTortue : p)
+        {
+            if(currentTortues.contains(updatedTortue))
+            {
+                int index = currentTortues.indexOf(updatedTortue);
+                tortuesView.get(index).updatePosition(updatedTortue.getX(), updatedTortue.getY(), updatedTortue.getDir());
+            }else {
+                addTortue(updatedTortue);
+            }
+        }
+        //Suppression des tortues non présentes :
+        for(TortueView t : tortuesView)
+        {
+            if(!p.contains(t.getTortue()))
+                tortuesView.remove(t);
+        }
         repaint();
+        
     }
 
-    @Override
-    public boolean hasNext() {
-        return tortues.iterator().hasNext();
+    public void updateTortue(Tortue t)
+    {
+        for(TortueView v : tortuesView)
+        {
+            if(v.getTortue().equals(t))
+            {
+                v.updatePosition(t.getX(), t.getY(), t.getDir());
+                repaint();
+                return;
+            }
+        }
+        //Nouvelle tortue non enregistré :
+        addTortue(t);
+        
     }
 
-    @Override
-    public TortueView next() {
-        return tortues.iterator().next();
-    }
-
-    public TortueView getCourante() {
-        return courante;
+    private List<Tortue> getCurrentTortues() {
+        List<Tortue> list = new ArrayList<>();
+        for(TortueView t : tortuesView)
+        {
+            list.add(t.getTortue());
+        }
+        return list;
     }
     
     

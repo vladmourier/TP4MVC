@@ -20,12 +20,15 @@ import java.util.Observable;
  *
  *************************************************************************
  */
-public class Tortue extends Observable {
+public class Tortue {
 
     public static final double ratioDegRad = 0.0174533; // Rapport radians/degres (pour la conversion)
 
     protected int x, y;
     protected int dir;
+    protected int label;
+    
+    private static int index=0;
 
     public Tortue(Tortue t) {
         int x = t.getX();
@@ -34,27 +37,26 @@ public class Tortue extends Observable {
         this.x = x;
         this.y = y;
         this.dir = dir;
+        this.label = t.label;
     }
 
     public Tortue() {
         x = 0;
         y = 0;
         dir = -90;
+        this.label = index;
+        index++;
     }
 
     public void reset() {
         x = 0;
         y = 0;
         dir = -90;
-        setChanged();
-        notifyObservers();
     }
 
     public void setPosition(int newX, int newY) {
         x = newX;
         y = newY;
-        setChanged();
-        notifyObservers();
     }
 
     public void avancer(int dist) {
@@ -63,20 +65,14 @@ public class Tortue extends Observable {
 
         x = newX;
         y = newY;
-        setChanged();
-        notifyObservers();
     }
 
     public void droite(int ang) {
         dir = (dir + ang) % 360;
-        setChanged();
-        notifyObservers();
     }
 
     public void gauche(int ang) {
         dir = (dir - ang) % 360;
-        setChanged();
-        notifyObservers();
     }
 
     /**
@@ -97,6 +93,10 @@ public class Tortue extends Observable {
             default:
                 throw new Exception("Pattern inconnu");
         }
+        mp.move(this);
+    }
+    
+    public void drawPattern(MovePattern mp){
         mp.move(this);
     }
 
@@ -142,4 +142,30 @@ public class Tortue extends Observable {
 //    public int getColor() {
 //        return coul;
 //    }
+
+    
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Tortue other = (Tortue) obj;
+        if (this.label != other.label) {
+            return false;
+        }
+        return true;
+    }
+
+    public void setDir(int dir) {
+        this.dir= dir;
+    }
+    
+    
 }

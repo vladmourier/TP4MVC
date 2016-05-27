@@ -13,17 +13,18 @@ import java.util.*;
  * @version 2.0
  */
 
-public class PopulationTortue implements Iterator<Tortue> {
+public class PopulationTortue implements Iterable<Tortue> {
     private ArrayList<Tortue> tortues; // la liste des tortues enregistrees
-    private Tortue courante;
+    private Iterator it;
+    private Tortue courante=null;
     
     public PopulationTortue() {
         tortues = new ArrayList<>();
+        it = tortues.iterator();
     }
     
     public void addTortue(Tortue o) {
         tortues.add(o);
-        if(courante == null) courante = o;
     }
     
     public void reset() {
@@ -31,23 +32,47 @@ public class PopulationTortue implements Iterator<Tortue> {
             Tortue t = (Tortue) it.next();
             t.reset();
         }
+        it = tortues.iterator();
+        courante = (Tortue) it.next();
     }
 
-    @Override
-    public boolean hasNext() {
-        return tortues.iterator().hasNext();
-    }
-
-    @Override
-    public Tortue next() {
-        Tortue t = tortues.iterator().next();
-        courante = t;
-        return courante;
-    }
+   
 
     public Tortue getCourante() {
-        return courante;
+       if(courante == null)
+           courante = (Tortue) it.next();
+       return courante;
     }
+
+    @Override
+    public Iterator<Tortue> iterator() {
+        return tortues.iterator();
+    }
+
+    /**
+     * Get a turtle (by his label)
+     * @param t
+     * @return 
+     */
+    public Tortue getTortue(Tortue t) {
+        int index = tortues.indexOf(t);
+        return index>-1 ? tortues.get(index) : null;
+    }
+
+    public int size() {
+        return tortues.size();
+    }
+
+    public void clear() {
+        tortues.clear();
+        it=tortues.iterator();
+        courante = null;
+    }
+
+    public boolean contains(Tortue t) {
+        return tortues.contains(t);
+    }
+    
     
     
 }
