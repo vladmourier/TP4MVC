@@ -60,9 +60,6 @@ public class ProcedureBarListener implements ActionListener {
                 mp = new Spiral(50, 40, 6);
                 break;
         }
-        if (mainController != null) {
-            mp.setAbstractController(mainController);
-        } else throw new Exception("Aucun contrôleur n'a été créé");
         return mp;
     }
 }

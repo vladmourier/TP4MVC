@@ -13,21 +13,26 @@ import LogoRefacto.model.Tortue;
  */
 public class Spiral extends MovePattern {
 
-    private int n, k, a;
+    private int  n0, k, a;
+    private static int n=-1;
 
     public Spiral(int n, int k, int a) {
-        this.n = n;
+        if(this.n==-1) this.n = n;
+        this.n0 = n;
         this.k = k;
         this.a = a;
     }
 
     @Override
-    protected void move(Tortue t) {
-        for (int i = 0; i < k; i++) {
-            abstractController.avancerTortue(t, n);
-            abstractController.droiteTortue(t, 360/a);
-            n = n + 1;
-        }
+    public void moveTurtle(Tortue t) {
+        t.avancer(n);
+        t.droite(360/a);
+        n = n + 1;   
     }
 
+    public void reset()
+    {
+        this.n= n0;
+    }
+            
 }
