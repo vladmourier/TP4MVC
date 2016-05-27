@@ -37,6 +37,7 @@ public class ManualCommandsView extends JToolBar {
         addButton(this, MainView.CMD_GAUCHE, "Gauche 45", null);
         addButton(this, MainView.CMD_CREER_TORTUE, "Créer tortue", null);
         addButton(this, MainView.CMD_SUPPRIMER_TORTUE, "Supprimer tortue", null);
+        addButton(this, MainView.CMD_NEXT_TORTUE, MainView.CMD_NEXT_TORTUE, null);
 
         String[] colorStrings = {"noir", "bleu", "cyan", "gris fonce", "rouge",
             "vert", "gris clair", "magenta", "orange",

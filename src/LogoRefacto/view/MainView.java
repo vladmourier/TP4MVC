@@ -36,6 +36,7 @@ public class MainView extends JFrame implements IView {
     public static final String CMD_QUITTER = "Quitter";
     public static final String CMD_CREER_TORTUE = "Créer tortue";
     public static final String CMD_SUPPRIMER_TORTUE = "Supprimer tortue";
+    public static final String CMD_NEXT_TORTUE = "Tortue suivante";
 
     private PopulationView populationView;
     private ProcedureBarView procedureBarView;

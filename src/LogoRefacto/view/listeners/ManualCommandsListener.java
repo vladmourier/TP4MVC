@@ -37,7 +37,7 @@ public class ManualCommandsListener implements ActionListener {
             String c = e.getActionCommand();
             if (c.equals(MainView.CMD_CREER_TORTUE)) {
                 Random r = new Random();
-                mainController.addTortue(new Tortue(r.nextInt(300), r.nextInt(200), -90));
+                mainController.addTortue(new Tortue(r.nextInt(600), r.nextInt(400), -90));
             } else if (c.equals(MainView.CMD_SUPPRIMER_TORTUE)) {
                 if (mainController.getPopulation().size() > 1) {
                     removeTortue(1);
@@ -67,6 +67,8 @@ public class ManualCommandsListener implements ActionListener {
             } // actions des boutons du bas
             else if (c.equals(MainView.CMD_EFFACER)) {
                 mainController.initializePopulation();
+            } else if (c.equals(MainView.CMD_NEXT_TORTUE)){
+                mainController.nextTortue();
             }
         }
     }
