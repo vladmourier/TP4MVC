@@ -17,16 +17,10 @@ public abstract class MovePattern {
     public static final String POLYGONE = "POLYGONE";
     public static final String SPIRALE = "SPIRALE";
     
-    protected AbstractController abstractController;
     
-    public void moveTurtle(Tortue t) throws Exception{
-        if(abstractController == null) throw new Exception("Erreur, aucun contrôleur pour cette action");
-        move(t);
-    }
     
-    protected abstract void move(Tortue t);
+    
+    public abstract void moveTurtle(Tortue t);
 
-    public void setAbstractController(AbstractController abstractController) {
-        this.abstractController = abstractController;
-    }
+    
 }

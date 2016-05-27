@@ -21,10 +21,10 @@ public class Polygone extends MovePattern{
     }
     
     @Override
-    protected void move(Tortue t) {
-        for (int j = 0; j < a; j++) {
-            abstractController.avancerTortue(t, n);
-            abstractController.droiteTortue(t, 360/a);
-        }    }
+    public void moveTurtle(Tortue t) {
+        t.avancer(n);
+        t.droite(360/a);
+    }
+
     
 }

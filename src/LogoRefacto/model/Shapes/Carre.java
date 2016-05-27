@@ -14,11 +14,12 @@ import LogoRefacto.model.Tortue;
 public class Carre extends MovePattern {
 
     @Override
-    protected void move(Tortue t) {
-        for (int i = 0; i < 4; i++) {
-            abstractController.avancerTortue(t, 100);
-            abstractController.droiteTortue(t, 90);
-        }
+    public void moveTurtle(Tortue t) {
+        
+        t.avancer(100);
+        t.droite(90);
+        
     }
+
 
 }
