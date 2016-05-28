@@ -26,7 +26,7 @@ public abstract class AbstractController extends Observable{
     public abstract void avancerTortue(Tortue t, int v);
     public abstract void droiteTortue(Tortue t, int v);
     public abstract void gaucheTortue(Tortue t, int v);
-    public abstract void doPatternTortue(Tortue t, MovePattern mp);
+    public abstract void doPatternTortue(Tortue t, MovePattern mp) throws Exception;
     public abstract Tortue getTortueCourante();
     public abstract Tortue nextTortue();
 

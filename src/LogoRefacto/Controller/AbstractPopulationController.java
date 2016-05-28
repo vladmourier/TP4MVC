@@ -17,11 +17,10 @@ import java.util.logging.Logger;
  * @author Vlad
  */
 public abstract class AbstractPopulationController extends AbstractController {
-    
-   protected PopulationTortue populationTortue;
-   protected Iterator<Tortue> itTortue;
-   protected Tortue tortueCourante;
-   
+
+    protected PopulationTortue populationTortue;
+    protected Iterator<Tortue> itTortue;
+    protected Tortue tortueCourante;
 
     public AbstractPopulationController() {
         populationTortue = new PopulationTortue();
@@ -65,13 +64,9 @@ public abstract class AbstractPopulationController extends AbstractController {
     }
 
     @Override
-    public void doPatternTortue(Tortue t, MovePattern mp) {
-        try {
-            getTortue(t).drawPattern(mp);
-            notifyView();
-        } catch (Exception ex) {
-            Logger.getLogger(MainController.class.getName()).log(Level.SEVERE, null, ex);
-        }
+    public void doPatternTortue(Tortue t, MovePattern mp) throws Exception {
+        getTortue(t).drawPattern(mp);
+        notifyView();
     }
 
     @Override
@@ -96,24 +91,6 @@ public abstract class AbstractPopulationController extends AbstractController {
     protected void notifyView() {
         setChanged();
         notifyObservers();
-    }
-    
-    
-    protected void autoMoveTortue(Tortue tortue, MovePattern mp) {
-        Thread t = (new Thread(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    while (true) {
-                        doPatternTortue(tortue, mp);
-                        Thread.sleep(500);
-                    }
-                } catch (Exception ex) {
-                    Logger.getLogger(MainController.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            }
-        }));
-        t.start();
     }
 
     @Override

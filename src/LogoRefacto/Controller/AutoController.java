@@ -26,14 +26,44 @@ public class AutoController extends AbstractPopulationController {
                 mp = new Carre();
                 break;
             case 1:
-                mp = new Polygone(30, 8);
+                mp = new Polygone(r.nextInt(30), r.nextInt(30));
                 break;
             case 2:
-                mp = new Spiral(3, 10, 4);
+                mp = new Spiral(r.nextInt(30), r.nextInt(30), r.nextInt(30));
                 break;
-                default:mp = new Spiral(1, 1, 1);
+            default:
+                mp = new Spiral(r.nextInt(30), r.nextInt(30), r.nextInt(30));
         }
         return mp;
+    }
+
+    @Override
+    public void initializePopulation() {
+        populationTortue.clear();
+        tortueCourante = new Tortue();
+        tortueCourante.setPosition(500 / 2, 400 / 2);
+        populationTortue.addTortue(tortueCourante);
+        autoMoveTortue(tortueCourante, chooseRandomPattern());
+        notifyView();
+    }
+
+    protected void autoMoveTortue(Tortue tortue, MovePattern mp) {
+        Thread t = (new Thread(new Runnable() {
+            @Override
+            public void run() {
+                boolean ok = true;
+                while (ok) {
+                    try {
+                        doPatternTortue(tortue, mp);
+                        Thread.sleep(500);
+                    } catch (Exception ex) {
+                        ok = false;
+                    }
+                }
+
+            }
+        }));
+        t.start();
     }
 
     @Override

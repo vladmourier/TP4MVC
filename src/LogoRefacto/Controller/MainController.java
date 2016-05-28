@@ -10,6 +10,8 @@ import LogoRefacto.model.Shapes.MovePattern;
 import LogoRefacto.model.Tortue;
 import java.util.HashMap;
 import java.util.Observer;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -32,6 +34,7 @@ public class MainController extends AbstractController {
         for (String key : controllers.keySet()) {
             if (key == mode) {
                 currentController = controllers.get(key);
+                currentController.initializePopulation();
             }
         }
     }
@@ -92,7 +95,11 @@ public class MainController extends AbstractController {
 
     @Override
     public void doPatternTortue(Tortue t, MovePattern mp) {
-        currentController.doPatternTortue(t, mp);
+        try {
+            currentController.doPatternTortue(t, mp);
+        } catch (Exception ex) {
+            Logger.getLogger(MainController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     @Override

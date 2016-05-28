@@ -27,7 +27,13 @@ public class MainListener implements ActionListener {
     public MainListener(MainController mc, MainView mainV) {
         mainController = mc;
         this.mainView = mainV;
-        mainController.setMode(selectMode());
+        String mode = selectMode();
+        mainController.setMode(mode);
+        if (mode.equals(MainController.MODE_AUTO)) {
+            mainV.lockToolbar(true);
+        } else {
+            mainV.lockToolbar(false);
+        }
         populationController = mainController.getCurrentController();
     }
 
@@ -44,7 +50,7 @@ public class MainListener implements ActionListener {
      */
     public void actionPerformed(ActionEvent e) {
         current = e;
-//        update(mainController.getTortueCourante());
+        update(mainController.getTortueCourante());
     }
 
     public void createTortue() {

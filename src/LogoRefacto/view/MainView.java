@@ -56,7 +56,6 @@ public class MainView extends JFrame implements IView {
         Init();
         populationView.paintComponent(getGraphics());
         controller.setObservers(populationView);
-        controller.initialisePopulations();
     }
 
     public void lockToolbar(boolean b) {

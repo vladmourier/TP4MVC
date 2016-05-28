@@ -6,6 +6,8 @@
 package LogoRefacto.view.listeners;
 
 import LogoRefacto.Controller.AbstractController;
+import LogoRefacto.Controller.MainController;
+import LogoRefacto.Controller.ManualController;
 import LogoRefacto.model.Tortue;
 import LogoRefacto.view.MainView;
 import LogoRefacto.view.ManualCommandsView;
@@ -21,10 +23,10 @@ import javax.swing.JComboBox;
  */
 public class ManualCommandsListener implements ActionListener {
 
-    AbstractController mainController;
+    MainController mainController;
     MainView mainView;
 
-    public ManualCommandsListener(AbstractController mainController, MainView mainView) {
+    public ManualCommandsListener(MainController mainController, MainView mainView) {
         this.mainController = mainController;
         this.mainView = mainView;
     }
@@ -38,7 +40,9 @@ public class ManualCommandsListener implements ActionListener {
             if (c.equals(MainView.CMD_CREER_TORTUE)) {
                 Random r = new Random();
                 mainController.addTortue(new Tortue(r.nextInt(600), r.nextInt(400), -90));
-                mainView.lockToolbar(false);
+                if (mainController.getCurrentController() instanceof ManualController) {
+                    mainView.lockToolbar(false);
+                }
             } else if (c.equals(MainView.CMD_SUPPRIMER_TORTUE)) {
                 supprimerTortue();
             } else if (c.equals(MainView.CMD_AVANCER)) {
