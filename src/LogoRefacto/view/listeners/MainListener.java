@@ -10,7 +10,6 @@ import LogoRefacto.Controller.MainController;
 import LogoRefacto.model.Tortue;
 import LogoRefacto.view.MainView;
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 /**
  *

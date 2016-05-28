@@ -11,7 +11,6 @@ import LogoRefacto.model.Shapes.Polygone;
 import LogoRefacto.model.Shapes.RandomPattern;
 import LogoRefacto.model.Shapes.Spiral;
 import LogoRefacto.model.Tortue;
-import LogoRefacto.view.MainView;
 import java.util.Random;
 
 /**
@@ -62,16 +61,19 @@ public class AutoController extends AbstractPopulationController {
                 boolean ok = true;
                 while (ok) {
                     try {
-                        doPatternTortue(tortue, mp);
+                        moveTortue(tortue, mp);
                         Thread.sleep(500);
                     } catch (Exception ex) {
                         ok = false;
                     }
                 }
-
             }
         }));
         t.start();
+    }
+
+    protected void moveTortue(Tortue tortue, MovePattern mp) throws Exception {
+        doPatternTortue(tortue, mp);
     }
 
     @Override

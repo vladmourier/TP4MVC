@@ -9,7 +9,6 @@ import LogoRefacto.model.PopulationTortue;
 import LogoRefacto.model.Shapes.MovePattern;
 import LogoRefacto.model.Tortue;
 import java.util.Iterator;
-import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**

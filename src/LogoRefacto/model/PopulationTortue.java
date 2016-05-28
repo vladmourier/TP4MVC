@@ -14,9 +14,9 @@ import java.util.*;
  */
 
 public class PopulationTortue implements Iterable<Tortue> {
-    private ArrayList<Tortue> tortues; // la liste des tortues enregistrees
-    private Iterator it;
-    private Tortue courante=null;
+    protected ArrayList<Tortue> tortues; // la liste des tortues enregistrees
+    protected Iterator it;
+    protected Tortue courante=null;
     
     public PopulationTortue() {
         tortues = new ArrayList<>();
