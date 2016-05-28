@@ -34,12 +34,14 @@ public class MainController extends AbstractController {
     @Override
     public void addTortue(Tortue t) {
         populationTortue.addTortue(t);
+        itTortue = populationTortue.iterator();
         notifyView();
     }
 
     @Override
     public void removeTortue(Tortue t) {
         populationTortue.removeTortue(t);
+        itTortue = populationTortue.iterator();
         notifyView();
     }
 

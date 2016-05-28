@@ -25,6 +25,7 @@ public class PopulationTortue implements Iterable<Tortue> {
     
     public void addTortue(Tortue o) {
         tortues.add(o);
+        it = iterator();
     }
     
     public void reset() {
@@ -42,6 +43,11 @@ public class PopulationTortue implements Iterable<Tortue> {
        if(courante == null)
            courante = (Tortue) it.next();
        return courante;
+    }
+    
+    public Tortue nextTortue(){
+        if(it.hasNext()) courante = (Tortue) it.next();
+        return courante;
     }
 
     @Override
@@ -80,4 +86,10 @@ public class PopulationTortue implements Iterable<Tortue> {
     public boolean removeTortue (int position){
         return tortues.remove(position) != null;
     }
+
+    public void setCourante(Tortue courante) {
+        this.courante = courante;
+    }
+    
+    
 }
