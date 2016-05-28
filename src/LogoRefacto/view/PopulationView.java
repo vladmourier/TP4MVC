@@ -98,10 +98,11 @@ public class PopulationView extends JPanel implements Observer{
                 toDelete.add(t);
         }
         tortuesView.removeAll(toDelete);
+       
         repaint();
         
     }
-
+    
     public void updateTortue(Tortue t)
     {
         for(TortueView v : tortuesView)

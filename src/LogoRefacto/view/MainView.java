@@ -22,6 +22,10 @@ import javax.swing.JPanel;
 import javax.swing.JToolBar;
 import javax.swing.KeyStroke;
 import LogoRefacto.Controller.AbstractController;
+import LogoRefacto.model.Shapes.MovePattern;
+import java.lang.reflect.Field;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -56,6 +60,11 @@ public class MainView extends JFrame implements IView {
         controller.initializePopulation();
     }
 
+    public void lockToolbar(boolean b) {
+        if (b) toolBar.lock();
+        else toolBar.unlock();
+    }
+
     public void Init() {
         getContentPane().setLayout(new BorderLayout(10, 10));
 
@@ -82,11 +91,9 @@ public class MainView extends JFrame implements IView {
         addMenuItem(menuCommandes, "Gauche", CMD_GAUCHE, -1);
         addMenuItem(menuCommandes, "Ajouter Tortue", CMD_CREER_TORTUE, -1);
         addMenuItem(menuCommandes, "Supprimer Tortue", CMD_SUPPRIMER_TORTUE, -1);
-        
-        
+
 //        addMenuItem(menuCommandes, "Lever Crayon", CMD_LEVER, -1);
 //        addMenuItem(menuCommandes, "Baisser Crayon", CMD_BAISSER, -1);
-
         JMenu menuHelp = new JMenu("Aide"); // on installe le premier menu
         menubar.add(menuHelp);
         addMenuItem(menuHelp, "Aide", "Help", -1);
@@ -219,8 +226,17 @@ public class MainView extends JFrame implements IView {
                 return (Color.black);
         }
     }
-    
-    public void setColor(int n){
+
+    public void setColor(int n) {
         populationView.setCurrentColor(decodeColor(n));
+    }
+
+    public static List<String> getActionCommands() {
+        Field[] forName = MainView.class.getDeclaredFields();
+        ArrayList<String> s = new ArrayList<>();
+        for (Field f : forName) {
+            s.add(f.getName());
+        }
+        return s;
     }
 }

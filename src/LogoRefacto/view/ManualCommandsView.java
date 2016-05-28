@@ -6,6 +6,7 @@
 package LogoRefacto.view;
 
 import static LogoRefacto.Application.HGAP;
+import java.awt.Component;
 import java.awt.Insets;
 import javax.swing.BorderFactory;
 import javax.swing.Box;
@@ -82,4 +83,19 @@ public class ManualCommandsView extends JToolBar {
         return colorList;
     }
 
+    public void lock() {
+        for (Component c : this.getComponents()) {
+            if (c instanceof JButton && !MainView.getActionCommands().contains(((JButton) c).getActionCommand()) && !((JButton) c).getActionCommand().equals(MainView.CMD_CREER_TORTUE)) {
+                ((JButton) c).setEnabled(false);
+            }
+        }
+    }
+
+    public void unlock() {
+        for (Component c : this.getComponents()) {
+            if (c instanceof JButton && !MainView.getActionCommands().contains(((JButton) c).getActionCommand())) {
+                ((JButton) c).setEnabled(true);
+            }
+        }
+    }
 }

@@ -38,36 +38,18 @@ public class ManualCommandsListener implements ActionListener {
             if (c.equals(MainView.CMD_CREER_TORTUE)) {
                 Random r = new Random();
                 mainController.addTortue(new Tortue(r.nextInt(600), r.nextInt(400), -90));
+                mainView.lockToolbar(false);
             } else if (c.equals(MainView.CMD_SUPPRIMER_TORTUE)) {
-                if (mainController.getPopulation().size() > 1) {
-                    removeTortue(1);
-                }
+                supprimerTortue();
             } else if (c.equals(MainView.CMD_AVANCER)) {
-                try {
-                    int v = Integer.parseInt(mainView.getInputValue());
-                    mainController.avancerTortue(mainController.getTortueCourante(), v);
-                } catch (NumberFormatException ex) {
-                    System.err.println("ce n'est pas un nombre : " + mainView.getInputValue());
-                }
-
+                avancerTortueCourante();
             } else if (c.equals(MainView.CMD_DROITE)) {
-                try {
-                    int v = Integer.parseInt(mainView.getInputValue());
-                    mainController.droiteTortue(mainController.getTortueCourante(), v);
-                } catch (NumberFormatException ex) {
-                    System.err.println("ce n'est pas un nombre : " + mainView.getInputValue());
-                }
+                droiteTortueCourante();
             } else if (c.equals(MainView.CMD_GAUCHE)) {
-                try {
-                    int v = Integer.parseInt(mainView.getInputValue());
-                    mainController.gaucheTortue(mainController.getTortueCourante(), v);
-                } catch (NumberFormatException ex) {
-                    System.err.println("ce n'est pas un nombre : " + mainView.getInputValue());
-                }
-            } // actions des boutons du bas
-            else if (c.equals(MainView.CMD_EFFACER)) {
+                gaucheTortueCourante();
+            } else if (c.equals(MainView.CMD_EFFACER)) {
                 mainController.initializePopulation();
-            } else if (c.equals(MainView.CMD_NEXT_TORTUE)){
+            } else if (c.equals(MainView.CMD_NEXT_TORTUE)) {
                 mainController.nextTortue();
             }
         }
@@ -84,6 +66,44 @@ public class ManualCommandsListener implements ActionListener {
             }
             i++;
         }
-        if(target!= null)mainController.removeTortue(target);
+        if (target != null) {
+            mainController.removeTortue(target);
+        }
+    }
+
+    private void avancerTortueCourante() {
+        try {
+            int v = Integer.parseInt(mainView.getInputValue());
+            mainController.avancerTortue(mainController.getTortueCourante(), v);
+        } catch (NumberFormatException ex) {
+            System.err.println("ce n'est pas un nombre : " + mainView.getInputValue());
+        }
+
+    }
+
+    private void supprimerTortue() {
+        int pop_size = mainController.getPopulation().size();
+        if (pop_size > 0) {
+            removeTortue(0);
+        }
+        if(--pop_size == 0) mainView.lockToolbar(true);
+    }
+
+    private void gaucheTortueCourante() {
+        try {
+            int v = Integer.parseInt(mainView.getInputValue());
+            mainController.gaucheTortue(mainController.getTortueCourante(), v);
+        } catch (NumberFormatException ex) {
+            System.err.println("ce n'est pas un nombre : " + mainView.getInputValue());
+        }
+    }
+
+    private void droiteTortueCourante() {
+        try {
+            int v = Integer.parseInt(mainView.getInputValue());
+            mainController.droiteTortue(mainController.getTortueCourante(), v);
+        } catch (NumberFormatException ex) {
+            System.err.println("ce n'est pas un nombre : " + mainView.getInputValue());
+        }
     }
 }
