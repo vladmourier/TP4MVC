@@ -85,7 +85,9 @@ public class ManualCommandsView extends JToolBar {
 
     public void lock() {
         for (Component c : this.getComponents()) {
-            if (c instanceof JButton && !MainView.getActionCommands().contains(((JButton) c).getActionCommand()) && !((JButton) c).getActionCommand().equals(MainView.CMD_CREER_TORTUE)) {
+            if (c instanceof JButton && !MainView.getActionCommands().contains(((JButton) c).getActionCommand()) 
+                    && !((JButton) c).getActionCommand().equals(MainView.CMD_CREER_TORTUE)
+                    && !((JButton) c).getActionCommand().equals(MainView.CMD_SUPPRIMER_TORTUE) ) {
                 ((JButton) c).setEnabled(false);
             }
         }

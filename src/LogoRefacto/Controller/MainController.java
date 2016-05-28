@@ -8,9 +8,8 @@ package LogoRefacto.Controller;
 import LogoRefacto.model.PopulationTortue;
 import LogoRefacto.model.Shapes.MovePattern;
 import LogoRefacto.model.Tortue;
-import java.util.Iterator;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.util.HashMap;
+import java.util.Observer;
 
 /**
  *
@@ -18,114 +17,97 @@ import java.util.logging.Logger;
  */
 public class MainController extends AbstractController {
 
-    private PopulationTortue populationTortue;
-    private Iterator<Tortue> itTortue;
-    private Tortue tortueCourante;
+    public static final String MODE_MANUEL = "MANUEL";
+    public static final String MODE_AUTO = "AUTO";
+
+    private HashMap<String, AbstractPopulationController> controllers;
+    private AbstractPopulationController currentController;
 
     public MainController() {
-        populationTortue = new PopulationTortue();
-        itTortue = populationTortue.iterator();
+        controllers = new HashMap<>();
     }
 
-    public Tortue getTortue(Tortue t) {
-        return populationTortue.getTortue(t);
-    }
-
-    @Override
-    public void addTortue(Tortue t) {
-        populationTortue.addTortue(t);
-        itTortue = populationTortue.iterator();
-        notifyView();
-    }
-
-    @Override
-    public void removeTortue(Tortue t) {
-        populationTortue.removeTortue(t);
-        itTortue = populationTortue.iterator();
-        notifyView();
-    }
-
-    @Override
-    public void avancerTortue(Tortue t, int dist) {
-        getTortue(t).avancer(dist);
-        notifyView();
-    }
-
-    @Override
-    public void droiteTortue(Tortue t, int dist) {
-        getTortue(t).droite(dist);
-        notifyView();
-    }
-
-    @Override
-    public void gaucheTortue(Tortue t, int dist) {
-        getTortue(t).gauche(dist);
-        notifyView();
-    }
-
-    @Override
-    public void doPatternTortue(Tortue t, MovePattern mp) {
-        try {
-            getTortue(t).drawPattern(mp);
-            notifyView();
-        } catch (Exception ex) {
-            Logger.getLogger(MainController.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
-
-    @Override
-    public Tortue nextTortue() {
-        if (itTortue.hasNext()) {
-            tortueCourante = itTortue.next();
-        } else if (populationTortue.size() > 0) {
-            itTortue = populationTortue.iterator();
-            tortueCourante = itTortue.next();
-        } else {
-            tortueCourante = null;
-        }
-        return tortueCourante;
-    }
-
-    @Override
-    public Tortue getTortueCourante() {
-        return tortueCourante;
-
-    }
-
-    private void notifyView() {
-        setChanged();
-        notifyObservers();
-    }
-
-    @Override
+    
     public void setMode(String mode) {
-        switch (mode) {
-            case MODE_AUTO:
-                //TODO
-                break;
-            case MODE_MANUEL:
-                //TODO
-                break;
+        for (String key : controllers.keySet()) {
+            if (key == mode) {
+                currentController = controllers.get(key);
+            }
         }
     }
 
-    @Override
-    public void initializePopulation() {
-        populationTortue.clear();
-        tortueCourante = new Tortue();
-        tortueCourante.setPosition(500 / 2, 400 / 2);
-        populationTortue.addTortue(tortueCourante);
-        notifyView();
+    public void setObservers(Observer o) {
+        for (AbstractPopulationController apc : controllers.values()) {
+            apc.addObserver(o);
+        }
     }
 
-    @Override
+    public void initialisePopulations() {
+        for (AbstractPopulationController apc : controllers.values()) {
+            apc.initializePopulation();
+        }
+    }
+
+    public void addController(String mode, AbstractPopulationController apc) {
+        controllers.put(mode, apc);
+    }
+
+    public AbstractPopulationController getCurrentController() {
+        return currentController;
+    }
+
     public void closeApplication() {
         System.exit(0);
     }
 
     @Override
-    public PopulationTortue getPopulation() {
-        return populationTortue;
+    public void initializePopulation() {
+        currentController.initializePopulation();
     }
 
+    @Override
+    public void addTortue(Tortue t) {
+        currentController.addTortue(t);
+    }
+
+    @Override
+    public void removeTortue(Tortue t) {
+        currentController.removeTortue(t);
+    }
+
+    @Override
+    public void avancerTortue(Tortue t, int v) {
+        currentController.avancerTortue(t, v);
+    }
+
+    @Override
+    public void droiteTortue(Tortue t, int v) {
+        currentController.droiteTortue(t, v);
+    }
+
+    @Override
+    public void gaucheTortue(Tortue t, int v) {
+        currentController.gaucheTortue(t, v);
+    }
+
+    @Override
+    public void doPatternTortue(Tortue t, MovePattern mp) {
+        currentController.doPatternTortue(t, mp);
+    }
+
+    @Override
+    public Tortue getTortueCourante() {
+
+        return currentController.getTortueCourante();
+    }
+
+    @Override
+    public Tortue nextTortue() {
+        return currentController.nextTortue();
+    }
+
+    @Override
+    public PopulationTortue getPopulation() {
+        return currentController.getPopulation();
+    }
 }

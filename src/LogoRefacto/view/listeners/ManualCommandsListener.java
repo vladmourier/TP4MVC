@@ -72,11 +72,14 @@ public class ManualCommandsListener implements ActionListener {
     }
 
     private void avancerTortueCourante() {
+        int v = Integer.parseInt(mainView.getInputValue());
         try {
-            int v = Integer.parseInt(mainView.getInputValue());
             mainController.avancerTortue(mainController.getTortueCourante(), v);
         } catch (NumberFormatException ex) {
             System.err.println("ce n'est pas un nombre : " + mainView.getInputValue());
+        } catch (NullPointerException nex) {//Si il n'y a pas de tortue courante (elle a été supprimée) on passe à la suivante
+            mainController.nextTortue();
+            mainController.avancerTortue(mainController.getTortueCourante(), v);
         }
 
     }
@@ -86,7 +89,9 @@ public class ManualCommandsListener implements ActionListener {
         if (pop_size > 0) {
             removeTortue(0);
         }
-        if(--pop_size == 0) mainView.lockToolbar(true);
+        if (pop_size == 1) {
+            mainView.lockToolbar(true);
+        }
     }
 
     private void gaucheTortueCourante() {

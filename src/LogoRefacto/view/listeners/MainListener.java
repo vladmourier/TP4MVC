@@ -5,7 +5,8 @@
  */
 package LogoRefacto.view.listeners;
 
-import LogoRefacto.Controller.AbstractController;
+import LogoRefacto.Controller.AbstractPopulationController;
+import LogoRefacto.Controller.MainController;
 import LogoRefacto.model.Tortue;
 import LogoRefacto.view.MainView;
 import java.awt.event.ActionEvent;
@@ -17,23 +18,17 @@ import java.awt.event.ActionListener;
  */
 public class MainListener implements ActionListener {
 
-    AbstractController mainController;
+    MainController mainController;
+    AbstractPopulationController populationController;
     MainView mainView;
 
     ActionEvent current;
 
-    public MainListener(AbstractController mc, MainView mainV) {
+    public MainListener(MainController mc, MainView mainV) {
         mainController = mc;
         this.mainView = mainV;
         mainController.setMode(selectMode());
-//        switch (selectMode()) {
-//            case AbstractController.MODE_AUTO:
-//                mainController.setMode(AbstractController.MODE_AUTO);
-//                break;
-//            case AbstractController.MODE_MANUEL:
-//                mainController.setMode(AbstractController.MODE_MANUEL);
-//                break;
-//        }
+        populationController = mainController.getCurrentController();
     }
 
     public void update(Tortue tortueCourante) {
@@ -58,7 +53,7 @@ public class MainListener implements ActionListener {
         tortue.setPosition(500 / 2, 400 / 2);
 
         // Deplacement de la tortue au centre de la feuille
-        mainController.addTortue(tortue);
+        populationController.addTortue(tortue);
 
     }
 

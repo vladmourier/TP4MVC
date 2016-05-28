@@ -21,8 +21,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JToolBar;
 import javax.swing.KeyStroke;
-import LogoRefacto.Controller.AbstractController;
-import LogoRefacto.model.Shapes.MovePattern;
+import LogoRefacto.Controller.MainController;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
@@ -51,13 +50,13 @@ public class MainView extends JFrame implements IView {
     // les boutons du bas
     private JMenu menuCommandes;
 
-    public MainView(AbstractController controller) {
+    public MainView(MainController controller) {
 
         populationView = new PopulationView();
         Init();
         populationView.paintComponent(getGraphics());
-        controller.addObserver(populationView);
-        controller.initializePopulation();
+        controller.setObservers(populationView);
+        controller.initialisePopulations();
     }
 
     public void lockToolbar(boolean b) {
@@ -188,8 +187,8 @@ public class MainView extends JFrame implements IView {
 
     public String showChooseBox() {
         String[] option = {
-            AbstractController.MODE_MANUEL,
-            AbstractController.MODE_AUTO
+            MainController.MODE_MANUEL,
+            MainController.MODE_AUTO
         };
         int n = JOptionPane.showOptionDialog(this, "Sélectionnez le mode de fonctionnement", "Choix du mode", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, option, option[0]);
         return n != -1 ? option[n] : option[0];

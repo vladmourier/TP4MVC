@@ -16,15 +16,10 @@ import java.util.Observable;
  */
 public abstract class AbstractController extends Observable{
     
-    public static final String MODE_MANUEL = "MANUEL";
-    public static final String MODE_AUTO = "AUTO";
-        
-    public abstract void setMode(String mode);
+//    public abstract void setMode(String mode);
 
     
     public abstract void initializePopulation();
-
-    public abstract void closeApplication();
 
     public abstract void addTortue(Tortue t);
     public abstract void removeTortue(Tortue t);

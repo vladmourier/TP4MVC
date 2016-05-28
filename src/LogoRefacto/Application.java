@@ -1,7 +1,9 @@
 package LogoRefacto;
 
 // package logo;
+import LogoRefacto.Controller.AutoController;
 import LogoRefacto.Controller.MainController;
+import LogoRefacto.Controller.ManualController;
 import LogoRefacto.view.listeners.MainListener;
 import LogoRefacto.view.MainView;
 import LogoRefacto.view.listeners.ManualCommandsListener;
@@ -37,6 +39,12 @@ public class Application {
             public void run() {
                 
                 MainController mc = new MainController();
+                
+                ManualController manC = new ManualController();
+                AutoController autoC = new AutoController();
+                
+                mc.addController(MainController.MODE_AUTO, autoC);
+                mc.addController(MainController.MODE_MANUEL, manC);
                 
                 MainView mv = new MainView(mc);
                 
