@@ -48,11 +48,15 @@ public class Application {
                 
                 MainView mv = new MainView(mc);
                 
-                MainListener sc = new MainListener(mc, mv);
+                MainListener mainListener = new MainListener(mc, mv);
                 
                 ProcedureBarListener pbl = new ProcedureBarListener(mc);
                 
                 ManualCommandsListener mcl = new ManualCommandsListener(mc , mv);
+                
+                for(Component c : mv.getMenuItems()){
+                    if(c instanceof JMenuItem) ((JMenuItem) c).addActionListener(mainListener);
+                }
                 
                 for (Component c : mv.getToolBar().getComponents()) {
                     if (c instanceof JButton) {
@@ -64,7 +68,7 @@ public class Application {
 
                 for (Component c : mv.getButtonPanel().getComponents()) {
                     if (c instanceof JButton) {
-                        ((JButton) c).addActionListener(sc);
+                        ((JButton) c).addActionListener(mainListener);
                     }
                 }
 

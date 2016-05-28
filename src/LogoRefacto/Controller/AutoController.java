@@ -8,8 +8,10 @@ package LogoRefacto.Controller;
 import LogoRefacto.model.Shapes.Carre;
 import LogoRefacto.model.Shapes.MovePattern;
 import LogoRefacto.model.Shapes.Polygone;
+import LogoRefacto.model.Shapes.RandomPattern;
 import LogoRefacto.model.Shapes.Spiral;
 import LogoRefacto.model.Tortue;
+import LogoRefacto.view.MainView;
 import java.util.Random;
 
 /**
@@ -38,12 +40,18 @@ public class AutoController extends AbstractPopulationController {
     }
 
     @Override
+    public void avancerTortue(Tortue t, int dist) {
+        getTortue(t).avancer(dist);
+        notifyView();
+    }
+
+    @Override
     public void initializePopulation() {
         populationTortue.clear();
         tortueCourante = new Tortue();
         tortueCourante.setPosition(500 / 2, 400 / 2);
         populationTortue.addTortue(tortueCourante);
-        autoMoveTortue(tortueCourante, chooseRandomPattern());
+        autoMoveTortue(tortueCourante, new RandomPattern());
         notifyView();
     }
 
@@ -70,7 +78,7 @@ public class AutoController extends AbstractPopulationController {
     public void addTortue(Tortue t) {
         populationTortue.addTortue(t);
         itTortue = populationTortue.iterator();
-        autoMoveTortue(t, chooseRandomPattern());
+        autoMoveTortue(t, new RandomPattern());
         notifyView();
     }
 

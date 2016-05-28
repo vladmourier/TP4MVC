@@ -21,98 +21,18 @@ import javax.swing.JComboBox;
  *
  * @author Vlad
  */
-public class ManualCommandsListener implements ActionListener {
-
-    MainController mainController;
-    MainView mainView;
+public class ManualCommandsListener extends CommandListener {
 
     public ManualCommandsListener(MainController mainController, MainView mainView) {
-        this.mainController = mainController;
-        this.mainView = mainView;
+        super(mainController, mainView);
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
+        super.actionPerformed(e);
         if (e.getActionCommand().equals(ManualCommandsView.CMD_COLORLIST)) {
             mainView.setColor(((JComboBox) e.getSource()).getSelectedIndex());
-        } else {
-            String c = e.getActionCommand();
-            if (c.equals(MainView.CMD_CREER_TORTUE)) {
-                Random r = new Random();
-                mainController.addTortue(new Tortue(r.nextInt(600), r.nextInt(400), -90));
-                if (mainController.getCurrentController() instanceof ManualController) {
-                    mainView.lockToolbar(false);
-                }
-            } else if (c.equals(MainView.CMD_SUPPRIMER_TORTUE)) {
-                supprimerTortue();
-            } else if (c.equals(MainView.CMD_AVANCER)) {
-                avancerTortueCourante();
-            } else if (c.equals(MainView.CMD_DROITE)) {
-                droiteTortueCourante();
-            } else if (c.equals(MainView.CMD_GAUCHE)) {
-                gaucheTortueCourante();
-            } else if (c.equals(MainView.CMD_EFFACER)) {
-                mainController.initializePopulation();
-            } else if (c.equals(MainView.CMD_NEXT_TORTUE)) {
-                mainController.nextTortue();
-            }
         }
     }
 
-    private void removeTortue(int n) {
-        Iterator<Tortue> it = mainController.getPopulation().iterator();
-        int i = 0;
-        Tortue target = null;
-        while (it.hasNext()) {
-            Tortue t = it.next();
-            if (i == n) {
-                target = t;
-            }
-            i++;
-        }
-        if (target != null) {
-            mainController.removeTortue(target);
-        }
-    }
-
-    private void avancerTortueCourante() {
-        int v = Integer.parseInt(mainView.getInputValue());
-        try {
-            mainController.avancerTortue(mainController.getTortueCourante(), v);
-        } catch (NumberFormatException ex) {
-            System.err.println("ce n'est pas un nombre : " + mainView.getInputValue());
-        } catch (NullPointerException nex) {//Si il n'y a pas de tortue courante (elle a été supprimée) on passe à la suivante
-            mainController.nextTortue();
-            mainController.avancerTortue(mainController.getTortueCourante(), v);
-        }
-
-    }
-
-    private void supprimerTortue() {
-        int pop_size = mainController.getPopulation().size();
-        if (pop_size > 0) {
-            removeTortue(0);
-        }
-        if (pop_size == 1) {
-            mainView.lockToolbar(true);
-        }
-    }
-
-    private void gaucheTortueCourante() {
-        try {
-            int v = Integer.parseInt(mainView.getInputValue());
-            mainController.gaucheTortue(mainController.getTortueCourante(), v);
-        } catch (NumberFormatException ex) {
-            System.err.println("ce n'est pas un nombre : " + mainView.getInputValue());
-        }
-    }
-
-    private void droiteTortueCourante() {
-        try {
-            int v = Integer.parseInt(mainView.getInputValue());
-            mainController.droiteTortue(mainController.getTortueCourante(), v);
-        } catch (NumberFormatException ex) {
-            System.err.println("ce n'est pas un nombre : " + mainView.getInputValue());
-        }
-    }
 }

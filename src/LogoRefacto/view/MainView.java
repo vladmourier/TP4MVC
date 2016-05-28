@@ -5,8 +5,6 @@
  */
 package LogoRefacto.view;
 
-import LogoRefacto.model.PopulationTortue;
-import LogoRefacto.model.Tortue;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -22,6 +20,7 @@ import javax.swing.JPanel;
 import javax.swing.JToolBar;
 import javax.swing.KeyStroke;
 import LogoRefacto.Controller.MainController;
+import java.awt.Component;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
@@ -30,8 +29,11 @@ import java.util.List;
  *
  * @author Vlad
  */
-public class MainView extends JFrame implements IView {
+public class MainView extends JFrame /* implements IView */{
 
+    public static final int WIDTH = 600;
+    public static final int HEIGHT = 400;
+    
     public static final String CMD_AVANCER = "Avancer";
     public static final String CMD_DROITE = "Droite";
     public static final String CMD_GAUCHE = "Gauche";
@@ -47,11 +49,12 @@ public class MainView extends JFrame implements IView {
     // Boutons
     private ManualCommandsView toolBar;
     private JPanel buttonPanel;
+    private List<Component> menuItems;
     // les boutons du bas
     private JMenu menuCommandes;
 
     public MainView(MainController controller) {
-
+        menuItems = new ArrayList<>();
         populationView = new PopulationView();
         Init();
         populationView.paintComponent(getGraphics());
@@ -90,8 +93,6 @@ public class MainView extends JFrame implements IView {
         addMenuItem(menuCommandes, "Ajouter Tortue", CMD_CREER_TORTUE, -1);
         addMenuItem(menuCommandes, "Supprimer Tortue", CMD_SUPPRIMER_TORTUE, -1);
 
-//        addMenuItem(menuCommandes, "Lever Crayon", CMD_LEVER, -1);
-//        addMenuItem(menuCommandes, "Baisser Crayon", CMD_BAISSER, -1);
         JMenu menuHelp = new JMenu("Aide"); // on installe le premier menu
         menubar.add(menuHelp);
         addMenuItem(menuHelp, "Aide", "Help", -1);
@@ -106,8 +107,8 @@ public class MainView extends JFrame implements IView {
 
         populationView = new PopulationView(); //500, 400);
         populationView.setBackground(Color.white);
-        populationView.setSize(new Dimension(600, 400));
-        populationView.setPreferredSize(new Dimension(600, 400));
+        populationView.setSize(new Dimension(WIDTH, HEIGHT));
+        populationView.setPreferredSize(new Dimension(WIDTH, HEIGHT));
 
         getContentPane().add(populationView, "Center");
 
@@ -119,7 +120,7 @@ public class MainView extends JFrame implements IView {
         JMenuItem menuItem;
         menuItem = new JMenuItem(label);
         m.add(menuItem);
-
+        menuItems.add(menuItem);
         menuItem.setActionCommand(command);
         if (key > 0) {
             if (key != KeyEvent.VK_DELETE) {
@@ -154,36 +155,6 @@ public class MainView extends JFrame implements IView {
         return procedureBarView;
     }
 
-    @Override
-    public void clearView() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public void closeWindow() {
-        System.exit(0);
-    }
-
-    @Override
-    public void displayPopulation(PopulationTortue t) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public void updatePopulation(PopulationTortue t) {
-        populationView.showTurtles(getGraphics());
-    }
-
-    @Override
-    public void updateTortue(Tortue t) {
-        populationView.showTurtles(getGraphics());
-    }
-
-    @Override
-    public void addTortue(Tortue t) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
     public String showChooseBox() {
         String[] option = {
             MainController.MODE_MANUEL,
@@ -193,7 +164,6 @@ public class MainView extends JFrame implements IView {
         return n != -1 ? option[n] : option[0];
     }
 
-//    public void SetColor()
     protected Color decodeColor(int c) {
         switch (c) {
             case 0:
@@ -237,4 +207,9 @@ public class MainView extends JFrame implements IView {
         }
         return s;
     }
+
+    public List<Component> getMenuItems() {
+        return menuItems;
+    }
+    
 }

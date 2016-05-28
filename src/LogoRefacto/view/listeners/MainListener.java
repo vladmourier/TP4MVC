@@ -16,17 +16,14 @@ import java.awt.event.ActionListener;
  *
  * @author Vlad
  */
-public class MainListener implements ActionListener {
+public class MainListener extends CommandListener {
 
-    MainController mainController;
     AbstractPopulationController populationController;
-    MainView mainView;
 
     ActionEvent current;
 
     public MainListener(MainController mc, MainView mainV) {
-        mainController = mc;
-        this.mainView = mainV;
+        super(mc, mainV);
         String mode = selectMode();
         mainController.setMode(mode);
         if (mode.equals(MainController.MODE_AUTO)) {
@@ -37,20 +34,13 @@ public class MainListener implements ActionListener {
         populationController = mainController.getCurrentController();
     }
 
-    public void update(Tortue tortueCourante) {
-        String c = current.getActionCommand();
-        if (c.equals(MainView.CMD_QUITTER)) {
-            mainController.closeApplication();
-        }
-    }
-
     @Override
     /**
      * la gestion des actions des boutons
      */
     public void actionPerformed(ActionEvent e) {
         current = e;
-        update(mainController.getTortueCourante());
+        super.actionPerformed(e);
     }
 
     public void createTortue() {
