@@ -105,7 +105,7 @@ public class Tortue {
         mp.moveTurtle(this);
     }
     
-    public void drawPattern(MovePattern mp) throws Exception{
+    public void drawPattern(MovePattern mp){
         mp.moveTurtle(this);
     }
 

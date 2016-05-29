@@ -11,6 +11,7 @@ import LogoRefacto.model.Shapes.Polygone;
 import LogoRefacto.model.Shapes.RandomPattern;
 import LogoRefacto.model.Shapes.Spiral;
 import LogoRefacto.model.Tortue;
+import LogoRefacto.view.MainView;
 import java.util.Random;
 
 /**
@@ -19,7 +20,11 @@ import java.util.Random;
  */
 public class AutoController extends AbstractPopulationController {
 
-    private MovePattern chooseRandomPattern() {
+    public AutoController(int width, int height) {
+        super(width, height);
+    }
+
+    private MovePattern chooseRandomgdgPattern() {
         MovePattern mp;
         Random r = new Random();
         switch (r.nextInt(3)) {
@@ -46,11 +51,11 @@ public class AutoController extends AbstractPopulationController {
 
     @Override
     public void initializePopulation() {
-        populationTortue.clear();
-        tortueCourante = new Tortue();
-        tortueCourante.setPosition(500 / 2, 400 / 2);
-        populationTortue.addTortue(tortueCourante);
-        autoMoveTortue(tortueCourante, new RandomPattern());
+        getPopulation().clear();
+        Tortue t = new Tortue();
+        t.setPosition(500 / 2, 400 / 2);
+        getPopulation().addTortue(t);
+        autoMoveTortue(t, new RandomPattern());
         notifyView();
     }
 
@@ -61,25 +66,21 @@ public class AutoController extends AbstractPopulationController {
                 boolean ok = true;
                 while (ok) {
                     try {
-                        moveTortue(tortue, mp);
+                        doPatternTortue(tortue, mp);
                         Thread.sleep(500);
                     } catch (Exception ex) {
                         ok = false;
                     }
                 }
+
             }
         }));
         t.start();
     }
 
-    protected void moveTortue(Tortue tortue, MovePattern mp) throws Exception {
-        doPatternTortue(tortue, mp);
-    }
-
     @Override
     public void addTortue(Tortue t) {
-        populationTortue.addTortue(t);
-        itTortue = populationTortue.iterator();
+        getPopulation().addTortue(t);
         autoMoveTortue(t, new RandomPattern());
         notifyView();
     }

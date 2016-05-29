@@ -55,7 +55,7 @@ public abstract class CommandListener implements ActionListener {
         }
     }
 
-    private void removeTortue(int n) {
+    protected void removeTortue(int n) {
         Iterator<Tortue> it = mainController.getPopulation().iterator();
         int i = 0;
         Tortue target = null;
@@ -71,7 +71,7 @@ public abstract class CommandListener implements ActionListener {
         }
     }
 
-    private void avancerTortueCourante() {
+    protected void avancerTortueCourante() {
         int v = Integer.parseInt(mainView.getInputValue());
         try {
             mainController.avancerTortue(mainController.getTortueCourante(), v);
@@ -84,7 +84,7 @@ public abstract class CommandListener implements ActionListener {
 
     }
 
-    private void supprimerTortue() {
+    protected void supprimerTortue() {
         int pop_size = mainController.getPopulation().size();
         if (pop_size > 0) {
             removeTortue(0);
@@ -94,7 +94,7 @@ public abstract class CommandListener implements ActionListener {
         }
     }
 
-    private void gaucheTortueCourante() {
+    protected void gaucheTortueCourante() {
         try {
             int v = Integer.parseInt(mainView.getInputValue());
             mainController.gaucheTortue(mainController.getTortueCourante(), v);
@@ -103,7 +103,7 @@ public abstract class CommandListener implements ActionListener {
         }
     }
 
-    private void droiteTortueCourante() {
+    protected void droiteTortueCourante() {
         try {
             int v = Integer.parseInt(mainView.getInputValue());
             mainController.droiteTortue(mainController.getTortueCourante(), v);

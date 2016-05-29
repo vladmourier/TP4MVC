@@ -13,6 +13,10 @@ import LogoRefacto.model.Tortue;
  * @author Vlad
  */
 public class AutoFlockingController extends AutoController {
+
+    public AutoFlockingController(int width, int height) {
+        super(width, height);
+    }
     protected void moveTortue(Tortue tortue, MovePattern mp) throws Exception {
     }
     protected void getAverageDist(){

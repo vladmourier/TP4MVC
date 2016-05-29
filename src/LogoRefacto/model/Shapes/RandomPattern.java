@@ -17,7 +17,7 @@ public class RandomPattern extends MovePattern{
     @Override
     public void moveTurtle(Tortue t) {
         Random r = new Random();
-        t.avancer(r.nextInt(100));
+        t.avancer(30);
         t.droite(r.nextInt(360));
     }
     

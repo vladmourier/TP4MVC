@@ -11,4 +11,8 @@ package LogoRefacto.Controller;
  */
 public class ManualController extends AbstractPopulationController {
     
+    public ManualController(int width, int height) {
+        super(width, height);
+    }
+    
 }
