@@ -26,45 +26,42 @@ public class Tortue {
 
     public static final double ratioDegRad = 0.0174533; // Rapport radians/degres (pour la conversion)
 
-    public class Position {
+    public class Chemin {
 
-        int x, y;
+        Position origine;
+        Position destination;
 
-        public Position(int x, int y) {
-            this.x = x;
-            this.y = y;
+        public Chemin(Position origine, Position destination) {
+            this.origine = origine;
+            this.destination = destination;
         }
 
-        public int getX() {
-            return x;
+        public Position getOrigine() {
+            return origine;
         }
 
-        public void setX(int x) {
-            this.x = x;
+        public void setOrigine(Position origine) {
+            this.origine = origine;
         }
 
-        public int getY() {
-            return y;
+        public Position getDestination() {
+            return destination;
         }
 
-        public void setY(int y) {
-            this.y = y;
+        public void setDestination(Position destination) {
+            this.destination = destination;
         }
 
     }
-
     protected Position position;
-    protected ArrayList<Position> trace;
+    protected ArrayList<Chemin> trace;
     protected int dir;
     protected int label;
-
     private static int index = 0;
 
     public Tortue(int x, int y, int dir) {
         trace = new ArrayList<>();
         position = new Position(x, y);
-        trace.add(position);
-
         this.dir = dir;
         this.label = index;
         index++;
@@ -76,7 +73,6 @@ public class Tortue {
         int y = t.getY();
         int dir = t.getDir();
         position = new Position(x, y);
-        trace.add(position);
 
         this.dir = dir;
         this.label = t.label;
@@ -85,7 +81,6 @@ public class Tortue {
     public Tortue() {
         trace = new ArrayList<>();
         position = new Position(0, 0);
-        trace.add(position);
         dir = -90;
         this.label = index;
         index++;
@@ -98,15 +93,17 @@ public class Tortue {
 
     public void setPosition(int newX, int newY) {
         position = new Position(newX, newY);
-        trace.add(position);
+    }
+
+    public void addtoTrace(int x, int y) {
+        trace.add(new Chemin(new Position(getX(), getY()), new Position(x, y)));
     }
 
     public void avancer(int dist) {
         int newX = (int) Math.round(position.x + dist * Math.cos(ratioDegRad * dir));
         int newY = (int) Math.round(position.y + dist * Math.sin(ratioDegRad * dir));
-
+        addtoTrace(newX, newY);
         position = new Position(newX, newY);
-        trace.add(position);
     }
 
     public void droite(int ang) {
@@ -206,8 +203,7 @@ public class Tortue {
         this.dir = dir;
     }
 
-    public ArrayList<Position> getTrace() {
+    public ArrayList<Chemin> getTrace() {
         return trace;
     }
-
 }

@@ -43,16 +43,14 @@ public class TortueView {
         if (graph == null) {
             return;
         }
-        
+
         //Crée les segments
-        Tortue.Position current = t.getTrace().get(0);
-        for (Tortue.Position p : t.getTrace().subList(1, t.getTrace().size())) {
+        for (Tortue.Chemin chemin : t.getTrace()) {
             Segment seg = new Segment(
-                    new Point(current.getX(), current.getY()),
-                    new Point(p.getX(), p.getY()));
+                    new Point(chemin.getOrigine().getX(), chemin.getOrigine().getY()),
+                    new Point(chemin.getDestination().getX(), chemin.getDestination().getY()));
             seg.setColor(c);
             listSegments.add(seg);
-            current = p;
         }
         // Dessine les segments
         for (Iterator it = listSegments.iterator(); it.hasNext();) {
@@ -90,9 +88,13 @@ public class TortueView {
         graph.fillPolygon(arrow);
     }
 
-    public void updatePosition(int newX, int newY, int dir, Color c) {
-        t.setPosition(newX, newY);
+    public void updatePosition(int newX, int newY, int dir, boolean addToTrace) {
         t.setDir(dir);
+        if (addToTrace) {
+            t.addtoTrace(newX, newY);
+        }
+        t.setPosition(newX, newY);
+
     }
 
     public Tortue getTortue() {

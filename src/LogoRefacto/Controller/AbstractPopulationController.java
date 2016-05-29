@@ -12,6 +12,8 @@ import LogoRefacto.model.Tortue;
 import LogoRefacto.model.World;
 import java.util.Iterator;
 import java.util.Observer;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -43,13 +45,32 @@ public abstract class AbstractPopulationController extends AbstractController {
 
     @Override
     public void avancerTortue(Tortue t, int dist) {
-        peuple.avancerTortue(t,dist);
+        System.out.println(t.getX() + " | " + t.getY());
+        int[] res = peuple.avancerTortue(t, dist);
+        while (res != null) {
+            notifyView();
+            if (res[0] == 0) {
+                t.setPosition(peuple.getWidth(), t.getY());
+            }
+            if (res[1] == 0) {
+                t.setPosition(t.getX(), peuple.getHeight());
+            }
+            if (res[0] == peuple.getWidth()) {
+                t.setPosition(0, t.getY());
+            }
+            if (res[1] == peuple.getHeight()) {
+                t.setPosition(t.getX(), 0);
+            }
+            notifyView(false);
+            res = peuple.avancerTortue(t, res[2]);
+            notifyView();
+        }
         notifyView();
     }
 
     @Override
     public void droiteTortue(Tortue t, int dist) {
-        peuple.droiteTortue(t,dist);
+        peuple.droiteTortue(t, dist);
         notifyView();
     }
 
@@ -67,7 +88,7 @@ public abstract class AbstractPopulationController extends AbstractController {
 
     @Override
     public Tortue nextTortue() {
-       
+
         return getPopulation().nextTortue();
     }
 
@@ -78,8 +99,12 @@ public abstract class AbstractPopulationController extends AbstractController {
     }
 
     protected void notifyView() {
+        notifyView(null);
+    }
+    
+    protected void notifyView(Object object){
         setChanged();
-        notifyObservers();
+        notifyObservers(object);
     }
 
     @Override
@@ -95,12 +120,12 @@ public abstract class AbstractPopulationController extends AbstractController {
     public PopulationTortue getPopulation() {
         return peuple.getPopulation();
     }
-    
+
     @Override
     public int getWorldWidth() {
         return peuple.getWidth();
     }
-    
+
     public int getWorldHeight() {
         return peuple.getHeight();
     }

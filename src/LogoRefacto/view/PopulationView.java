@@ -70,17 +70,17 @@ public class PopulationView extends JPanel implements Observer {
     @Override
     public void update(Observable o, Object argTortue) {
         AbstractController controller = (AbstractController) o;
-        updatePopulation(controller.getPopulation());
+        updatePopulation(controller.getPopulation(), argTortue != null ? (boolean)argTortue : true);
 
     }
 
-    public void updatePopulation(PopulationTortue p) {
+    public void updatePopulation(PopulationTortue p, boolean addToTrace) {
         List<Tortue> currentTortues = getCurrentTortues();
         //Mise à jour des tortues (et ajout si necessaire):
         for (Tortue updatedTortue : p) {
             if (currentTortues.contains(updatedTortue)) {
                 int index = currentTortues.indexOf(updatedTortue);
-                tortuesView.get(index).updatePosition(updatedTortue.getX(), updatedTortue.getY(), updatedTortue.getDir(), currentColor);
+                tortuesView.get(index).updatePosition(updatedTortue.getX(), updatedTortue.getY(), updatedTortue.getDir(), addToTrace);
             } else {
                 addTortue(updatedTortue);
             }
@@ -98,10 +98,10 @@ public class PopulationView extends JPanel implements Observer {
 
     }
 
-    public void updateTortue(Tortue t) {
+    public void updateTortue(Tortue t, boolean addToTrace) {
         for (TortueView v : tortuesView) {
             if (v.getTortue().equals(t)) {
-                v.updatePosition(t.getX(), t.getY(), t.getDir(), currentColor);
+                v.updatePosition(t.getX(), t.getY(), t.getDir(), addToTrace);
                 repaint();
                 return;
             }
