@@ -8,7 +8,9 @@ package LogoRefacto.Controller;
 import LogoRefacto.model.PopulationTortue;
 import LogoRefacto.model.Shapes.MovePattern;
 import LogoRefacto.model.Tortue;
+import LogoRefacto.model.World;
 import java.util.Observable;
+import java.util.Observer;
 
 /**
  *
@@ -17,8 +19,6 @@ import java.util.Observable;
 public abstract class AbstractController extends Observable{
     
 //    public abstract void setMode(String mode);
-
-    
     public abstract void initializePopulation();
 
     public abstract void addTortue(Tortue t);
@@ -31,4 +31,6 @@ public abstract class AbstractController extends Observable{
     public abstract Tortue nextTortue();
 
     public abstract PopulationTortue getPopulation();
+    public abstract int getWorldWidth();
+    public abstract int getWorldHeight();
 }

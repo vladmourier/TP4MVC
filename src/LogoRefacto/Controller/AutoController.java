@@ -20,7 +20,11 @@ import java.util.Random;
  */
 public class AutoController extends AbstractPopulationController {
 
-    private MovePattern chooseRandomPattern() {
+    public AutoController(int width, int height) {
+        super(width, height);
+    }
+
+    private MovePattern chooseRandomgdgPattern() {
         MovePattern mp;
         Random r = new Random();
         switch (r.nextInt(3)) {
@@ -47,11 +51,11 @@ public class AutoController extends AbstractPopulationController {
 
     @Override
     public void initializePopulation() {
-        populationTortue.clear();
-        tortueCourante = new Tortue();
-        tortueCourante.setPosition(500 / 2, 400 / 2);
-        populationTortue.addTortue(tortueCourante);
-        autoMoveTortue(tortueCourante, new RandomPattern());
+        getPopulation().clear();
+        Tortue t = new Tortue();
+        t.setPosition(500 / 2, 400 / 2);
+        getPopulation().addTortue(t);
+        autoMoveTortue(t, new RandomPattern());
         notifyView();
     }
 
@@ -76,8 +80,7 @@ public class AutoController extends AbstractPopulationController {
 
     @Override
     public void addTortue(Tortue t) {
-        populationTortue.addTortue(t);
-        itTortue = populationTortue.iterator();
+        getPopulation().addTortue(t);
         autoMoveTortue(t, new RandomPattern());
         notifyView();
     }

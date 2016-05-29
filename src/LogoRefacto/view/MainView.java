@@ -5,6 +5,9 @@
  */
 package LogoRefacto.view;
 
+import LogoRefacto.Controller.AbstractController;
+import LogoRefacto.model.PopulationTortue;
+import LogoRefacto.model.Tortue;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -20,19 +23,24 @@ import javax.swing.JPanel;
 import javax.swing.JToolBar;
 import javax.swing.KeyStroke;
 import LogoRefacto.Controller.MainController;
+import LogoRefacto.view.listeners.MainListener;
+import LogoRefacto.view.listeners.ManualCommandsListener;
+import LogoRefacto.view.listeners.ProcedureBarListener;
 import java.awt.Component;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JButton;
+import javax.swing.JComboBox;
 
 /**
  *
  * @author Vlad
  */
-public class MainView extends JFrame /* implements IView */{
+public class MainView extends JFrame {
 
-    public static final int WIDTH = 600;
-    public static final int HEIGHT = 400;
+    public final int WIDTH;
+    public final int HEIGHT;
     
     public static final String CMD_AVANCER = "Avancer";
     public static final String CMD_DROITE = "Droite";
@@ -52,13 +60,31 @@ public class MainView extends JFrame /* implements IView */{
     private List<Component> menuItems;
     // les boutons du bas
     private JMenu menuCommandes;
+    
+    MainController mainController;
 
     public MainView(MainController controller) {
         menuItems = new ArrayList<>();
         populationView = new PopulationView();
+        WIDTH = controller.getWorldWidth();
+        HEIGHT = controller.getWorldHeight();
         Init();
         populationView.paintComponent(getGraphics());
+        this.mainController = controller;
         controller.setObservers(populationView);
+        addActionListeners();
+        initializeMode();
+        
+    }
+    
+    private void initializeMode() {
+        String mode = showChooseBox();
+        this.mainController.setMode(mode);
+        if (mode.equals(MainController.MODE_AUTO)) {
+            lockToolbar(true);
+        } else {
+            lockToolbar(false);
+        }
     }
 
     public void lockToolbar(boolean b) {
@@ -206,6 +232,36 @@ public class MainView extends JFrame /* implements IView */{
             s.add(f.getName());
         }
         return s;
+    }
+
+    private void addActionListeners() {
+        //Creation des listeners :
+        MainListener sc = new MainListener(mainController, this);
+                
+        ProcedureBarListener pbl = new ProcedureBarListener(mainController);
+
+        ManualCommandsListener mcl = new ManualCommandsListener(mainController , this);
+
+        for (Component c : getToolBar().getComponents()) {
+                    if (c instanceof JButton) {
+                        ((JButton) c).addActionListener(mcl);
+                    } else if (c instanceof JComboBox){
+                        ((JComboBox) c).addActionListener(mcl);
+                    }
+                }
+
+                for (Component c : getButtonPanel().getComponents()) {
+                    if (c instanceof JButton) {
+                        ((JButton) c).addActionListener(sc);
+                    }
+                }
+
+                for (Component c : getProcedureBarView().getComponents()) {
+                    if (c instanceof JButton) {
+                        ((JButton) c).addActionListener(pbl);
+                    }
+                }
+
     }
 
     public List<Component> getMenuItems() {

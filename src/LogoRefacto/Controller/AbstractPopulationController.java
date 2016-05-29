@@ -6,11 +6,12 @@
 package LogoRefacto.Controller;
 
 import LogoRefacto.model.PopulationTortue;
+import LogoRefacto.model.ScrappingWorld;
 import LogoRefacto.model.Shapes.MovePattern;
 import LogoRefacto.model.Tortue;
+import LogoRefacto.model.World;
 import java.util.Iterator;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.util.Observer;
 
 /**
  *
@@ -18,48 +19,43 @@ import java.util.logging.Logger;
  */
 public abstract class AbstractPopulationController extends AbstractController {
 
-    protected PopulationTortue populationTortue;
-    protected Iterator<Tortue> itTortue;
-    protected Tortue tortueCourante;
+    protected World peuple;
 
-    public AbstractPopulationController() {
-        populationTortue = new PopulationTortue();
-        itTortue = populationTortue.iterator();
+    public AbstractPopulationController(int width, int height) {
+        peuple = new ScrappingWorld(width, height);
     }
 
     public Tortue getTortue(Tortue t) {
-        return populationTortue.getTortue(t);
+        return getPopulation().getTortue(t);
     }
 
     @Override
     public void addTortue(Tortue t) {
-        populationTortue.addTortue(t);
-        itTortue = populationTortue.iterator();
+        getPopulation().addTortue(t);
         notifyView();
     }
 
     @Override
     public void removeTortue(Tortue t) {
-        populationTortue.removeTortue(t);
-        itTortue = populationTortue.iterator();
+        getPopulation().removeTortue(t);
         notifyView();
     }
 
     @Override
     public void avancerTortue(Tortue t, int dist) {
-        getTortue(t).avancer(dist);
+        peuple.avancerTortue(t,dist);
         notifyView();
     }
 
     @Override
     public void droiteTortue(Tortue t, int dist) {
-        getTortue(t).droite(dist);
+        peuple.droiteTortue(t,dist);
         notifyView();
     }
 
     @Override
     public void gaucheTortue(Tortue t, int dist) {
-        getTortue(t).gauche(dist);
+        peuple.gaucheTortue(t, dist);
         notifyView();
     }
 
@@ -71,20 +67,13 @@ public abstract class AbstractPopulationController extends AbstractController {
 
     @Override
     public Tortue nextTortue() {
-        if (itTortue.hasNext()) {
-            tortueCourante = itTortue.next();
-        } else if (populationTortue.size() > 0) {
-            itTortue = populationTortue.iterator();
-            tortueCourante = itTortue.next();
-        } else {
-            tortueCourante = null;
-        }
-        return tortueCourante;
+       
+        return getPopulation().nextTortue();
     }
 
     @Override
     public Tortue getTortueCourante() {
-        return tortueCourante;
+        return getPopulation().getCourante();
 
     }
 
@@ -95,15 +84,24 @@ public abstract class AbstractPopulationController extends AbstractController {
 
     @Override
     public void initializePopulation() {
-        populationTortue.clear();
-        tortueCourante = new Tortue();
-        tortueCourante.setPosition(500 / 2, 400 / 2);
-        populationTortue.addTortue(tortueCourante);
+        getPopulation().clear();
+        Tortue t = new Tortue();
+        t.setPosition(500 / 2, 400 / 2);
+        getPopulation().addTortue(t);
         notifyView();
     }
 
     @Override
     public PopulationTortue getPopulation() {
-        return populationTortue;
+        return peuple.getPopulation();
+    }
+    
+    @Override
+    public int getWorldWidth() {
+        return peuple.getWidth();
+    }
+    
+    public int getWorldHeight() {
+        return peuple.getHeight();
     }
 }

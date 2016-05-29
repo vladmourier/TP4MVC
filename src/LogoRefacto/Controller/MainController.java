@@ -8,6 +8,7 @@ package LogoRefacto.Controller;
 import LogoRefacto.model.PopulationTortue;
 import LogoRefacto.model.Shapes.MovePattern;
 import LogoRefacto.model.Tortue;
+import LogoRefacto.model.World;
 import java.util.HashMap;
 import java.util.Observer;
 import java.util.logging.Level;
@@ -21,12 +22,24 @@ public class MainController extends AbstractController {
 
     public static final String MODE_MANUEL = "MANUEL";
     public static final String MODE_AUTO = "AUTO";
+    
+    private final int worldWidth;
+    private final int worldHeight;
+    
 
     private HashMap<String, AbstractPopulationController> controllers;
     private AbstractPopulationController currentController;
 
-    public MainController() {
+    public MainController(int width, int height) {
         controllers = new HashMap<>();
+        this.worldHeight= height;
+        this.worldWidth = width;
+        //Creating two differents mode : auto and manual
+        ManualController manC = new ManualController(width, height);
+        AutoController autoC = new AutoController(width, height);
+
+        addController(MainController.MODE_AUTO, autoC);
+        addController(MainController.MODE_MANUEL, manC);
     }
 
     
@@ -39,6 +52,7 @@ public class MainController extends AbstractController {
         }
     }
 
+    
     public void setObservers(Observer o) {
         for (AbstractPopulationController apc : controllers.values()) {
             apc.addObserver(o);
@@ -116,5 +130,16 @@ public class MainController extends AbstractController {
     @Override
     public PopulationTortue getPopulation() {
         return currentController.getPopulation();
+    }
+
+  
+    @Override
+    public int getWorldWidth() {
+        return worldWidth;
+    }
+
+    @Override
+    public int getWorldHeight() {
+        return worldHeight;
     }
 }

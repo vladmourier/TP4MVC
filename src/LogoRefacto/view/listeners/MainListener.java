@@ -24,13 +24,6 @@ public class MainListener extends CommandListener {
 
     public MainListener(MainController mc, MainView mainV) {
         super(mc, mainV);
-        String mode = selectMode();
-        mainController.setMode(mode);
-        if (mode.equals(MainController.MODE_AUTO)) {
-            mainV.lockToolbar(true);
-        } else {
-            mainV.lockToolbar(false);
-        }
         populationController = mainController.getCurrentController();
     }
 
@@ -55,5 +48,5 @@ public class MainListener extends CommandListener {
 
     public String selectMode() {
         return mainView.showChooseBox();
-    }
+}
 }

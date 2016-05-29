@@ -4,9 +4,8 @@
  * and open the template in the editor.
  */
 package LogoRefacto.view;
-
-import static LogoRefacto.Application.HGAP;
 import java.awt.Component;
+import java.awt.Dimension;
 import java.awt.Insets;
 import javax.swing.BorderFactory;
 import javax.swing.Box;
@@ -25,6 +24,9 @@ import javax.swing.JToolBar;
 public class ManualCommandsView extends JToolBar {
 
     public static final String CMD_COLORLIST = "COLORLIST";
+    public static final Dimension VGAP = new Dimension(1, 5);
+    public static final Dimension HGAP = new Dimension(5, 1);
+
     private JTextField inputValue;
     JComboBox colorList;
 

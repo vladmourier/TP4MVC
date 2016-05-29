@@ -28,9 +28,7 @@ import javax.swing.*;
  ************************************************************************* */
 public class Application {
 
-    public static final Dimension VGAP = new Dimension(1, 5);
-    public static final Dimension HGAP = new Dimension(5, 1);
-
+   
     /**
      * @param args
      */
@@ -38,50 +36,13 @@ public class Application {
         SwingUtilities.invokeLater(new Runnable() {
             public void run() {
                 
-                MainController mc = new MainController();
+                MainController mc = new MainController(600,400);
                 
-                ManualController manC = new ManualController();
-                AutoController autoC = new AutoController();
-                
-                mc.addController(MainController.MODE_AUTO, autoC);
-                mc.addController(MainController.MODE_MANUEL, manC);
                 
                 MainView mv = new MainView(mc);
                 
-                MainListener mainListener = new MainListener(mc, mv);
-                
-                ProcedureBarListener pbl = new ProcedureBarListener(mc);
-                
-                ManualCommandsListener mcl = new ManualCommandsListener(mc , mv);
-                
-                for(Component c : mv.getMenuItems()){
-                    if(c instanceof JMenuItem) ((JMenuItem) c).addActionListener(mainListener);
-                }
-                
-                for (Component c : mv.getToolBar().getComponents()) {
-                    if (c instanceof JButton) {
-                        ((JButton) c).addActionListener(mcl);
-                    } else if (c instanceof JComboBox){
-                        ((JComboBox) c).addActionListener(mcl);
-                    }
-                }
-
-                for (Component c : mv.getButtonPanel().getComponents()) {
-                    if (c instanceof JButton) {
-                        ((JButton) c).addActionListener(mainListener);
-                    }
-                }
-
-                for (Component c : mv.getProcedureBarView().getComponents()) {
-                    if (c instanceof JButton) {
-                        ((JButton) c).addActionListener(pbl);
-                    }
-                }
-                
-               
                 
                 mv.setVisible(true);
-
             }
         });
 

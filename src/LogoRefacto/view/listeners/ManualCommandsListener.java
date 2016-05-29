@@ -11,8 +11,11 @@ import LogoRefacto.Controller.ManualController;
 import LogoRefacto.model.Tortue;
 import LogoRefacto.view.MainView;
 import LogoRefacto.view.ManualCommandsView;
+import java.awt.KeyEventDispatcher;
+import java.awt.KeyboardFocusManager;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
 import java.util.Iterator;
 import java.util.Random;
 import javax.swing.JComboBox;
@@ -21,13 +24,17 @@ import javax.swing.JComboBox;
  *
  * @author Vlad
  */
-public class ManualCommandsListener extends CommandListener {
+public class ManualCommandsListener extends CommandListener implements KeyEventDispatcher{
+
 
     public ManualCommandsListener(MainController mainController, MainView mainView) {
         super(mainController, mainView);
+        //Ajout des touches
+        KeyboardFocusManager manager = KeyboardFocusManager.getCurrentKeyboardFocusManager();
+        manager.addKeyEventDispatcher(this);
     }
 
-    @Override
+   @Override
     public void actionPerformed(ActionEvent e) {
         super.actionPerformed(e);
         if (e.getActionCommand().equals(ManualCommandsView.CMD_COLORLIST)) {
@@ -35,4 +42,23 @@ public class ManualCommandsListener extends CommandListener {
         }
     }
 
+
+    @Override
+    public boolean dispatchKeyEvent(KeyEvent e) {
+        if (e.getID() != KeyEvent.KEY_PRESSED) {
+            return false;
+        }
+        if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
+            droiteTortueCourante();
+        } else if (e.getKeyCode() == KeyEvent.VK_LEFT) {
+            gaucheTortueCourante();
+        } else if (e.getKeyCode() == KeyEvent.VK_UP) {
+            avancerTortueCourante();
+        }else if (e.getKeyCode() == KeyEvent.VK_TAB) {
+            //next tortue;
+            mainController.nextTortue();
+        }
+        
+        return true;
+    }
 }
