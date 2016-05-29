@@ -21,11 +21,11 @@ import javax.swing.JPanel;
  *
  * @author Vlad
  */
-public class PopulationView extends JPanel implements Observer{
+public class PopulationView extends JPanel implements Observer {
 
     private ArrayList<TortueView> tortuesView; // la liste des tortues enregistrees
     private Color currentColor = Color.BLACK;
-    
+
     public PopulationView() {
         this.tortuesView = new ArrayList<>();
     }
@@ -37,10 +37,9 @@ public class PopulationView extends JPanel implements Observer{
     public void addTortue(Tortue t) {
         TortueView tv = new TortueView(t);
         tortuesView.add(tv);
-       repaint();
-        
-    }
+        repaint();
 
+    }
 
     public void reset() {
         for (TortueView t : tortuesView) {
@@ -68,47 +67,40 @@ public class PopulationView extends JPanel implements Observer{
         }
     }
 
- 
     @Override
     public void update(Observable o, Object argTortue) {
         AbstractController controller = (AbstractController) o;
-        updatePopulation(controller.getPopulation());            
-        
+        updatePopulation(controller.getPopulation());
+
     }
-    
-    public void updatePopulation(PopulationTortue p)
-    {
+
+    public void updatePopulation(PopulationTortue p) {
         List<Tortue> currentTortues = getCurrentTortues();
         //Mise à jour des tortues (et ajout si necessaire):
-        for(Tortue updatedTortue : p)
-        {
-            if(currentTortues.contains(updatedTortue))
-            {
+        for (Tortue updatedTortue : p) {
+            if (currentTortues.contains(updatedTortue)) {
                 int index = currentTortues.indexOf(updatedTortue);
                 tortuesView.get(index).updatePosition(updatedTortue.getX(), updatedTortue.getY(), updatedTortue.getDir(), currentColor);
-            }else {
+            } else {
                 addTortue(updatedTortue);
             }
         }
         //Suppression des tortues non présentes :
         ArrayList<TortueView> toDelete = new ArrayList<>();
-        for(TortueView t : tortuesView)
-        {
-            if(!p.contains(t.getTortue()))
+        for (TortueView t : tortuesView) {
+            if (!p.contains(t.getTortue())) {
                 toDelete.add(t);
+            }
         }
         tortuesView.removeAll(toDelete);
-       
+
         repaint();
-        
+
     }
-    
-    public void updateTortue(Tortue t)
-    {
-        for(TortueView v : tortuesView)
-        {
-            if(v.getTortue().equals(t))
-            {
+
+    public void updateTortue(Tortue t) {
+        for (TortueView v : tortuesView) {
+            if (v.getTortue().equals(t)) {
                 v.updatePosition(t.getX(), t.getY(), t.getDir(), currentColor);
                 repaint();
                 return;
@@ -116,19 +108,23 @@ public class PopulationView extends JPanel implements Observer{
         }
         //Nouvelle tortue non enregistré :
         addTortue(t);
-        
+
     }
 
     private List<Tortue> getCurrentTortues() {
         List<Tortue> list = new ArrayList<>();
-        for(TortueView t : tortuesView)
-        {
+        for (TortueView t : tortuesView) {
             list.add(t.getTortue());
         }
         return list;
     }
 
-    public void setCurrentColor(Color color) {
-        this.currentColor = color;
+    public void setTortueColor(Tortue t, Color color) {
+        for (TortueView tortueV : tortuesView) {
+            if (t.equals(tortueV.getTortue())) {
+                tortueV.setColor(color);
+                tortueV.drawTurtle(getGraphics());
+            }
+        }
     }
 }

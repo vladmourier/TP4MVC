@@ -4,6 +4,7 @@ import LogoRefacto.model.Shapes.Carre;
 import LogoRefacto.model.Shapes.MovePattern;
 import LogoRefacto.model.Shapes.Polygone;
 import LogoRefacto.model.Shapes.Spiral;
+import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Random;
 
@@ -25,55 +26,87 @@ public class Tortue {
 
     public static final double ratioDegRad = 0.0174533; // Rapport radians/degres (pour la conversion)
 
-    protected int x, y;
+    public class Position {
+
+        int x, y;
+
+        public Position(int x, int y) {
+            this.x = x;
+            this.y = y;
+        }
+
+        public int getX() {
+            return x;
+        }
+
+        public void setX(int x) {
+            this.x = x;
+        }
+
+        public int getY() {
+            return y;
+        }
+
+        public void setY(int y) {
+            this.y = y;
+        }
+
+    }
+
+    protected Position position;
+    protected ArrayList<Position> trace;
     protected int dir;
     protected int label;
-    
-    private static int index=0;
+
+    private static int index = 0;
 
     public Tortue(int x, int y, int dir) {
-        this.x = x;
-        this.y = y;
+        trace = new ArrayList<>();
+        position = new Position(x, y);
+        trace.add(position);
+
         this.dir = dir;
         this.label = index;
         index++;
     }
-    
+
     public Tortue(Tortue t) {
+        trace = new ArrayList<>();
         int x = t.getX();
         int y = t.getY();
         int dir = t.getDir();
-        this.x = x;
-        this.y = y;
+        position = new Position(x, y);
+        trace.add(position);
+
         this.dir = dir;
         this.label = t.label;
     }
 
     public Tortue() {
-        x = 0;
-        y = 0;
+        trace = new ArrayList<>();
+        position = new Position(0, 0);
+        trace.add(position);
         dir = -90;
         this.label = index;
         index++;
     }
 
     public void reset() {
-        x = 0;
-        y = 0;
+        position = new Position(0, 0);
         dir = -90;
     }
 
     public void setPosition(int newX, int newY) {
-        x = newX;
-        y = newY;
+        position = new Position(newX, newY);
+        trace.add(position);
     }
 
     public void avancer(int dist) {
-        int newX = (int) Math.round(x + dist * Math.cos(ratioDegRad * dir));
-        int newY = (int) Math.round(y + dist * Math.sin(ratioDegRad * dir));
+        int newX = (int) Math.round(position.x + dist * Math.cos(ratioDegRad * dir));
+        int newY = (int) Math.round(position.y + dist * Math.sin(ratioDegRad * dir));
 
-        x = newX;
-        y = newY;
+        position = new Position(newX, newY);
+        trace.add(position);
     }
 
     public void droite(int ang) {
@@ -104,17 +137,17 @@ public class Tortue {
         }
         mp.moveTurtle(this);
     }
-    
-    public void drawPattern(MovePattern mp){
+
+    public void drawPattern(MovePattern mp) {
         mp.moveTurtle(this);
     }
 
     public int getX() {
-        return x;
+        return position.x;
     }
 
     public int getY() {
-        return y;
+        return position.y;
     }
 
     public int getDir() {
@@ -151,9 +184,6 @@ public class Tortue {
 //    public int getColor() {
 //        return coul;
 //    }
-
-    
-
     @Override
     public boolean equals(Object obj) {
         if (this == obj) {
@@ -173,8 +203,11 @@ public class Tortue {
     }
 
     public void setDir(int dir) {
-        this.dir= dir;
+        this.dir = dir;
     }
-    
-    
+
+    public ArrayList<Position> getTrace() {
+        return trace;
+    }
+
 }

@@ -20,6 +20,7 @@ import java.util.Iterator;
 public class TortueView {
 
     Tortue t;
+    Color c = Color.BLACK;
     protected ArrayList<Segment> listSegments; // Trace de la tortue
     protected static final int rp = 10, rb = 5; // Taille de la pointe et de la base de la fleche
 
@@ -42,7 +43,17 @@ public class TortueView {
         if (graph == null) {
             return;
         }
-
+        
+        //Crée les segments
+        Tortue.Position current = t.getTrace().get(0);
+        for (Tortue.Position p : t.getTrace().subList(1, t.getTrace().size())) {
+            Segment seg = new Segment(
+                    new Point(current.getX(), current.getY()),
+                    new Point(p.getX(), p.getY()));
+            seg.setColor(c);
+            listSegments.add(seg);
+            current = p;
+        }
         // Dessine les segments
         for (Iterator it = listSegments.iterator(); it.hasNext();) {
             Segment seg = (Segment) it.next();
@@ -75,27 +86,21 @@ public class TortueView {
                 (int) Math.round(p2.y + r * Math.sin(theta - alpha)));
 
         arrow.addPoint(p2.x, p2.y);
-        graph.setColor(Color.green);
+        graph.setColor(c);
         graph.fillPolygon(arrow);
     }
 
     public void updatePosition(int newX, int newY, int dir, Color c) {
-        c = new Color(c.getRed(), c.getGreen(), c.getBlue());
-        Segment seg = new Segment();
-        seg.getPtStart().x = t.getX();
-        seg.getPtStart().y = t.getY();
-        seg.getPtEnd().x = newX;
-        seg.getPtEnd().y = newY;
-        seg.setColor(c);
-
-        listSegments.add(seg);
-
         t.setPosition(newX, newY);
         t.setDir(dir);
     }
 
     public Tortue getTortue() {
         return t;
+    }
+
+    public void setColor(Color c) {
+        this.c = c;
     }
 
 }

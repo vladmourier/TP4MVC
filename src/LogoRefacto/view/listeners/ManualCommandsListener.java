@@ -38,7 +38,7 @@ public class ManualCommandsListener extends CommandListener implements KeyEventD
     public void actionPerformed(ActionEvent e) {
         super.actionPerformed(e);
         if (e.getActionCommand().equals(ManualCommandsView.CMD_COLORLIST)) {
-            mainView.setColor(((JComboBox) e.getSource()).getSelectedIndex());
+            mainView.setCurrentTortueColor(((JComboBox) e.getSource()).getSelectedIndex());
         }
     }
 

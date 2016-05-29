@@ -1,14 +1,8 @@
 package LogoRefacto;
 
 // package logo;
-import LogoRefacto.Controller.AutoController;
 import LogoRefacto.Controller.MainController;
-import LogoRefacto.Controller.ManualController;
-import LogoRefacto.view.listeners.MainListener;
 import LogoRefacto.view.MainView;
-import LogoRefacto.view.listeners.ManualCommandsListener;
-import LogoRefacto.view.listeners.ProcedureBarListener;
-import java.awt.*;
 
 import javax.swing.*;
 

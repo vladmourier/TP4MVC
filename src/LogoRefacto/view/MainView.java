@@ -132,7 +132,7 @@ public class MainView extends JFrame {
         getContentPane().add(procedureBarView, "South");
 
         populationView = new PopulationView(); //500, 400);
-        populationView.setBackground(Color.white);
+//        populationView.setBackground(Color.white);
         populationView.setSize(new Dimension(WIDTH, HEIGHT));
         populationView.setPreferredSize(new Dimension(WIDTH, HEIGHT));
 
@@ -221,8 +221,8 @@ public class MainView extends JFrame {
         }
     }
 
-    public void setColor(int n) {
-        populationView.setCurrentColor(decodeColor(n));
+    public void setCurrentTortueColor(int n) {
+        populationView.setTortueColor(mainController.getTortueCourante(), decodeColor(n));
     }
 
     public static List<String> getActionCommands() {

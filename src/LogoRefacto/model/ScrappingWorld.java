@@ -11,32 +11,38 @@ import LogoRefacto.model.Shapes.MovePattern;
  *
  * @author Hassane
  */
-public class ScrappingWorld extends World{
+public class ScrappingWorld extends World {
 
     public ScrappingWorld(PopulationTortue p, int width, int height) {
         super(p, width, height);
     }
-    
+
     public ScrappingWorld(int width, int height) {
-        super( width, height);
+        super(width, height);
     }
-    
+
     @Override
-    public void avancerTortue(Tortue t, int dist ){
+    public void avancerTortue(Tortue t, int dist) {
         System.out.println("Avancement scrappisé");
         Tortue habitant = habitants.getTortue(t);
         habitant.avancer(dist);
         int newX = habitant.getX();
         int newY = habitant.getY();
-        habitant.setPosition(newX%worldWidth, newY%worldHeight);
+        if (newX < 0) {
+            newX += worldWidth;
+        }
+        if (newY < 0) {
+            newY += worldHeight;
+        }
+        habitant.setPosition(newX % worldWidth, newY % worldHeight);
     }
-    
+
     @Override
-    public void drawPatternTortue(Tortue t, MovePattern mp){
+    public void drawPatternTortue(Tortue t, MovePattern mp) {
         Tortue habitant = habitants.getTortue(t);
         habitant.drawPattern(mp);
         int newX = habitant.getX();
         int newY = habitant.getY();
-        habitant.setPosition(newX%worldWidth, newY%worldHeight);
+        habitant.setPosition(newX % worldWidth, newY % worldHeight);
     }
 }
