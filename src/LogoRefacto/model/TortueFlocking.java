@@ -15,8 +15,15 @@ public class TortueFlocking extends Tortue {
     private final double vitesse=  0;
     
     public boolean canSee (Tortue t){
-        //TODO
-        return false;
+        boolean closeEnough = Position.getDistance(getPosition(), t.getPosition()) <= distance_vision;
+        
+        double tan = (Math.abs(t.getY() - getY()))/(Math.abs(t.getX() - getX()));
+        
+        int angle = (int) (Math.atan(tan)/ratioDegRad);
+        
+        boolean correctAngle = Math.abs(angle - dir)< angle_vision/2;
+        
+        return closeEnough && correctAngle;
     }
     
     

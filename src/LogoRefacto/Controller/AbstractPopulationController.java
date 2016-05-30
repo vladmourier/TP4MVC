@@ -9,6 +9,7 @@ import LogoRefacto.model.PopulationTortue;
 import LogoRefacto.model.ScrappingWorld;
 import LogoRefacto.model.Shapes.MovePattern;
 import LogoRefacto.model.Tortue;
+import LogoRefacto.model.TortueFlocking;
 import LogoRefacto.model.World;
 import java.util.Iterator;
 import java.util.Observer;
@@ -45,7 +46,6 @@ public abstract class AbstractPopulationController extends AbstractController {
 
     @Override
     public void avancerTortue(Tortue t, int dist) {
-        System.out.println(t.getX() + " | " + t.getY());
         int[] res = peuple.avancerTortue(t, dist);
         while (res != null) {
             notifyView();
@@ -101,8 +101,8 @@ public abstract class AbstractPopulationController extends AbstractController {
     protected void notifyView() {
         notifyView(null);
     }
-    
-    protected void notifyView(Object object){
+
+    protected void notifyView(Object object) {
         setChanged();
         notifyObservers(object);
     }

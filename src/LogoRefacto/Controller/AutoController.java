@@ -44,12 +44,6 @@ public class AutoController extends AbstractPopulationController {
     }
 
     @Override
-    public void avancerTortue(Tortue t, int dist) {
-        getTortue(t).avancer(dist);
-        notifyView();
-    }
-
-    @Override
     public void initializePopulation() {
         getPopulation().clear();
         Tortue t = new Tortue();

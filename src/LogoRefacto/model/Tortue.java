@@ -58,7 +58,7 @@ public class Tortue {
     protected int dir;
     protected int label;
     private static int index = 0;
-
+    
     public Tortue(int x, int y, int dir) {
         trace = new ArrayList<>();
         position = new Position(x, y);
@@ -89,6 +89,10 @@ public class Tortue {
     public void reset() {
         position = new Position(0, 0);
         dir = -90;
+    }
+
+    public Position getPosition() {
+        return position;
     }
 
     public void setPosition(int newX, int newY) {
