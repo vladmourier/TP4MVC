@@ -46,6 +46,7 @@ public class TortueView {
 
         //Crée les segments
         for (Tortue.Chemin chemin : t.getTrace()) {
+            
             Segment seg = new Segment(
                     new Point(chemin.getOrigine().getX(), chemin.getOrigine().getY()),
                     new Point(chemin.getDestination().getX(), chemin.getDestination().getY()));
@@ -88,11 +89,8 @@ public class TortueView {
         graph.fillPolygon(arrow);
     }
 
-    public void updatePosition(int newX, int newY, int dir, boolean addToTrace) {
+    public void updatePosition(int newX, int newY, int dir) {
         t.setDir(dir);
-        if (addToTrace) {
-            t.addtoTrace(newX, newY);
-        }
         t.setPosition(newX, newY);
 
     }
@@ -103,6 +101,10 @@ public class TortueView {
 
     public void setColor(Color c) {
         this.c = c;
+    }
+
+    void updateTortue(Tortue t) {
+        this.t = t;
     }
 
 }

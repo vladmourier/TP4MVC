@@ -106,6 +106,12 @@ public class Tortue {
         position = new Position(newX, newY);
     }
 
+    public Position calculateNexPosition(int dist){
+        int newX = (int) Math.round(position.x + dist * Math.cos(ratioDegRad * dir));
+        int newY = (int) Math.round(position.y + dist * Math.sin(ratioDegRad * dir));
+        return new Position(newX, newY);
+    }
+    
     public void droite(int ang) {
         dir = (dir + ang) % 360;
     }

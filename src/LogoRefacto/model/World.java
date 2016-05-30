@@ -28,9 +28,9 @@ public class World {
         this(new PopulationTortue(), width, height);
     }
     
-    public int[] avancerTortue(Tortue t, int dist){
+    public void avancerTortue(Tortue t, int dist){
         habitants.getTortue(t).avancer(dist);
-        return null;
+        
     }
     
     public void gaucheTortue(Tortue t, int ang){
