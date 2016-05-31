@@ -64,7 +64,7 @@ public abstract class AbstractPopulationController extends AbstractController {
 
     @Override
     public void doPatternTortue(Tortue t, MovePattern mp) throws Exception {
-        getTortue(t).drawPattern(mp);
+        peuple.drawPatternTortue(t, mp);
         notifyView();
     }
 

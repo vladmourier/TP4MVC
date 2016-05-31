@@ -14,11 +14,15 @@ import java.util.Random;
  */
 public class RandomPattern extends MovePattern{
 
+    int defaultDistance = 25;
+    int angle = 100;
+    
     @Override
-    public void moveTurtle(Tortue t) {
+    public int moveTurtle(Tortue t) {
         Random r = new Random();
-        t.avancer(50);
-        t.droite(r.nextInt(360));
+        t.droite(r.nextInt(angle)-angle/2);
+        t.avancer(defaultDistance);
+        return defaultDistance;
     }
     
 }

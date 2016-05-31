@@ -21,7 +21,7 @@ public abstract class MovePattern {
     
     
     
-    public abstract void moveTurtle(Tortue t);
+    public abstract int moveTurtle(Tortue t);
 
     
 }

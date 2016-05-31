@@ -28,10 +28,9 @@ public class AutoFlockingController extends AutoController {
         TortueFlocking t = new TortueFlocking();
         t.setPosition(500 / 2, 400 / 2);
         getPopulation().addTortue(t);
-        autoMoveTortue(t, new RandomPattern());
+        this.thread.start();
         notifyView();
     }
-
     @Override
     public void addTortue(Tortue t) {
         getPopulation().addTortue(t);
@@ -42,8 +41,6 @@ public class AutoFlockingController extends AutoController {
             ((TortueFlocking) t).addVoisin(current);
             current.addVoisin((TortueFlocking) t);
         }
-        autoMoveTortue(t, new RandomPattern());
-
         notifyView();
     }
 }

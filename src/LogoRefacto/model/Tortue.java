@@ -146,8 +146,8 @@ public class Tortue {
         mp.moveTurtle(this);
     }
 
-    public void drawPattern(MovePattern mp) {
-        mp.moveTurtle(this);
+    public int drawPattern(MovePattern mp) {
+       return mp.moveTurtle(this);
     }
 
     public int getX() {

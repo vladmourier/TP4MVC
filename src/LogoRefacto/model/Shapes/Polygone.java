@@ -21,9 +21,10 @@ public class Polygone extends MovePattern{
     }
     
     @Override
-    public void moveTurtle(Tortue t) {
+    public int moveTurtle(Tortue t) {
         t.avancer(n);
         t.droite(360/a);
+        return n;
     }
 
     

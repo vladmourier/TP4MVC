@@ -24,10 +24,11 @@ public class Spiral extends MovePattern {
     }
 
     @Override
-    public void moveTurtle(Tortue t) {
+    public int moveTurtle(Tortue t) {
         t.avancer(n);
         t.droite(360/a);
         n = n + 1;   
+        return n-1;
     }
 
     public void reset()
