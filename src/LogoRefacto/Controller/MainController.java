@@ -8,6 +8,7 @@ package LogoRefacto.Controller;
 import LogoRefacto.model.PopulationTortue;
 import LogoRefacto.model.Shapes.MovePattern;
 import LogoRefacto.model.Tortue;
+import LogoRefacto.model.TortueFlocking;
 import LogoRefacto.model.World;
 import java.util.HashMap;
 import java.util.Observer;
@@ -88,6 +89,16 @@ public class MainController extends AbstractController {
     @Override
     public void addTortue(Tortue t) {
         currentController.addTortue(t);
+    }
+    
+    public void addTortue (int x, int y, int dir){
+        Tortue t;
+        if(currentController instanceof AutoFlockingController){
+            t = new TortueFlocking(x, y, dir);
+        } else {
+            t = new Tortue(x, y, dir);
+        }
+        addTortue(t);
     }
 
     @Override

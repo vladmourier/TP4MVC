@@ -176,7 +176,7 @@ public class Tortue {
         if (this.label == other.label) {
             return true;
         }
-        return true;
+        return false;
     }
 
     public void setDir(int dir) {
