@@ -13,6 +13,18 @@ public class TortueFlocking extends Tortue {
     private final int distance_vision = 100; // distance en pixel jusqu'oÃ¹ la tortue peut voir
     private final int angle_vision = 180; // en degrÃ©s
     private final double vitesse=  0;
+
+    public TortueFlocking(int x, int y, int dir) {
+        super(x, y, dir);
+    }
+
+    public TortueFlocking(Tortue t) {
+        super(t);
+    }
+
+    public TortueFlocking() {
+        super();
+    }
     
     public boolean canSee (Tortue t){
         boolean closeEnough = Position.getDistance(getPosition(), t.getPosition()) <= distance_vision;
@@ -24,6 +36,18 @@ public class TortueFlocking extends Tortue {
         boolean correctAngle = Math.abs(angle - dir)< angle_vision/2;
         
         return closeEnough && correctAngle;
+    }
+
+    public int getDistance_vision() {
+        return distance_vision;
+    }
+
+    public int getAngle_vision() {
+        return angle_vision;
+    }
+
+    public double getVitesse() {
+        return vitesse;
     }
     
     

@@ -8,6 +8,7 @@ package LogoRefacto.view.listeners;
 import LogoRefacto.Controller.AbstractPopulationController;
 import LogoRefacto.Controller.MainController;
 import LogoRefacto.model.Tortue;
+import LogoRefacto.model.TortueFlocking;
 import LogoRefacto.view.MainView;
 import java.awt.event.ActionEvent;
 
@@ -37,7 +38,7 @@ public class MainListener extends CommandListener {
 
     public void createTortue() {
         // Creation de la tortue
-        Tortue tortue = new Tortue();
+        Tortue tortue = new TortueFlocking();
         tortue.setPosition(500 / 2, 400 / 2);
 
         // Deplacement de la tortue au centre de la feuille

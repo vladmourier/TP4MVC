@@ -46,25 +46,7 @@ public abstract class AbstractPopulationController extends AbstractController {
 
     @Override
     public void avancerTortue(Tortue t, int dist) {
-        int[] res = peuple.avancerTortue(t, dist);
-        while (res != null) {
-            notifyView();
-            if (res[0] == 0) {
-                t.setPosition(peuple.getWidth(), t.getY());
-            }
-            if (res[1] == 0) {
-                t.setPosition(t.getX(), peuple.getHeight());
-            }
-            if (res[0] == peuple.getWidth()) {
-                t.setPosition(0, t.getY());
-            }
-            if (res[1] == peuple.getHeight()) {
-                t.setPosition(t.getX(), 0);
-            }
-            notifyView(false);
-            res = peuple.avancerTortue(t, res[2]);
-            notifyView();
-        }
+        peuple.avancerTortue(t, dist);
         notifyView();
     }
 

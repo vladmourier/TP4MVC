@@ -36,7 +36,7 @@ public class MainController extends AbstractController {
         this.worldWidth = width;
         //Creating two differents mode : auto and manual
         ManualController manC = new ManualController(width, height);
-        AutoController autoC = new AutoController(width, height);
+        AutoController autoC = new AutoFlockingController(width, height);
 
         addController(MainController.MODE_AUTO, autoC);
         addController(MainController.MODE_MANUEL, manC);

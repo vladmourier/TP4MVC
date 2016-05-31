@@ -17,28 +17,27 @@ import java.util.Iterator;
  *
  * @author Vlad
  */
-public class TortueView {
+public class TortueView extends ITortueView {
 
     Tortue t;
-    Color c = Color.BLACK;
-    protected ArrayList<Segment> listSegments; // Trace de la tortue
-    protected static final int rp = 10, rb = 5; // Taille de la pointe et de la base de la fleche
 
     public TortueView() {
-        listSegments = new ArrayList<>();
+        super();
         this.t = new Tortue();
     }
 
     public TortueView(Tortue t) {
-        listSegments = new ArrayList<>();
+        super();
         this.t = new Tortue(t);
     }
 
+    @Override
     public void reset() {
-        listSegments.clear();
+        super.reset();
         t.reset();
     }
 
+    @Override
     public void drawTurtle(Graphics graph) {
         if (graph == null) {
             return;
@@ -46,6 +45,7 @@ public class TortueView {
 
         //Crée les segments
         for (Tortue.Chemin chemin : t.getTrace()) {
+
             Segment seg = new Segment(
                     new Point(chemin.getOrigine().getX(), chemin.getOrigine().getY()),
                     new Point(chemin.getDestination().getX(), chemin.getDestination().getY()));
@@ -88,21 +88,20 @@ public class TortueView {
         graph.fillPolygon(arrow);
     }
 
-    public void updatePosition(int newX, int newY, int dir, boolean addToTrace) {
+    @Override
+    public void updatePosition(int newX, int newY, int dir) {
         t.setDir(dir);
-        if (addToTrace) {
-            t.addtoTrace(newX, newY);
-        }
         t.setPosition(newX, newY);
-
     }
 
+    @Override
     public Tortue getTortue() {
         return t;
     }
 
-    public void setColor(Color c) {
-        this.c = c;
+    @Override
+    void updateTortue(Tortue t) {
+        this.t = t;
     }
 
 }

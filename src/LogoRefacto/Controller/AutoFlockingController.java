@@ -6,7 +6,9 @@
 package LogoRefacto.Controller;
 
 import LogoRefacto.model.Shapes.MovePattern;
+import LogoRefacto.model.Shapes.RandomPattern;
 import LogoRefacto.model.Tortue;
+import LogoRefacto.model.TortueFlocking;
 
 /**
  *
@@ -17,9 +19,14 @@ public class AutoFlockingController extends AutoController {
     public AutoFlockingController(int width, int height) {
         super(width, height);
     }
-    protected void moveTortue(Tortue tortue, MovePattern mp) throws Exception {
-    }
-    protected void getAverageDist(){
-
+    
+        @Override
+    public void initializePopulation() {
+        getPopulation().clear();
+        TortueFlocking t = new TortueFlocking();
+        t.setPosition(500 / 2, 400 / 2);
+        getPopulation().addTortue(t);
+        autoMoveTortue(t, new RandomPattern());
+        notifyView();
     }
 }

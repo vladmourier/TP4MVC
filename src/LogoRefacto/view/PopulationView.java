@@ -8,6 +8,7 @@ package LogoRefacto.view;
 import LogoRefacto.Controller.AbstractController;
 import LogoRefacto.model.PopulationTortue;
 import LogoRefacto.model.Tortue;
+import LogoRefacto.model.TortueFlocking;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
@@ -23,7 +24,7 @@ import javax.swing.JPanel;
  */
 public class PopulationView extends JPanel implements Observer {
 
-    private ArrayList<TortueView> tortuesView; // la liste des tortues enregistrees
+    private ArrayList<ITortueView> tortuesView; // la liste des tortues enregistrees
     private Color currentColor = Color.BLACK;
 
     public PopulationView() {
@@ -35,14 +36,25 @@ public class PopulationView extends JPanel implements Observer {
     }
 
     public void addTortue(Tortue t) {
-        TortueView tv = new TortueView(t);
+        if(t instanceof TortueFlocking) {
+            addFlockingTortue((TortueFlocking) t);
+            return;
+        }
+        ITortueView tv = new TortueView(t);
+        tortuesView.add(tv);
+        repaint();
+
+    }
+
+    public void addFlockingTortue(TortueFlocking t) {
+        ITortueView tv = new FlockngTortueView(t);
         tortuesView.add(tv);
         repaint();
 
     }
 
     public void reset() {
-        for (TortueView t : tortuesView) {
+        for (ITortueView t : tortuesView) {
             t.reset();
         }
         repaint();
@@ -62,7 +74,7 @@ public class PopulationView extends JPanel implements Observer {
     }
 
     public void showTurtles(Graphics g) {
-        for (TortueView t : tortuesView) {
+        for (ITortueView t : tortuesView) {
             t.drawTurtle(g);
         }
     }
@@ -70,24 +82,24 @@ public class PopulationView extends JPanel implements Observer {
     @Override
     public void update(Observable o, Object argTortue) {
         AbstractController controller = (AbstractController) o;
-        updatePopulation(controller.getPopulation(), argTortue != null ? (boolean)argTortue : true);
+        updatePopulation(controller.getPopulation());
 
     }
 
-    public void updatePopulation(PopulationTortue p, boolean addToTrace) {
+    public void updatePopulation(PopulationTortue p) {
         List<Tortue> currentTortues = getCurrentTortues();
         //Mise à jour des tortues (et ajout si necessaire):
         for (Tortue updatedTortue : p) {
             if (currentTortues.contains(updatedTortue)) {
                 int index = currentTortues.indexOf(updatedTortue);
-                tortuesView.get(index).updatePosition(updatedTortue.getX(), updatedTortue.getY(), updatedTortue.getDir(), addToTrace);
+                tortuesView.get(index).updateTortue(updatedTortue);
             } else {
                 addTortue(updatedTortue);
             }
         }
         //Suppression des tortues non présentes :
-        ArrayList<TortueView> toDelete = new ArrayList<>();
-        for (TortueView t : tortuesView) {
+        ArrayList<ITortueView> toDelete = new ArrayList<>();
+        for (ITortueView t : tortuesView) {
             if (!p.contains(t.getTortue())) {
                 toDelete.add(t);
             }
@@ -98,10 +110,10 @@ public class PopulationView extends JPanel implements Observer {
 
     }
 
-    public void updateTortue(Tortue t, boolean addToTrace) {
-        for (TortueView v : tortuesView) {
+    public void updateTortue(Tortue t) {
+        for (ITortueView v : tortuesView) {
             if (v.getTortue().equals(t)) {
-                v.updatePosition(t.getX(), t.getY(), t.getDir(), addToTrace);
+                v.updateTortue(t);
                 repaint();
                 return;
             }
@@ -113,14 +125,14 @@ public class PopulationView extends JPanel implements Observer {
 
     private List<Tortue> getCurrentTortues() {
         List<Tortue> list = new ArrayList<>();
-        for (TortueView t : tortuesView) {
+        for (ITortueView t : tortuesView) {
             list.add(t.getTortue());
         }
         return list;
     }
 
     public void setTortueColor(Tortue t, Color color) {
-        for (TortueView tortueV : tortuesView) {
+        for (ITortueView tortueV : tortuesView) {
             if (t.equals(tortueV.getTortue())) {
                 tortueV.setColor(color);
                 tortueV.drawTurtle(getGraphics());

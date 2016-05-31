@@ -22,9 +22,8 @@ public class ScrappingWorld extends World {
     }
 
     @Override
-    public int[] avancerTortue(Tortue t, int dist) {
+    public void avancerTortue(Tortue t, int dist) {
         int[] result = null;
-        System.out.println("Avancement scrappisé");
         int x = t.getX(), y = t.getY();
         Tortue habitant = habitants.getTortue(t);
         habitant.avancer(dist);
@@ -32,38 +31,24 @@ public class ScrappingWorld extends World {
         int newY = habitant.getY();
 
         if (newX > worldWidth) {
-            result = new int[3];
-            habitant.setPosition(worldWidth, newY);
-            result[0] = worldWidth;
-            result[1] = newY;
-            result[2] = dist - ((int) Position.getDistance(new Position(x, y), new Position(result[0], result[1])));
+            habitant.setPosition(x-worldWidth, y);
+            habitant.avancer(dist);
+            
         } else if (newX < 0) {
-            result = new int[3];
-            habitant.setPosition(0, newY);
-            result[0] = 0;
-            result[1] = newY;
-            result[2] = dist - ((int) Position.getDistance(new Position(x, y), new Position(result[0], result[1])));
+            habitant.setPosition(x+worldWidth, y);
+            habitant.avancer(dist);
         }
         if (newY > worldHeight) {
-            result = new int[3];
-            habitant.setPosition(newX, worldHeight);
-            result[0] = newX;
-            result[1] = worldHeight;
-            result[2] = dist - ((int) Position.getDistance(new Position(x, y), new Position(result[0], result[1])));
-
+            habitant.setPosition(x, y-worldHeight);
+            habitant.avancer(dist);
         } else if (newY < 0) {
-            result = new int[3];
-            habitant.setPosition(newX, 0);
-            result[0] = newX;
-            result[1] = 0;
-            result[2] = dist - ((int) Position.getDistance(new Position(x, y), new Position(result[0], result[1])));
+            habitant.setPosition(x, y+worldHeight);
+            habitant.avancer(dist);
         }
 
-        if (result != null) {
-            habitant.setPosition(result[0], result[1]);
-        }
+       
 
-        return result;
+        //return result;
     }
 
     @Override

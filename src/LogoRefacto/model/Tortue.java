@@ -110,6 +110,12 @@ public class Tortue {
         position = new Position(newX, newY);
     }
 
+    public Position calculateNexPosition(int dist){
+        int newX = (int) Math.round(position.x + dist * Math.cos(ratioDegRad * dir));
+        int newY = (int) Math.round(position.y + dist * Math.sin(ratioDegRad * dir));
+        return new Position(newX, newY);
+    }
+    
     public void droite(int ang) {
         dir = (dir + ang) % 360;
     }
@@ -155,36 +161,6 @@ public class Tortue {
         return dir;
     }
 
-//    public void baisserCrayon() {
-//        crayon = true;
-//    }
-//
-//    public void leverCrayon() {
-//        crayon = false;
-//    }
-//
-//    public void couleur(int n) {
-//        coul = n % 12;
-//    }
-//
-//    public void couleurSuivante() {
-//        couleur(coul + 1);
-//    }
-//
-//    public boolean isCrayon() {
-//        return crayon;
-//    }
-//
-//    public int getCoul() {
-//        return coul;
-//    }
-//    public void setColor(int n) {
-//        coul = n;
-//    }
-//
-//    public int getColor() {
-//        return coul;
-//    }
     @Override
     public boolean equals(Object obj) {
         if (this == obj) {
@@ -193,14 +169,14 @@ public class Tortue {
         if (obj == null) {
             return false;
         }
-        if (getClass() != obj.getClass()) {
+        if (getClass() != obj.getClass() && obj.getClass() != TortueFlocking.class) {
             return false;
         }
         final Tortue other = (Tortue) obj;
         if (this.label == other.label) {
             return true;
         }
-        return false;
+        return true;
     }
 
     public void setDir(int dir) {
