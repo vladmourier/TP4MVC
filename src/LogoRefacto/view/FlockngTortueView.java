@@ -8,6 +8,7 @@ package LogoRefacto.view;
 import LogoRefacto.model.Tortue;
 import LogoRefacto.model.TortueFlocking;
 import static LogoRefacto.view.ITortueView.rb;
+import java.awt.AlphaComposite;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -87,7 +88,7 @@ public class FlockngTortueView extends ITortueView {
         arrow.addPoint(p2.x, p2.y);
         graph.setColor(c);
         graph.fillPolygon(arrow);
-        
+
     }
 
     public void drawRadar(Graphics2D g2d) {
@@ -96,11 +97,13 @@ public class FlockngTortueView extends ITortueView {
                 t.getY() - t.getDistance_vision() / 2,
                 t.getDistance_vision(),
                 t.getDistance_vision(),
-                -t.getDir() - t.getAngle_vision()/2,
+                -t.getDir() - t.getAngle_vision() / 2,
                 t.getAngle_vision(),
                 Arc2D.Double.PIE
         );
-        g2d.setColor(Color.ORANGE);
+        Color c = new Color(250, 220, 0, 128);
+        g2d.setColor(c);
+
         g2d.fill(arc);
     }
 
