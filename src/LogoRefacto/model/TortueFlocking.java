@@ -9,13 +9,14 @@ import java.util.ArrayList;
 
 /**
  *
- * @author Vlad
+ * @author Vlad & Hassane
  */
 public class TortueFlocking extends Tortue {
 
+    private final int distance_safe_space = 50;//Distance à respecter avec les autres tortues
     private final int distance_vision = 200; // distance en pixel jusqu'oÃ¹ la tortue peut voir
     private final int angle_vision = 100; // en degrÃ©s
-    private final int vitesse = 0;// en nombre de pixels
+    private int vitesse = 0;// en nombre de pixels
 
     private ArrayList<TortueFlocking> voisins;
     private ArrayList<TortueFlocking> visibles;
@@ -38,15 +39,27 @@ public class TortueFlocking extends Tortue {
         visibles = new ArrayList<>();
     }
 
-    public void updateVisibles() {
-        visibles.clear();
+    private void updateVisibles() {
+        if (visibles.size() > 0) {
+            visibles.clear();
+        }
         for (TortueFlocking tf : voisins) {
             if (this.canSee(tf)) {
                 visibles.add(tf);
             }
         }
     }
+    
+    private void updateVitesse(int v){
+        this.vitesse = v;
+    }
 
+    public void updateForFlocking(){
+        updateVisibles();
+        updateVitesse(getVitesseMoyenneVisibles());
+        setDir(getDirMoyenneVisibles());
+    }
+    
     public boolean canSee(Tortue t) {
         if (this.equals(t)) {
             return true;
@@ -85,13 +98,11 @@ public class TortueFlocking extends Tortue {
     }
 
     public void avancer(int dist) {
+        updateForFlocking();
         int newX = (int) Math.round(position.x + dist * Math.cos(ratioDegRad * dir));
         int newY = (int) Math.round(position.y + dist * Math.sin(ratioDegRad * dir));
         addtoTrace(newX, newY);
         position = new Position(newX, newY);
-        for (TortueFlocking tf : voisins) {
-            canSee(tf);
-        }
 
     }
 
@@ -111,7 +122,7 @@ public class TortueFlocking extends Tortue {
         return sommeVitesse / visibles.size();
     }
 
-    public boolean isCorrectAngle(Tortue t, int angle) {
+    private boolean isCorrectAngle(Tortue t, int angle) {
         boolean b = false;
         int correctAngle;
         //on divise l'écran en 4 cadres autour de la position de la tortue

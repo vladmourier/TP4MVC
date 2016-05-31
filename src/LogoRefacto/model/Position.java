@@ -7,7 +7,7 @@ package LogoRefacto.model;
 
 /**
  *
- * @author Vlad
+ * @author Vlad & Hassane
  */
 public class Position {
 

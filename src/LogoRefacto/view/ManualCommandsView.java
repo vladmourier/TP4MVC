@@ -19,7 +19,7 @@ import javax.swing.JToolBar;
 
 /**
  *
- * @author Vlad
+ * @author Vlad & Hassane
  */
 public class ManualCommandsView extends JToolBar {
 

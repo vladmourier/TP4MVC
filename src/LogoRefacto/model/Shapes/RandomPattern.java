@@ -10,7 +10,7 @@ import java.util.Random;
 
 /**
  *
- * @author Vlad
+ * @author Vlad & Hassane
  */
 public class RandomPattern extends MovePattern{
 

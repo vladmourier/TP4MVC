@@ -9,7 +9,7 @@ import LogoRefacto.model.Tortue;
 
 /**
  *
- * @author Vlad
+ * @author Vlad & Hassane
  */
 public class Spiral extends MovePattern {
 

@@ -14,7 +14,7 @@ import java.util.Iterator;
 
 /**
  *
- * @author Vlad
+ * @author Vlad & Hassane
  */
 public class AutoFlockingController extends AutoController {
 

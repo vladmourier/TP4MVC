@@ -16,7 +16,7 @@ import java.util.Random;
 
 /**
  *
- * @author Vlad
+ * @author Vlad & Hassane
  */
 public abstract class CommandListener implements ActionListener {
 

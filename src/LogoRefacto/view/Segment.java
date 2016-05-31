@@ -11,7 +11,7 @@ import java.awt.Point;
 
 /**
  *
- * @author Vlad
+ * @author Vlad & Hassane
  */
 public class Segment {
 

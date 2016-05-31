@@ -5,6 +5,7 @@
  */
 package LogoRefacto.view;
 
+import LogoRefacto.model.Chemin;
 import LogoRefacto.model.Tortue;
 import java.awt.Color;
 import java.awt.Graphics;
@@ -15,7 +16,7 @@ import java.util.Iterator;
 
 /**
  *
- * @author Vlad
+ * @author Vlad & Hassane
  */
 public class TortueView extends ITortueView {
 
@@ -44,7 +45,7 @@ public class TortueView extends ITortueView {
         }
 
         //Crée les segments
-        for (Tortue.Chemin chemin : t.getTrace()) {
+        for (Chemin chemin : t.getTrace()) {
 
             Segment seg = new Segment(
                     new Point(chemin.getOrigine().getX(), chemin.getOrigine().getY()),

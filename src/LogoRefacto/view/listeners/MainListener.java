@@ -14,7 +14,7 @@ import java.awt.event.ActionEvent;
 
 /**
  *
- * @author Vlad
+ * @author Vlad & Hassane
  */
 public class MainListener extends CommandListener {
 

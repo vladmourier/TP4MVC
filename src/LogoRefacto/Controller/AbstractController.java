@@ -12,7 +12,7 @@ import java.util.Observable;
 
 /**
  *
- * @author Vlad
+ * @author Vlad & Hassane
  */
 public abstract class AbstractController extends Observable{
     

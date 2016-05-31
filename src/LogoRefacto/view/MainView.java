@@ -35,7 +35,7 @@ import javax.swing.JComboBox;
 
 /**
  *
- * @author Vlad
+ * @author Vlad & Hassane
  */
 public class MainView extends JFrame {
 
@@ -103,7 +103,6 @@ public class MainView extends JFrame {
         buttonPanel.add(toolBar);
 
         getContentPane().add(buttonPanel, "North");
-
         // Menus
         JMenuBar menubar = new JMenuBar();
         setJMenuBar(menubar);	// on installe le menu bar
@@ -134,12 +133,10 @@ public class MainView extends JFrame {
         getContentPane().add(procedureBarView, "South");
 
         populationView = new PopulationView(); //500, 400);
-//        populationView.setBackground(Color.white);
         populationView.setSize(new Dimension(WIDTH, HEIGHT));
         populationView.setPreferredSize(new Dimension(WIDTH, HEIGHT));
 
         getContentPane().add(populationView, "Center");
-
         pack();
         setVisible(true);
     }

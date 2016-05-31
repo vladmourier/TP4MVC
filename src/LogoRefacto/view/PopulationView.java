@@ -20,7 +20,7 @@ import javax.swing.JPanel;
 
 /**
  *
- * @author Vlad
+ * @author Vlad & Hassane
  */
 public class PopulationView extends JPanel implements Observer {
 

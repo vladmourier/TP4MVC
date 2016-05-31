@@ -13,7 +13,7 @@ import javax.swing.JPanel;
 
 /**
  *
- * @author Vlad
+ * @author Vlad & Hassane
  */
 public class ProcedureBarView extends JPanel {
     private JButton b20;

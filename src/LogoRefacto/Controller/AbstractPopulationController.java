@@ -18,7 +18,7 @@ import java.util.logging.Logger;
 
 /**
  *
- * @author Vlad
+ * @author Vlad & Hassane
  */
 public abstract class AbstractPopulationController extends AbstractController {
 
