@@ -187,4 +187,8 @@ public class Tortue {
     public ArrayList<Chemin> getTrace() {
         return trace;
     }
+
+    public int getLabel() {
+        return label;
+    }
 }

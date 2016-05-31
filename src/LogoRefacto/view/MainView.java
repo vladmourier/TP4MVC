@@ -41,7 +41,7 @@ public class MainView extends JFrame {
 
     public final int WIDTH;
     public final int HEIGHT;
-    
+
     public static final String CMD_AVANCER = "Avancer";
     public static final String CMD_DROITE = "Droite";
     public static final String CMD_GAUCHE = "Gauche";
@@ -60,7 +60,7 @@ public class MainView extends JFrame {
     private List<Component> menuItems;
     // les boutons du bas
     private JMenu menuCommandes;
-    
+
     MainController mainController;
 
     public MainView(MainController controller) {
@@ -74,13 +74,12 @@ public class MainView extends JFrame {
         controller.setObservers(populationView);
         addActionListeners();
         initializeMode();
-        
     }
-    
+
     private void initializeMode() {
         String mode = showChooseBox();
         this.mainController.setMode(mode);
-        if (mode.equals(MainController.MODE_AUTO)) {
+        if (mode.equals(MainController.MODE_AUTO) || mode.equals(MainController.MODE_FLOCKING)) {
             lockToolbar(true);
         } else {
             lockToolbar(false);
@@ -88,8 +87,11 @@ public class MainView extends JFrame {
     }
 
     public void lockToolbar(boolean b) {
-        if (b) toolBar.lock();
-        else toolBar.unlock();
+        if (b) {
+            toolBar.lock();
+        } else {
+            toolBar.unlock();
+        }
     }
 
     public void Init() {
@@ -184,7 +186,8 @@ public class MainView extends JFrame {
     public String showChooseBox() {
         String[] option = {
             MainController.MODE_MANUEL,
-            MainController.MODE_AUTO
+            MainController.MODE_AUTO,
+            MainController.MODE_FLOCKING
         };
         int n = JOptionPane.showOptionDialog(this, "Sélectionnez le mode de fonctionnement", "Choix du mode", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, option, option[0]);
         return n != -1 ? option[n] : option[0];
@@ -237,35 +240,39 @@ public class MainView extends JFrame {
     private void addActionListeners() {
         //Creation des listeners :
         MainListener sc = new MainListener(mainController, this);
-                
+
         ProcedureBarListener pbl = new ProcedureBarListener(mainController);
 
-        ManualCommandsListener mcl = new ManualCommandsListener(mainController , this);
+        ManualCommandsListener mcl = new ManualCommandsListener(mainController, this);
 
+        for(Component c : menuItems){
+            ((JMenuItem)c).addActionListener(sc);
+        }
+        
         for (Component c : getToolBar().getComponents()) {
-                    if (c instanceof JButton) {
-                        ((JButton) c).addActionListener(mcl);
-                    } else if (c instanceof JComboBox){
-                        ((JComboBox) c).addActionListener(mcl);
-                    }
-                }
+            if (c instanceof JButton) {
+                ((JButton) c).addActionListener(mcl);
+            } else if (c instanceof JComboBox) {
+                ((JComboBox) c).addActionListener(mcl);
+            }
+        }
 
-                for (Component c : getButtonPanel().getComponents()) {
-                    if (c instanceof JButton) {
-                        ((JButton) c).addActionListener(sc);
-                    }
-                }
+        for (Component c : getButtonPanel().getComponents()) {
+            if (c instanceof JButton) {
+                ((JButton) c).addActionListener(sc);
+            }
+        }
 
-                for (Component c : getProcedureBarView().getComponents()) {
-                    if (c instanceof JButton) {
-                        ((JButton) c).addActionListener(pbl);
-                    }
-                }
+        for (Component c : getProcedureBarView().getComponents()) {
+            if (c instanceof JButton) {
+                ((JButton) c).addActionListener(pbl);
+            }
+        }
 
     }
 
     public List<Component> getMenuItems() {
         return menuItems;
     }
-    
+
 }

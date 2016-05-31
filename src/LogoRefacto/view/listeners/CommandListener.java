@@ -28,16 +28,11 @@ public abstract class CommandListener implements ActionListener {
         this.mainView = mainView;
     }
 
-    
     @Override
     public void actionPerformed(ActionEvent e) {
         String c = e.getActionCommand();
         if (c.equals(MainView.CMD_CREER_TORTUE)) {
-            Random r = new Random();
-            mainController.addTortue(new Tortue(r.nextInt(600), r.nextInt(400), -90));
-            if (mainController.getCurrentController() instanceof ManualController) {
-                mainView.lockToolbar(false);
-            }
+            creerTortue();
         } else if (c.equals(MainView.CMD_SUPPRIMER_TORTUE)) {
             supprimerTortue();
         } else if (c.equals(MainView.CMD_AVANCER)) {
@@ -52,6 +47,15 @@ public abstract class CommandListener implements ActionListener {
             mainController.nextTortue();
         } else if (c.equals(MainView.CMD_QUITTER)) {
             mainController.closeApplication();
+        }
+    }
+
+    protected void creerTortue() {
+        Random r = new Random();
+        Tortue t;
+        mainController.addTortue(r.nextInt(600), r.nextInt(400), -90);
+        if (mainController.getCurrentController() instanceof ManualController) {
+            mainView.lockToolbar(false);
         }
     }
 

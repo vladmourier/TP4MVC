@@ -8,25 +8,29 @@ package LogoRefacto.view;
 import LogoRefacto.model.Tortue;
 import LogoRefacto.model.TortueFlocking;
 import static LogoRefacto.view.ITortueView.rb;
+import java.awt.AlphaComposite;
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.Point;
 import java.awt.Polygon;
+import java.awt.geom.Arc2D;
 import java.util.Iterator;
 
 /**
  *
  * @author Vlad
  */
-public class FlockngTortueView extends ITortueView{
+public class FlockngTortueView extends ITortueView {
 
     TortueFlocking t;
 
-    public FlockngTortueView(Tortue t){
+    public FlockngTortueView(Tortue t) {
         this.t = new TortueFlocking();
         this.t.setDir(t.getDir());
         this.t.setPosition(t.getX(), t.getY());
     }
+
     public FlockngTortueView(TortueFlocking t) {
         this.t = t;
     }
@@ -61,10 +65,6 @@ public class FlockngTortueView extends ITortueView{
         //Calcule des deux bases
         //Angle de la droite
         double theta = Tortue.ratioDegRad * (-t.getDir());
-        //bord supérieur champ de vision
-        double vision1 = Tortue.ratioDegRad * (-((t.getDir()-(t.getAngle_vision()/2))));
-        //bord inférieur champ de vision
-        double vision2 = Tortue.ratioDegRad * (-((t.getDir()+(t.getAngle_vision()/2))));
         //Demi angle au sommet du triangle
         double alpha = Math.atan((float) rb / (float) rp);
         //Rayon de la fleche
@@ -82,20 +82,29 @@ public class FlockngTortueView extends ITortueView{
         arrow.addPoint((int) Math.round(p2.x - r * Math.cos(theta - alpha)),
                 (int) Math.round(p2.y + r * Math.sin(theta - alpha)));
 
+        //Champ de vision
+        drawRadar((Graphics2D) graph);
+
         arrow.addPoint(p2.x, p2.y);
         graph.setColor(c);
         graph.fillPolygon(arrow);
-        
-        champVision.addPoint(p.x, p.y);
-        //bord supérieur
-        Point p3 = new Point((int) Math.round(p.x + t.getDistance_vision() * Math.cos(vision1)), (int) Math.round(p.y - t.getDistance_vision() * Math.sin(vision1)));
-        Point p4 = new Point((int) Math.round(p.x + t.getDistance_vision() * Math.cos(vision2)), (int) Math.round(p.y - t.getDistance_vision() * Math.sin(vision2)));
-        champVision.addPoint(rp, rp);
-        champVision.addPoint(p3.x, p3.y);
-        champVision.addPoint(p4.x, p4.y);
-        graph.setColor(Color.MAGENTA);
-        graph.fillPolygon(champVision);
-        
+
+    }
+
+    public void drawRadar(Graphics2D g2d) {
+        Arc2D arc = new Arc2D.Double(
+                t.getX() - t.getDistance_vision() / 2,
+                t.getY() - t.getDistance_vision() / 2,
+                t.getDistance_vision(),
+                t.getDistance_vision(),
+                -t.getDir() - t.getAngle_vision() / 2,
+                t.getAngle_vision(),
+                Arc2D.Double.PIE
+        );
+        Color c = new Color(250, 220, 0, 128);
+        g2d.setColor(c);
+
+        g2d.fill(arc);
     }
 
     @Override
@@ -114,5 +123,5 @@ public class FlockngTortueView extends ITortueView{
     public Tortue getTortue() {
         return t;
     }
-    
+
 }
