@@ -26,33 +26,6 @@ public class Tortue {
 
     public static final double ratioDegRad = 0.0174533; // Rapport radians/degres (pour la conversion)
 
-    public class Chemin {
-
-        Position origine;
-        Position destination;
-
-        public Chemin(Position origine, Position destination) {
-            this.origine = origine;
-            this.destination = destination;
-        }
-
-        public Position getOrigine() {
-            return origine;
-        }
-
-        public void setOrigine(Position origine) {
-            this.origine = origine;
-        }
-
-        public Position getDestination() {
-            return destination;
-        }
-
-        public void setDestination(Position destination) {
-            this.destination = destination;
-        }
-
-    }
     protected Position position;
     protected ArrayList<Chemin> trace;
     protected int dir;

@@ -5,10 +5,10 @@
  */
 package LogoRefacto.view;
 
+import LogoRefacto.model.Chemin;
 import LogoRefacto.model.Tortue;
 import LogoRefacto.model.TortueFlocking;
 import static LogoRefacto.view.ITortueView.rb;
-import java.awt.AlphaComposite;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -19,7 +19,7 @@ import java.util.Iterator;
 
 /**
  *
- * @author Vlad
+ * @author Vlad & Hassane
  */
 public class FlockngTortueView extends ITortueView {
 
@@ -42,7 +42,7 @@ public class FlockngTortueView extends ITortueView {
         }
 
         //Crée les segments
-        for (Tortue.Chemin chemin : t.getTrace()) {
+        for (Chemin chemin : t.getTrace()) {
 
             Segment seg = new Segment(
                     new Point(chemin.getOrigine().getX(), chemin.getOrigine().getY()),

@@ -7,7 +7,7 @@ package LogoRefacto.Controller;
 
 /**
  *
- * @author Vlad
+ * @author Vlad & Hassane
  */
 public class ManualController extends AbstractPopulationController {
     

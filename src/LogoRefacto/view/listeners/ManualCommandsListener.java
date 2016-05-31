@@ -22,7 +22,7 @@ import javax.swing.JComboBox;
 
 /**
  *
- * @author Vlad
+ * @author Vlad & Hassane
  */
 public class ManualCommandsListener extends CommandListener implements KeyEventDispatcher{
 

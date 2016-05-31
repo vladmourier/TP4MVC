@@ -17,7 +17,7 @@ import java.util.logging.Logger;
 
 /**
  *
- * @author Vlad
+ * @author Vlad & Hassane
  */
 public class MainController extends AbstractController {
 

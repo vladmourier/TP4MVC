@@ -12,7 +12,7 @@ import java.util.ArrayList;
 
 /**
  *
- * @author Vlad
+ * @author Vlad & Hassane
  */
 public abstract class ITortueView {
 

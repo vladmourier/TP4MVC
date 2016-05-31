@@ -16,7 +16,7 @@ import java.util.Random;
 
 /**
  *
- * @author Vlad
+ * @author Vlad & Hassane
  */
 public class AutoController extends AbstractPopulationController implements Runnable {
 
@@ -51,10 +51,14 @@ public class AutoController extends AbstractPopulationController implements Runn
         while (ok) {
             try {
                 for (Tortue t : getPopulation())
+                {
                     doPatternTortue(t, new RandomPattern());
+                    
+                }
                 
                  Thread.sleep(200);
             } catch (Exception ex) {
+                System.err.println(ex.getLocalizedMessage());
                 ok = false;
             }
         }

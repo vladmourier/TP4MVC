@@ -10,7 +10,7 @@ import LogoRefacto.model.Tortue;
 
 /**
  *
- * @author Vlad
+ * @author Vlad & Hassane
  */
 public abstract class MovePattern {
     public static final String CARRE = "CARRE";
