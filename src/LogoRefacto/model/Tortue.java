@@ -89,6 +89,7 @@ public class Tortue {
     public void reset() {
         position = new Position(0, 0);
         dir = -90;
+        trace.clear();
     }
 
     public Position getPosition() {
@@ -176,7 +177,7 @@ public class Tortue {
         if (this.label == other.label) {
             return true;
         }
-        return true;
+        return false;
     }
 
     public void setDir(int dir) {
