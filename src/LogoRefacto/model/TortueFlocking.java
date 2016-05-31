@@ -15,23 +15,36 @@ public class TortueFlocking extends Tortue {
 
     private final int distance_vision = 200; // distance en pixel jusqu'oÃ¹ la tortue peut voir
     private final int angle_vision = 100; // en degrÃ©s
-    private final double vitesse = 0;
+    private final int vitesse = 0;// en nombre de pixels
 
     private ArrayList<TortueFlocking> voisins;
+    private ArrayList<TortueFlocking> visibles;
 
     public TortueFlocking(int x, int y, int dir) {
         super(x, y, dir);
         voisins = new ArrayList<>();
+        visibles = new ArrayList<>();
     }
 
     public TortueFlocking(Tortue t) {
         super(t);
         voisins = new ArrayList<>();
+        visibles = new ArrayList<>();
     }
 
     public TortueFlocking() {
         super();
         voisins = new ArrayList<>();
+        visibles = new ArrayList<>();
+    }
+
+    public void updateVisibles() {
+        visibles.clear();
+        for (TortueFlocking tf : voisins) {
+            if (this.canSee(tf)) {
+                visibles.add(tf);
+            }
+        }
     }
 
     public boolean canSee(Tortue t) {
@@ -40,11 +53,11 @@ public class TortueFlocking extends Tortue {
         }
         boolean closeEnough = Position.getDistance(getPosition(), t.getPosition()) <= distance_vision;
 
-        double tan =  (((double)t.getY() - (double)getY()) / ( (double)t.getX() - (double)getX()));
+        double tan = (((double) t.getY() - (double) getY()) / ((double) t.getX() - (double) getX()));
 
         int angle = (int) (Math.atan(tan) / ratioDegRad);
 
-        boolean correctAngle = Math.abs(angle - dir) < Math.abs(angle_vision / 2 - dir);
+        boolean correctAngle = Math.abs(angle) % 180 < Math.abs(angle_vision / 2) % 180;
         if (!(closeEnough && correctAngle)) {
             System.out.println("La tortue " + label + " ne peut voir" + " la tortue " + t.getLabel());
         } else {
@@ -82,4 +95,43 @@ public class TortueFlocking extends Tortue {
 
     }
 
+    public int getDirMoyenneVisibles() {
+        int sommeDir = 0;
+        for (TortueFlocking tf : visibles) {
+            sommeDir += tf.getDir();
+        }
+        return sommeDir / visibles.size();
+    }
+
+    public int getVitesseMoyenneVisibles() {
+        int sommeVitesse = 0;
+        for (TortueFlocking tf : visibles) {
+            sommeVitesse += tf.getVitesse();
+        }
+        return sommeVitesse / visibles.size();
+    }
+
+    public boolean isCorrectAngle(Tortue t, int angle) {
+        boolean b = false;
+        int correctAngle;
+        //on divise l'écran en 4 cadres autour de la position de la tortue
+        if (t.getX() > getX() && t.getY() > getY())//inf droit
+        {
+            //Dans ce cas là l'angle calculé par la tangente est le bon (normalement)
+        }
+        if (t.getX() < getX() && t.getY() < getY())//sup gauche
+        {
+
+        }
+        if (t.getX() < getX() && t.getY() > getY())//inf gauche
+        {
+
+        }
+        if (t.getX() > getX() && t.getY() < getY())//sup droit
+        {
+            correctAngle = -angle;
+        }
+
+        return b;
+    }
 }
