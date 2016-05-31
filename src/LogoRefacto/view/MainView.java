@@ -74,13 +74,12 @@ public class MainView extends JFrame {
         controller.setObservers(populationView);
         addActionListeners();
         initializeMode();
-        
     }
     
     private void initializeMode() {
         String mode = showChooseBox();
         this.mainController.setMode(mode);
-        if (mode.equals(MainController.MODE_AUTO)) {
+        if (mode.equals(MainController.MODE_AUTO) || mode.equals(MainController.MODE_FLOCKING)) {
             lockToolbar(true);
         } else {
             lockToolbar(false);
@@ -184,7 +183,8 @@ public class MainView extends JFrame {
     public String showChooseBox() {
         String[] option = {
             MainController.MODE_MANUEL,
-            MainController.MODE_AUTO
+            MainController.MODE_AUTO,
+            MainController.MODE_FLOCKING
         };
         int n = JOptionPane.showOptionDialog(this, "Sélectionnez le mode de fonctionnement", "Choix du mode", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, option, option[0]);
         return n != -1 ? option[n] : option[0];

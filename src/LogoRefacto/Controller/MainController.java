@@ -22,6 +22,7 @@ public class MainController extends AbstractController {
 
     public static final String MODE_MANUEL = "MANUEL";
     public static final String MODE_AUTO = "AUTO";
+    public static final String MODE_FLOCKING = "FLOCKING";
     
     private final int worldWidth;
     private final int worldHeight;
@@ -36,10 +37,12 @@ public class MainController extends AbstractController {
         this.worldWidth = width;
         //Creating two differents mode : auto and manual
         ManualController manC = new ManualController(width, height);
-        AutoController autoC = new AutoFlockingController(width, height);
+        AutoController autoC = new AutoController(width, height);
+        AutoFlockingController autoFC = new AutoFlockingController(width, height);
 
         addController(MainController.MODE_AUTO, autoC);
         addController(MainController.MODE_MANUEL, manC);
+        addController(MainController.MODE_FLOCKING, autoFC);
     }
 
     

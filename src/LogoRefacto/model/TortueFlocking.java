@@ -11,7 +11,7 @@ package LogoRefacto.model;
  */
 public class TortueFlocking extends Tortue {
     private final int distance_vision = 100; // distance en pixel jusqu'oÃ¹ la tortue peut voir
-    private final int angle_vision = 180; // en degrÃ©s
+    private final int angle_vision = 45; // en degrÃ©s
     private final double vitesse=  0;
 
     public TortueFlocking(int x, int y, int dir) {
