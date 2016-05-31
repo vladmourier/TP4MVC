@@ -9,6 +9,8 @@ import LogoRefacto.model.Shapes.MovePattern;
 import LogoRefacto.model.Shapes.RandomPattern;
 import LogoRefacto.model.Tortue;
 import LogoRefacto.model.TortueFlocking;
+import java.util.ArrayList;
+import java.util.Iterator;
 
 /**
  *
@@ -19,14 +21,29 @@ public class AutoFlockingController extends AutoController {
     public AutoFlockingController(int width, int height) {
         super(width, height);
     }
-    
-        @Override
+
+    @Override
     public void initializePopulation() {
         getPopulation().clear();
         TortueFlocking t = new TortueFlocking();
         t.setPosition(500 / 2, 400 / 2);
         getPopulation().addTortue(t);
         autoMoveTortue(t, new RandomPattern());
+        notifyView();
+    }
+
+    @Override
+    public void addTortue(Tortue t) {
+        getPopulation().addTortue(t);
+        ArrayList<TortueFlocking> tortues = new ArrayList<>();
+        Iterator it = getPopulation().iterator();
+        while (it.hasNext()) {
+            TortueFlocking current = (TortueFlocking) it.next();
+            ((TortueFlocking) t).addVoisin(current);
+            current.addVoisin((TortueFlocking) t);
+        }
+        autoMoveTortue(t, new RandomPattern());
+
         notifyView();
     }
 }
