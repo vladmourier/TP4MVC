@@ -42,9 +42,9 @@ public class TortueFlocking extends Tortue {
 
         double tan =  (((double)t.getY() - (double)getY()) / ( (double)t.getX() - (double)getX()));
 
-        int angle = (int) (Math.atan(tan) / ratioDegRad) - t.getDir();
+        int angle = (int) (Math.atan(tan) / ratioDegRad);
 
-        boolean correctAngle = Math.abs(angle - dir) < angle_vision / 2;
+        boolean correctAngle = Math.abs(angle - dir) < Math.abs(angle_vision / 2 - dir);
         if (!(closeEnough && correctAngle)) {
             System.out.println("La tortue " + label + " ne peut voir" + " la tortue " + t.getLabel());
         } else {
