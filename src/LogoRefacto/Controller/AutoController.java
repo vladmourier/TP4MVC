@@ -5,11 +5,11 @@
  */
 package LogoRefacto.Controller;
 
-import LogoRefacto.model.Shapes.Carre;
-import LogoRefacto.model.Shapes.MovePattern;
-import LogoRefacto.model.Shapes.Polygone;
-import LogoRefacto.model.Shapes.RandomPattern;
-import LogoRefacto.model.Shapes.Spiral;
+import LogoRefacto.model.MovePatterns.Carre;
+import LogoRefacto.model.MovePatterns.MovePattern;
+import LogoRefacto.model.MovePatterns.Polygone;
+import LogoRefacto.model.MovePatterns.RandomPattern;
+import LogoRefacto.model.MovePatterns.Spiral;
 import LogoRefacto.model.Tortue;
 import LogoRefacto.view.MainView;
 import java.util.Random;

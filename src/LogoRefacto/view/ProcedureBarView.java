@@ -5,7 +5,7 @@
  */
 package LogoRefacto.view;
 
-import LogoRefacto.model.Shapes.Carre;
+import LogoRefacto.model.MovePatterns.Carre;
 import java.awt.GridLayout;
 import java.awt.LayoutManager;
 import javax.swing.JButton;

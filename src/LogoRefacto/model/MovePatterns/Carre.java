@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package LogoRefacto.model.Shapes;
+package LogoRefacto.model.MovePatterns;
 
 import LogoRefacto.model.Tortue;
 
@@ -11,20 +11,15 @@ import LogoRefacto.model.Tortue;
  *
  * @author Vlad & Hassane
  */
-public class Polygone extends MovePattern{
+public class Carre extends MovePattern {
 
-    private int n, a;
-
-    public Polygone(int n, int a) {
-        this.n = n;
-        this.a = a;
-    }
-    
     @Override
     public void moveTurtle(Tortue t) {
-        t.avancer(n);
-        t.droite(360/a);
+        
+        t.avancer(100);
+        t.droite(90);
+        
     }
 
-    
+
 }

@@ -7,7 +7,7 @@ package LogoRefacto.Controller;
 
 import LogoRefacto.model.PopulationTortue;
 import LogoRefacto.model.ScrappingWorld;
-import LogoRefacto.model.Shapes.MovePattern;
+import LogoRefacto.model.MovePatterns.MovePattern;
 import LogoRefacto.model.Tortue;
 import LogoRefacto.model.TortueFlocking;
 import LogoRefacto.model.World;

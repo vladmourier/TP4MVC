@@ -5,7 +5,7 @@
  */
 package LogoRefacto.model;
 
-import LogoRefacto.model.Shapes.MovePattern;
+import LogoRefacto.model.MovePatterns.MovePattern;
 
 /**
  *
