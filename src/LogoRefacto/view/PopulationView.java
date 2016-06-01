@@ -36,7 +36,7 @@ public class PopulationView extends JPanel implements Observer {
     }
 
     public void addTortue(Tortue t) {
-        if(t instanceof TortueFlocking) {
+        if (t instanceof TortueFlocking) {
             addFlockingTortue((TortueFlocking) t);
             return;
         }
@@ -99,6 +99,7 @@ public class PopulationView extends JPanel implements Observer {
         }
         //Suppression des tortues non présentes :
         ArrayList<ITortueView> toDelete = new ArrayList<>();
+        tortuesView.remove(null);// ajouté car des fois tortueview contient null 
         for (ITortueView t : tortuesView) {
             if (!p.contains(t.getTortue())) {
                 toDelete.add(t);

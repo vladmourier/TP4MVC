@@ -98,7 +98,7 @@ public class TortueFlocking extends Tortue {
     }
 
     public void avancer(int dist) {
-        updateForFlocking();
+//        updateForFlocking();
         int newX = (int) Math.round(position.x + dist * Math.cos(ratioDegRad * dir));
         int newY = (int) Math.round(position.y + dist * Math.sin(ratioDegRad * dir));
         addtoTrace(newX, newY);
