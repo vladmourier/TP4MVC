@@ -1,9 +1,9 @@
 package LogoRefacto.model;
 
-import LogoRefacto.model.Shapes.Carre;
-import LogoRefacto.model.Shapes.MovePattern;
-import LogoRefacto.model.Shapes.Polygone;
-import LogoRefacto.model.Shapes.Spiral;
+import LogoRefacto.model.MovePatterns.Carre;
+import LogoRefacto.model.MovePatterns.MovePattern;
+import LogoRefacto.model.MovePatterns.Polygone;
+import LogoRefacto.model.MovePatterns.Spiral;
 import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Random;
@@ -26,12 +26,27 @@ public class Tortue {
 
     public static final double ratioDegRad = 0.0174533; // Rapport radians/degres (pour la conversion)
 
+    /**
+     * La position actuelle de la tortue
+     */
     protected Position position;
+    /**
+     * L'ensemble des déplacements de la tortue
+     */
     protected ArrayList<Chemin> trace;
+    /**
+     * La direction de la tortue
+     */
     protected int dir;
+    /**
+     * L'id de la tortue
+     */
     protected int label;
+    /**
+     * Compteur pour définir les id des tortues
+     */
     private static int index = 0;
-    
+
     public Tortue(int x, int y, int dir) {
         trace = new ArrayList<>();
         position = new Position(x, y);
@@ -59,6 +74,9 @@ public class Tortue {
         index++;
     }
 
+    /**
+     * Replace la tortue en position initiale
+     */
     public void reset() {
         position = new Position(0, 0);
         dir = 270;
@@ -77,6 +95,11 @@ public class Tortue {
         trace.add(new Chemin(new Position(getX(), getY()), new Position(x, y)));
     }
 
+    /**
+     * Fait avancer la tortue de dist pixels
+     *
+     * @param dist
+     */
     public void avancer(int dist) {
         int newX = (int) Math.round(position.x + dist * Math.cos(ratioDegRad * dir));
         int newY = (int) Math.round(position.y + dist * Math.sin(ratioDegRad * dir));
@@ -84,12 +107,12 @@ public class Tortue {
         position = new Position(newX, newY);
     }
 
-    public Position calculateNexPosition(int dist){
+    public Position calculateNexPosition(int dist) {
         int newX = (int) Math.round(position.x + dist * Math.cos(ratioDegRad * dir));
         int newY = (int) Math.round(position.y + dist * Math.sin(ratioDegRad * dir));
         return new Position(newX, newY);
     }
-    
+
     public void droite(int ang) {
         dir = (dir + ang) % 360;
         System.out.println("D" + dir);
@@ -97,29 +120,6 @@ public class Tortue {
 
     public void gauche(int ang) {
         dir = (dir - ang) % 360;
-        if(dir<0) dir+=360;
-        System.out.println("G" + dir);
-    }
-
-    /**
-     * quelques classiques
-     */
-    public void drawPattern(String MovePattern) throws Exception {
-        MovePattern mp;
-        switch (MovePattern) {
-            case Carre.CARRE:
-                mp = new Carre();
-                break;
-            case Carre.POLYGONE:
-                mp = new Polygone(60, 8);
-                break;
-            case Carre.SPIRALE:
-                mp = new Spiral(50, 40, 6);
-                break;
-            default:
-                throw new Exception("Pattern inconnu");
-        }
-        mp.moveTurtle(this);
     }
 
     public int drawPattern(MovePattern mp) {

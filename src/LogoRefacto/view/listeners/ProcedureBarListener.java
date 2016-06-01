@@ -6,10 +6,10 @@
 package LogoRefacto.view.listeners;
 
 import LogoRefacto.Controller.AbstractController;
-import LogoRefacto.model.Shapes.Carre;
-import LogoRefacto.model.Shapes.MovePattern;
-import LogoRefacto.model.Shapes.Polygone;
-import LogoRefacto.model.Shapes.Spiral;
+import LogoRefacto.model.MovePatterns.Carre;
+import LogoRefacto.model.MovePatterns.MovePattern;
+import LogoRefacto.model.MovePatterns.Polygone;
+import LogoRefacto.model.MovePatterns.Spiral;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.lang.reflect.Field;
@@ -18,7 +18,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- *
+ * Classe réagissant aux évènements sur la barre des boutons procédures
  * @author Vlad & Hassane
  */
 public class ProcedureBarListener implements ActionListener {

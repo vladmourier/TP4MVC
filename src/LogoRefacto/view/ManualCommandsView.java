@@ -18,7 +18,7 @@ import javax.swing.JTextField;
 import javax.swing.JToolBar;
 
 /**
- *
+ * Classe représentant les différents contrôleurs de la barre d'outils
  * @author Vlad & Hassane
  */
 public class ManualCommandsView extends JToolBar {
@@ -89,7 +89,8 @@ public class ManualCommandsView extends JToolBar {
         for (Component c : this.getComponents()) {
             if (c instanceof JButton && !MainView.getActionCommands().contains(((JButton) c).getActionCommand()) 
                     && !((JButton) c).getActionCommand().equals(MainView.CMD_CREER_TORTUE)
-                    && !((JButton) c).getActionCommand().equals(MainView.CMD_SUPPRIMER_TORTUE) ) {
+                    && !((JButton) c).getActionCommand().equals(MainView.CMD_SUPPRIMER_TORTUE)
+                    && !((JButton) c).getActionCommand().equals(MainView.CMD_EFFACER) ) {
                 ((JButton) c).setEnabled(false);
             }
         }

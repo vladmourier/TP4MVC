@@ -11,7 +11,7 @@ import java.awt.Graphics;
 import java.util.ArrayList;
 
 /**
- *
+ * Classe responsable du dessin des tortues et de leurs traces
  * @author Vlad & Hassane
  */
 public abstract class ITortueView {

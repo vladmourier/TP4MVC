@@ -6,7 +6,7 @@
 package LogoRefacto.Controller;
 
 import LogoRefacto.model.PopulationTortue;
-import LogoRefacto.model.Shapes.MovePattern;
+import LogoRefacto.model.MovePatterns.MovePattern;
 import LogoRefacto.model.Tortue;
 import LogoRefacto.model.TortueFlocking;
 import LogoRefacto.model.World;
@@ -16,7 +16,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- *
+ * Contrôleur principal de l'application
  * @author Vlad & Hassane
  */
 public class MainController extends AbstractController {
@@ -24,17 +24,16 @@ public class MainController extends AbstractController {
     public static final String MODE_MANUEL = "MANUEL";
     public static final String MODE_AUTO = "AUTO";
     public static final String MODE_FLOCKING = "FLOCKING";
-    
+
     private final int worldWidth;
     private final int worldHeight;
-    
 
     private HashMap<String, AbstractPopulationController> controllers;
     private AbstractPopulationController currentController;
 
     public MainController(int width, int height) {
         controllers = new HashMap<>();
-        this.worldHeight= height;
+        this.worldHeight = height;
         this.worldWidth = width;
         //Creating two differents mode : auto and manual
         ManualController manC = new ManualController(width, height);
@@ -46,17 +45,18 @@ public class MainController extends AbstractController {
         addController(MainController.MODE_FLOCKING, autoFC);
     }
 
-    
     public void setMode(String mode) {
         for (String key : controllers.keySet()) {
             if (key == mode) {
+                if (currentController != null) {
+                    currentController.clearPopulation();
+                }
                 currentController = controllers.get(key);
                 currentController.initializePopulation();
             }
         }
     }
 
-    
     public void setObservers(Observer o) {
         for (AbstractPopulationController apc : controllers.values()) {
             apc.addObserver(o);
@@ -90,10 +90,10 @@ public class MainController extends AbstractController {
     public void addTortue(Tortue t) {
         currentController.addTortue(t);
     }
-    
-    public void addTortue (int x, int y, int dir){
+
+    public void addTortue(int x, int y, int dir) {
         Tortue t;
-        if(currentController instanceof AutoFlockingController){
+        if (currentController instanceof AutoFlockingController) {
             t = new TortueFlocking(x, y, dir);
         } else {
             t = new Tortue(x, y, dir);
@@ -146,7 +146,6 @@ public class MainController extends AbstractController {
         return currentController.getPopulation();
     }
 
-  
     @Override
     public int getWorldWidth() {
         return worldWidth;

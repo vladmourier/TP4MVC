@@ -5,10 +5,10 @@
  */
 package LogoRefacto.model;
 
-import LogoRefacto.model.Shapes.MovePattern;
+import LogoRefacto.model.MovePatterns.MovePattern;
 
 /**
- *
+ * L'espace dans lequel évolue la population de tortues
  * @author Hassane
  */
 public class World {

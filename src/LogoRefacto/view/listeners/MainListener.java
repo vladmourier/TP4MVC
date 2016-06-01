@@ -13,7 +13,7 @@ import LogoRefacto.view.MainView;
 import java.awt.event.ActionEvent;
 
 /**
- *
+ * 
  * @author Vlad & Hassane
  */
 public class MainListener extends CommandListener {

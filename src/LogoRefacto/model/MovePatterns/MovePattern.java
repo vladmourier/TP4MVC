@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package LogoRefacto.model.Shapes;
+package LogoRefacto.model.MovePatterns;
 
 import LogoRefacto.Controller.AbstractController;
 import LogoRefacto.model.Tortue;

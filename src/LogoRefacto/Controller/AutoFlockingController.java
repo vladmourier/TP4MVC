@@ -5,9 +5,9 @@
  */
 package LogoRefacto.Controller;
 
-import LogoRefacto.model.Shapes.FlockingMove;
-import LogoRefacto.model.Shapes.MovePattern;
-import LogoRefacto.model.Shapes.RandomPattern;
+import LogoRefacto.model.MovePatterns.FlockingMove;
+import LogoRefacto.model.MovePatterns.MovePattern;
+import LogoRefacto.model.MovePatterns.RandomPattern;
 import LogoRefacto.model.Tortue;
 import LogoRefacto.model.TortueFlocking;
 import java.util.ArrayList;
