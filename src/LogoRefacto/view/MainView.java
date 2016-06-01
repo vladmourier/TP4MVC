@@ -47,6 +47,7 @@ public class MainView extends JFrame {
     public static final String CMD_GAUCHE = "Gauche";
     public static final String CMD_EFFACER = "Effacer";
     public static final String CMD_QUITTER = "Quitter";
+    public static final String CMD_CHANGE_MODE = "Changer de mode";
     public static final String CMD_CREER_TORTUE = "Créer tortue";
     public static final String CMD_SUPPRIMER_TORTUE = "Supprimer tortue";
     public static final String CMD_NEXT_TORTUE = "Tortue suivante";
@@ -76,7 +77,7 @@ public class MainView extends JFrame {
         initializeMode();
     }
 
-    private void initializeMode() {
+    public void initializeMode() {
         String mode = showChooseBox();
         this.mainController.setMode(mode);
         if (mode.equals(MainController.MODE_AUTO) || mode.equals(MainController.MODE_FLOCKING)) {
@@ -111,6 +112,7 @@ public class MainView extends JFrame {
 
         addMenuItem(menuFile, "Effacer", CMD_EFFACER, KeyEvent.VK_N);
         addMenuItem(menuFile, "Quitter", CMD_QUITTER, KeyEvent.VK_Q);
+        addMenuItem(menuFile, "Changer de mode", CMD_CHANGE_MODE, KeyEvent.VK_M);
 
         menuCommandes = new JMenu("Commandes"); // on installe le premier menu
         menubar.add(menuCommandes);

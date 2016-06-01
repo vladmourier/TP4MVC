@@ -47,6 +47,8 @@ public abstract class CommandListener implements ActionListener {
             mainController.nextTortue();
         } else if (c.equals(MainView.CMD_QUITTER)) {
             mainController.closeApplication();
+        } else if (c.equals(MainView.CMD_CHANGE_MODE)){
+            mainView.initializeMode();
         }
     }
 

@@ -98,6 +98,11 @@ public abstract class AbstractPopulationController extends AbstractController {
         notifyView();
     }
 
+    public void clearPopulation(){
+        getPopulation().clear();
+        notifyView();
+    }
+    
     @Override
     public PopulationTortue getPopulation() {
         return peuple.getPopulation();
