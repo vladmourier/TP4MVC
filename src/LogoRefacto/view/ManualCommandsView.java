@@ -18,7 +18,7 @@ import javax.swing.JTextField;
 import javax.swing.JToolBar;
 
 /**
- *
+ * Classe représentant les différents contrôleurs de la barre d'outils
  * @author Vlad & Hassane
  */
 public class ManualCommandsView extends JToolBar {

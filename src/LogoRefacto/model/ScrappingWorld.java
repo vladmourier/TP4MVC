@@ -8,7 +8,7 @@ package LogoRefacto.model;
 import LogoRefacto.model.MovePatterns.MovePattern;
 
 /**
- *
+ * Un monde à la géométrie toroïdale
  * @author Hassane
  */
 public class ScrappingWorld extends World {

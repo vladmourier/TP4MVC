@@ -16,7 +16,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- *
+ * Contrôleur principal de l'application
  * @author Vlad & Hassane
  */
 public class MainController extends AbstractController {

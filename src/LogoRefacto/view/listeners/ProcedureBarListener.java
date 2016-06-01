@@ -18,7 +18,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- *
+ * Classe réagissant aux évènements sur la barre des boutons procédures
  * @author Vlad & Hassane
  */
 public class ProcedureBarListener implements ActionListener {

@@ -15,7 +15,7 @@ import java.util.Iterator;
 import java.util.Random;
 
 /**
- *
+ * Classe écoutant les boutons, définit un comportement commun pour le menu et la barre d'outils
  * @author Vlad & Hassane
  */
 public abstract class CommandListener implements ActionListener {

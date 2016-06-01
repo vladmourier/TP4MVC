@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 /**
- *
+ * Gère des tortues auto adoptant un comportement de flocking
  * @author Vlad & Hassane
  */
 public class AutoFlockingController extends AutoController {

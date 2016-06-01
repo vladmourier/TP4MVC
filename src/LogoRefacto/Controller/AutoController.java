@@ -15,7 +15,7 @@ import LogoRefacto.view.MainView;
 import java.util.Random;
 
 /**
- *
+ * Controleur gérant les tortues auto (bougeant aléatoirement)
  * @author Vlad & Hassane
  */
 public class AutoController extends AbstractPopulationController {

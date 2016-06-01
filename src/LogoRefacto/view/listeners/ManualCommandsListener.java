@@ -21,7 +21,7 @@ import java.util.Random;
 import javax.swing.JComboBox;
 
 /**
- *
+ * Classe écoutant la barre d'outils
  * @author Vlad & Hassane
  */
 public class ManualCommandsListener extends CommandListener implements KeyEventDispatcher{

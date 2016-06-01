@@ -9,7 +9,7 @@ import LogoRefacto.Controller.AbstractController;
 import LogoRefacto.model.Tortue;
 
 /**
- *
+ * Classe permettant de bouger la tortue selon un schéma répétitif prédéfini
  * @author Vlad & Hassane
  */
 public abstract class MovePattern {

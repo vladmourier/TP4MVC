@@ -8,7 +8,7 @@ package LogoRefacto.model;
 import java.util.ArrayList;
 
 /**
- *
+ * Une tortue adoptant un comportement de 'flocking'
  * @author Vlad & Hassane
  */
 public class TortueFlocking extends Tortue {
