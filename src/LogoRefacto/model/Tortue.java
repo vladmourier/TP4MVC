@@ -54,14 +54,14 @@ public class Tortue {
     public Tortue() {
         trace = new ArrayList<>();
         position = new Position(0, 0);
-        dir = -90;
+        dir = 270;
         this.label = index;
         index++;
     }
 
     public void reset() {
         position = new Position(0, 0);
-        dir = -90;
+        dir = 270;
         trace.clear();
     }
 
@@ -92,10 +92,13 @@ public class Tortue {
     
     public void droite(int ang) {
         dir = (dir + ang) % 360;
+        System.out.println("D" + dir);
     }
 
     public void gauche(int ang) {
         dir = (dir - ang) % 360;
+        if(dir<0) dir+=360;
+        System.out.println("G" + dir);
     }
 
     /**
@@ -154,7 +157,8 @@ public class Tortue {
     }
 
     public void setDir(int dir) {
-        this.dir = dir;
+        
+        this.dir = ((dir%360)+360)%360;
     }
 
     public ArrayList<Chemin> getTrace() {

@@ -5,6 +5,7 @@
  */
 package LogoRefacto.Controller;
 
+import LogoRefacto.model.Shapes.FlockingMove;
 import LogoRefacto.model.Shapes.MovePattern;
 import LogoRefacto.model.Shapes.RandomPattern;
 import LogoRefacto.model.Tortue;
@@ -31,16 +32,23 @@ public class AutoFlockingController extends AutoController {
         this.thread.start();
         notifyView();
     }
+    
     @Override
-    public void addTortue(Tortue t) {
-        getPopulation().addTortue(t);
-        ArrayList<TortueFlocking> tortues = new ArrayList<>();
-        Iterator it = getPopulation().iterator();
-        while (it.hasNext()) {
-            TortueFlocking current = (TortueFlocking) it.next();
-            ((TortueFlocking) t).addVoisin(current);
-            current.addVoisin((TortueFlocking) t);
+    public void run() {
+        boolean ok = true;
+        while (ok) {
+            try {
+                for (Tortue t : getPopulation())
+                {
+                    doPatternTortue(t, new FlockingMove(peuple.getPopulation()));
+                    
+                }
+                
+                 Thread.sleep(1000); //200
+            } catch (Exception ex) {
+                System.err.println(ex.getLocalizedMessage());
+                ok = false;
+            }
         }
-        notifyView();
     }
 }

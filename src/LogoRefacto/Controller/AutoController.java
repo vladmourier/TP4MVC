@@ -56,7 +56,7 @@ public class AutoController extends AbstractPopulationController implements Runn
                     
                 }
                 
-                 Thread.sleep(200);
+                 Thread.sleep(1000); //200
             } catch (Exception ex) {
                 System.err.println(ex.getLocalizedMessage());
                 ok = false;
