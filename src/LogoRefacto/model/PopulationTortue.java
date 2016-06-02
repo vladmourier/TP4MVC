@@ -10,11 +10,16 @@ import java.util.*;
 
 public class PopulationTortue implements Iterable<Tortue> {
     protected ArrayList<Tortue> tortues; // la liste des tortues enregistrees
-    protected Iterator it;
+    protected Iterator<Tortue> it;
     protected Tortue courante=null;
     
     public PopulationTortue() {
         tortues = new ArrayList<>();
+        it = tortues.iterator();
+    }
+    
+    public PopulationTortue(PopulationTortue p) {
+        tortues = new ArrayList<>(p.tortues);
         it = tortues.iterator();
     }
     
@@ -36,12 +41,16 @@ public class PopulationTortue implements Iterable<Tortue> {
 
     public Tortue getCourante() {
        if(courante == null)
-           courante = (Tortue) it.next();
+           courante =  it.next();
        return courante;
     }
     
     public Tortue nextTortue(){
-        if(it.hasNext()) courante = (Tortue) it.next();
+        if(it.hasNext()) courante = it.next();
+        else if(tortues.size()>0) {
+            it = iterator();
+            courante=it.next();
+        }
         return courante;
     }
 

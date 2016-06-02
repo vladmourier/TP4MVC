@@ -6,12 +6,11 @@
 package LogoRefacto.Controller;
 
 import LogoRefacto.model.MovePatterns.FlockingMove;
-import LogoRefacto.model.MovePatterns.MovePattern;
-import LogoRefacto.model.MovePatterns.RandomPattern;
+import LogoRefacto.model.PopulationTortue;
 import LogoRefacto.model.Tortue;
 import LogoRefacto.model.TortueFlocking;
 import java.util.ArrayList;
-import java.util.Iterator;
+import java.util.List;
 
 /**
  *
@@ -29,26 +28,25 @@ public class AutoFlockingController extends AutoController {
         TortueFlocking t = new TortueFlocking();
         t.setPosition(500 / 2, 400 / 2);
         getPopulation().addTortue(t);
-        this.thread.start();
+        if(this.thread==null || !this.thread.isAlive()) {
+            thread = new Thread(this);
+            thread.start();
+        }
         notifyView();
     }
-    
+
     @Override
-    public void run() {
-        boolean ok = true;
-        while (ok) {
-            try {
-                for (Tortue t : getPopulation())
-                {
-                    doPatternTortue(t, new FlockingMove(peuple.getPopulation()));
-                    
-                }
-                
-                 Thread.sleep(1000); //200
-            } catch (Exception ex) {
-                System.err.println(ex.getLocalizedMessage());
-                ok = false;
-            }
+    public void autoAction() {
+         //Create new population to avoid multiple access from other threads
+        PopulationTortue tortues = new PopulationTortue(getPopulation());
+
+        for (Tortue t : tortues)
+        {
+            doPatternTortue(t, new FlockingMove(peuple.getPopulation()));
+
         }
     }
+    
+    
+    
 }

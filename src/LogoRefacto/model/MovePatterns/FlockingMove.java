@@ -22,7 +22,7 @@ public class FlockingMove extends RandomPattern{
     
     private final int distance_safe_space = 50;//Distance à respecter avec les autres tortues
     private final int distance_vision = 200; // distance en pixel jusqu'oÃ¹ la tortue peut voir
-    private final int angle_vision = 100; // en degrÃ©s
+    private final int angle_vision = 50; // en degrÃ©s
     private int vitesse = 0;// en nombre de pixels
     private PopulationTortue population;
     private int distance; //distance à parcourir
@@ -32,7 +32,8 @@ public class FlockingMove extends RandomPattern{
     public FlockingMove(PopulationTortue population)
     {
         super();
-        this.population=population;
+        this.population=new PopulationTortue(population);
+        
         
     }
     
@@ -53,9 +54,8 @@ public class FlockingMove extends RandomPattern{
     
     private List<Tortue> getTortueVisible(Tortue t) {
         ArrayList<Tortue> visiblesTortues = new ArrayList<>();
-        for(Iterator<Tortue> it = population.iterator(); it.hasNext();)
+        for(Tortue voisin : population)
         {
-            Tortue voisin = it.next();
             if(canSee(t, voisin))
             {
                 visiblesTortues.add(voisin);

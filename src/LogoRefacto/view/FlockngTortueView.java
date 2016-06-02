@@ -59,7 +59,6 @@ public class FlockngTortueView extends ITortueView {
         //Calcule les 3 coins du triangle a partir de
         // la position de la tortue p
         Point p = new Point(t.getX(), t.getY());
-        Polygon champVision = new Polygon();
         Polygon arrow = new Polygon();
 
         //Calcule des deux bases
@@ -93,10 +92,10 @@ public class FlockngTortueView extends ITortueView {
 
     public void drawRadar(Graphics2D g2d) {
         Arc2D arc = new Arc2D.Double(
-                t.getX() - t.getDistance_vision() / 2,
-                t.getY() - t.getDistance_vision() / 2,
-                t.getDistance_vision(),
-                t.getDistance_vision(),
+                t.getX() - t.getDistance_vision(),
+                t.getY() - t.getDistance_vision(),
+                t.getDistance_vision()*2,
+                t.getDistance_vision()*2,
                 -t.getDir() - t.getAngle_vision() / 2,
                 t.getAngle_vision(),
                 Arc2D.Double.PIE

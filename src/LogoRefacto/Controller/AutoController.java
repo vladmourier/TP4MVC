@@ -10,6 +10,7 @@ import LogoRefacto.model.MovePatterns.MovePattern;
 import LogoRefacto.model.MovePatterns.Polygone;
 import LogoRefacto.model.MovePatterns.RandomPattern;
 import LogoRefacto.model.MovePatterns.Spiral;
+import LogoRefacto.model.PopulationTortue;
 import LogoRefacto.model.Tortue;
 import LogoRefacto.view.MainView;
 import java.util.Random;
@@ -24,7 +25,6 @@ public class AutoController extends AbstractPopulationController implements Runn
     
     public AutoController(int width, int height) {
         super(width, height);
-        thread = new Thread(this);
        
     }
 
@@ -34,7 +34,8 @@ public class AutoController extends AbstractPopulationController implements Runn
         Tortue t = new Tortue();
         t.setPosition(500 / 2, 400 / 2);
         getPopulation().addTortue(t);
-        this.thread.start();
+        thread = new Thread(this);
+        thread.start();
         notifyView();
     }
 
@@ -45,18 +46,24 @@ public class AutoController extends AbstractPopulationController implements Runn
         notifyView();
     }
 
+    public void autoAction()
+    {
+        PopulationTortue p = new PopulationTortue(getPopulation());
+                
+        for (Tortue t : p)
+        {
+            doPatternTortue(t, new RandomPattern());
+
+        }
+    }
+    
     @Override
     public void run() {
         boolean ok = true;
         while (ok) {
             try {
-                for (Tortue t : getPopulation())
-                {
-                    doPatternTortue(t, new RandomPattern());
-                    
-                }
-                
-                 Thread.sleep(1000); //200
+                autoAction();
+                Thread.sleep(200); 
             } catch (Exception ex) {
                 System.err.println(ex.getLocalizedMessage());
                 ok = false;

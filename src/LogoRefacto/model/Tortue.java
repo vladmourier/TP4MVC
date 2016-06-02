@@ -57,6 +57,7 @@ public class Tortue {
 
     public Tortue(Tortue t) {
         trace = new ArrayList<>();
+        trace.addAll(t.trace);
         int x = t.getX();
         int y = t.getY();
         int dir = t.getDir();
@@ -114,12 +115,12 @@ public class Tortue {
     }
 
     public void droite(int ang) {
-        dir = (dir + ang) % 360;
+        setDir(dir + ang);
         System.out.println("D" + dir);
     }
 
     public void gauche(int ang) {
-        dir = (dir - ang) % 360;
+        setDir(dir - ang);
     }
 
     public int drawPattern(MovePattern mp) {
