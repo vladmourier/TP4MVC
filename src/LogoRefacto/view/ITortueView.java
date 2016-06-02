@@ -12,6 +12,7 @@ import java.util.ArrayList;
 
 /**
  * Classe responsable du dessin des tortues et de leurs traces
+ *
  * @author Vlad & Hassane
  */
 public abstract class ITortueView {
@@ -19,6 +20,7 @@ public abstract class ITortueView {
     Color c = Color.BLACK;
     protected ArrayList<Segment> listSegments; // Trace de la tortue
     protected static final int rp = 10, rb = 5; // Taille de la pointe et de la base de la fleche
+    protected ITurtleShape shape;
 
     public ITortueView() {
         listSegments = new ArrayList<>();
@@ -37,6 +39,6 @@ public abstract class ITortueView {
     }
 
     abstract void updateTortue(Tortue t);
-    
+
     abstract public Tortue getTortue();
 }
