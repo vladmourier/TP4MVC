@@ -13,6 +13,7 @@ import java.awt.Point;
 import java.awt.Polygon;
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 
 /**
  *
@@ -25,13 +26,16 @@ public class TortueView extends ITortueView {
     public TortueView() {
         super();
         this.t = new Tortue();
+        shape = new TriangleShape();
     }
 
     public TortueView(Tortue t) {
         super();
         this.t = new Tortue(t);
+        shape = new TriangleShape();
     }
-
+    
+    
     @Override
     public void reset() {
         super.reset();
@@ -43,9 +47,9 @@ public class TortueView extends ITortueView {
         if (graph == null) {
             return;
         }
-
+        List<Chemin> chemins = new ArrayList<>(t.getTrace());
         //Crée les segments
-        for (Chemin chemin : t.getTrace()) {
+        for (Chemin chemin : chemins) {
 
             Segment seg = new Segment(
                     new Point(chemin.getOrigine().getX(), chemin.getOrigine().getY()),
@@ -59,34 +63,7 @@ public class TortueView extends ITortueView {
             seg.drawSegment(graph);
         }
 
-        //Calcule les 3 coins du triangle a partir de
-        // la position de la tortue p
-        Point p = new Point(t.getX(), t.getY());
-        Polygon arrow = new Polygon();
-
-        //Calcule des deux bases
-        //Angle de la droite
-        double theta = Tortue.ratioDegRad * (-t.getDir());
-        //Demi angle au sommet du triangle
-        double alpha = Math.atan((float) rb / (float) rp);
-        //Rayon de la fleche
-        double r = Math.sqrt(rp * rp + rb * rb);
-        //Sens de la fleche
-
-        //Pointe
-        Point p2 = new Point((int) Math.round(p.x + r * Math.cos(theta)),
-                (int) Math.round(p.y - r * Math.sin(theta)));
-        arrow.addPoint(p2.x, p2.y);
-        arrow.addPoint((int) Math.round(p2.x - r * Math.cos(theta + alpha)),
-                (int) Math.round(p2.y + r * Math.sin(theta + alpha)));
-
-        //Base2
-        arrow.addPoint((int) Math.round(p2.x - r * Math.cos(theta - alpha)),
-                (int) Math.round(p2.y + r * Math.sin(theta - alpha)));
-
-        arrow.addPoint(p2.x, p2.y);
-        graph.setColor(c);
-        graph.fillPolygon(arrow);
+        shape.drawTurtleBody(graph, c, t);
     }
 
     @Override
