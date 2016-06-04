@@ -10,9 +10,7 @@ import LogoRefacto.model.Position;
 import LogoRefacto.model.Tortue;
 import LogoRefacto.model.TortueFlocking;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
-import java.util.Random;
 
 /**
  *

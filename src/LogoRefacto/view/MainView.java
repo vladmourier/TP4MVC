@@ -5,9 +5,6 @@
  */
 package LogoRefacto.view;
 
-import LogoRefacto.Controller.AbstractController;
-import LogoRefacto.model.PopulationTortue;
-import LogoRefacto.model.Tortue;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;

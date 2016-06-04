@@ -5,7 +5,6 @@
  */
 package LogoRefacto.model.MovePatterns;
 
-import LogoRefacto.Controller.AbstractController;
 import LogoRefacto.model.Tortue;
 
 /**

@@ -9,8 +9,6 @@ import LogoRefacto.model.MovePatterns.FlockingMove;
 import LogoRefacto.model.PopulationTortue;
 import LogoRefacto.model.Tortue;
 import LogoRefacto.model.TortueFlocking;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  *

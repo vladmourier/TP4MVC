@@ -9,12 +9,7 @@ import LogoRefacto.model.PopulationTortue;
 import LogoRefacto.model.ScrappingWorld;
 import LogoRefacto.model.MovePatterns.MovePattern;
 import LogoRefacto.model.Tortue;
-import LogoRefacto.model.TortueFlocking;
 import LogoRefacto.model.World;
-import java.util.Iterator;
-import java.util.Observer;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *

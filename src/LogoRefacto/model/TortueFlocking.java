@@ -5,8 +5,6 @@
  */
 package LogoRefacto.model;
 
-import java.util.ArrayList;
-
 /**
  *
  * @author Vlad & Hassane

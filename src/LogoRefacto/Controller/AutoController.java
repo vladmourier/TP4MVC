@@ -5,15 +5,10 @@
  */
 package LogoRefacto.Controller;
 
-import LogoRefacto.model.MovePatterns.Carre;
-import LogoRefacto.model.MovePatterns.MovePattern;
-import LogoRefacto.model.MovePatterns.Polygone;
+
 import LogoRefacto.model.MovePatterns.RandomPattern;
-import LogoRefacto.model.MovePatterns.Spiral;
 import LogoRefacto.model.PopulationTortue;
 import LogoRefacto.model.Tortue;
-import LogoRefacto.view.MainView;
-import java.util.Random;
 
 /**
  * Controleur gérant les tortues auto (bougeant aléatoirement)

@@ -1,12 +1,7 @@
 package LogoRefacto.model;
 
-import LogoRefacto.model.MovePatterns.Carre;
 import LogoRefacto.model.MovePatterns.MovePattern;
-import LogoRefacto.model.MovePatterns.Polygone;
-import LogoRefacto.model.MovePatterns.Spiral;
 import java.util.ArrayList;
-import java.util.Observable;
-import java.util.Random;
 
 /**
  * ***********************************************************************

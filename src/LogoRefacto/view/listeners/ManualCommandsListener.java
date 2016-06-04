@@ -5,19 +5,13 @@
  */
 package LogoRefacto.view.listeners;
 
-import LogoRefacto.Controller.AbstractController;
 import LogoRefacto.Controller.MainController;
-import LogoRefacto.Controller.ManualController;
-import LogoRefacto.model.Tortue;
 import LogoRefacto.view.MainView;
 import LogoRefacto.view.ManualCommandsView;
 import java.awt.KeyEventDispatcher;
 import java.awt.KeyboardFocusManager;
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
-import java.util.Iterator;
-import java.util.Random;
 import javax.swing.JComboBox;
 
 /**
