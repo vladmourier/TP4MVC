@@ -1,12 +1,7 @@
 package LogoRefacto.model;
 
-import LogoRefacto.model.MovePatterns.Carre;
 import LogoRefacto.model.MovePatterns.MovePattern;
-import LogoRefacto.model.MovePatterns.Polygone;
-import LogoRefacto.model.MovePatterns.Spiral;
 import java.util.ArrayList;
-import java.util.Observable;
-import java.util.Random;
 
 /**
  * ***********************************************************************
@@ -124,7 +119,7 @@ public class Tortue {
     }
 
     public int drawPattern(MovePattern mp) {
-       return mp.moveTurtle(this);
+        return mp.moveTurtle(this);
     }
 
     public int getX() {
@@ -158,8 +153,8 @@ public class Tortue {
     }
 
     public void setDir(int dir) {
-        
-        this.dir = ((dir%360)+360)%360;
+
+        this.dir = ((dir % 360) + 360) % 360;
     }
 
     public ArrayList<Chemin> getTrace() {

@@ -5,15 +5,8 @@
  */
 package LogoRefacto.view;
 
-import LogoRefacto.model.Chemin;
 import LogoRefacto.model.Tortue;
-import java.awt.Color;
 import java.awt.Graphics;
-import java.awt.Point;
-import java.awt.Polygon;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
 
 /**
  *
@@ -34,31 +27,11 @@ public class TortueView extends ITortueView {
         this.t = new Tortue(t);
         shape = new TriangleShape();
     }
-    
-    
+
     @Override
     public void reset() {
         super.reset();
         t.reset();
-    }
-
-    @Override
-    public void drawTurtle(Graphics graph) {
-        if (graph == null) {
-            return;
-        }
-        List<Chemin> chemins = new ArrayList<>(t.getTrace());
-        //Crée les segments
-        for (Chemin chemin : chemins) {
-
-            Segment seg = new Segment(
-                    new Point(chemin.getOrigine().getX(), chemin.getOrigine().getY()),
-                    new Point(chemin.getDestination().getX(), chemin.getDestination().getY()));
-            seg.setColor(c);
-            seg.drawSegment(graph);
-        }
-        
-        shape.drawTurtleBody(graph, c, t);
     }
 
     @Override
@@ -75,6 +48,10 @@ public class TortueView extends ITortueView {
     @Override
     void updateTortue(Tortue t) {
         this.t = t;
+    }
+
+    @Override
+    protected void drawMore(Graphics graph) {
     }
 
 }

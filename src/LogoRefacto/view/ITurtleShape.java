@@ -14,5 +14,6 @@ import java.awt.Graphics;
  * @author Vlad
  */
 public interface ITurtleShape {
+
     public void drawTurtleBody(Graphics graph, Color c, Tortue t);
 }

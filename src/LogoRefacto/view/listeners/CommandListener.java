@@ -15,7 +15,9 @@ import java.util.Iterator;
 import java.util.Random;
 
 /**
- * Classe écoutant les boutons, définit un comportement commun pour le menu et la barre d'outils
+ * Classe écoutant les boutons, définit un comportement commun pour le menu et
+ * la barre d'outils
+ *
  * @author Vlad & Hassane
  */
 public abstract class CommandListener implements ActionListener {
@@ -47,7 +49,7 @@ public abstract class CommandListener implements ActionListener {
             mainController.nextTortue();
         } else if (c.equals(MainView.CMD_QUITTER)) {
             mainController.closeApplication();
-        } else if (c.equals(MainView.CMD_CHANGE_MODE)){
+        } else if (c.equals(MainView.CMD_CHANGE_MODE)) {
             mainView.initializeMode();
         }
     }

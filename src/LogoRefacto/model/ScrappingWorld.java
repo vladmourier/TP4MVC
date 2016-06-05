@@ -11,6 +11,7 @@ import java.util.List;
 
 /**
  * Un monde à la géométrie toroïdale
+ *
  * @author Hassane
  */
 public class ScrappingWorld extends World {
@@ -38,7 +39,7 @@ public class ScrappingWorld extends World {
         int x = t.getX(), y = t.getY();
         int dist = habitant.drawPattern(mp);
         correctPosition(x, y, habitant, dist);
-       
+
     }
 
     private void correctPosition(int oldX, int oldY, Tortue habitant, int lastDist) {
@@ -46,21 +47,21 @@ public class ScrappingWorld extends World {
         int newY = habitant.getY();
 
         if (newX > worldWidth) {
-            habitant.setPosition(oldX-worldWidth, oldY);
+            habitant.setPosition(oldX - worldWidth, oldY);
             habitant.avancer(lastDist);
-            
+
         } else if (newX < 0) {
-            habitant.setPosition(oldX+worldWidth, oldY);
+            habitant.setPosition(oldX + worldWidth, oldY);
             habitant.avancer(lastDist);
         }
         if (newY > worldHeight) {
-            habitant.setPosition(oldX, oldY-worldHeight);
+            habitant.setPosition(oldX, oldY - worldHeight);
             habitant.avancer(lastDist);
         } else if (newY < 0) {
-            habitant.setPosition(oldX, oldY+worldHeight);
+            habitant.setPosition(oldX, oldY + worldHeight);
             habitant.avancer(lastDist);
         }
-        
+
     }
 
     @Override

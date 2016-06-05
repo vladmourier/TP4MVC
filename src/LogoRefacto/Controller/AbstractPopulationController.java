@@ -9,12 +9,7 @@ import LogoRefacto.model.PopulationTortue;
 import LogoRefacto.model.ScrappingWorld;
 import LogoRefacto.model.MovePatterns.MovePattern;
 import LogoRefacto.model.Tortue;
-import LogoRefacto.model.TortueFlocking;
 import LogoRefacto.model.World;
-import java.util.Iterator;
-import java.util.Observer;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
@@ -89,7 +84,8 @@ public abstract class AbstractPopulationController extends AbstractController {
 
     /**
      * Informe l'affichage avec un paramètre
-     * @param object 
+     *
+     * @param object
      */
     protected void notifyView(Object object) {
         setChanged();
@@ -108,11 +104,11 @@ public abstract class AbstractPopulationController extends AbstractController {
     /**
      * Réinitialise la population de tortues du controleur
      */
-    public void clearPopulation(){
+    public void clearPopulation() {
         getPopulation().clear();
         notifyView();
     }
-    
+
     @Override
     public PopulationTortue getPopulation() {
         return peuple.getPopulation();

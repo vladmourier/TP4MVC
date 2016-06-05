@@ -15,12 +15,11 @@ public class Carre extends MovePattern {
 
     @Override
     public int moveTurtle(Tortue t) {
-        
+
         t.avancer(100);
         t.droite(90);
         return 100;
-        
-    }
 
+    }
 
 }

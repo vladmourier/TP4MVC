@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package LogoRefacto.view;
+
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Insets;
@@ -19,6 +20,7 @@ import javax.swing.JToolBar;
 
 /**
  * Classe représentant les différents contrôleurs de la barre d'outils
+ *
  * @author Vlad & Hassane
  */
 public class ManualCommandsView extends JToolBar {
@@ -87,10 +89,10 @@ public class ManualCommandsView extends JToolBar {
 
     public void lock() {
         for (Component c : this.getComponents()) {
-            if (c instanceof JButton && !MainView.getActionCommands().contains(((JButton) c).getActionCommand()) 
+            if (c instanceof JButton && !MainView.getActionCommands().contains(((JButton) c).getActionCommand())
                     && !((JButton) c).getActionCommand().equals(MainView.CMD_CREER_TORTUE)
                     && !((JButton) c).getActionCommand().equals(MainView.CMD_SUPPRIMER_TORTUE)
-                    && !((JButton) c).getActionCommand().equals(MainView.CMD_EFFACER) ) {
+                    && !((JButton) c).getActionCommand().equals(MainView.CMD_EFFACER)) {
                 ((JButton) c).setEnabled(false);
             }
         }

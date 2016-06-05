@@ -5,17 +5,12 @@
  */
 package LogoRefacto.view;
 
-import LogoRefacto.model.Chemin;
 import LogoRefacto.model.Tortue;
 import LogoRefacto.model.TortueFlocking;
-import static LogoRefacto.view.ITortueView.rb;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.awt.Point;
-import java.awt.Polygon;
 import java.awt.geom.Arc2D;
-import java.util.Iterator;
 
 /**
  *
@@ -38,23 +33,7 @@ public class FlockngTortueView extends ITortueView {
     }
 
     @Override
-    public void drawTurtle(Graphics graph) {
-        if (graph == null) {
-            return;
-        }
-
-        //Crée les segments
-        for (int i=0; i<t.getTrace().size(); i++) {
-            Chemin chemin = t.getTrace().get(i);
-            Segment seg = new Segment(
-                    new Point(chemin.getOrigine().getX(), chemin.getOrigine().getY()),
-                    new Point(chemin.getDestination().getX(), chemin.getDestination().getY()));
-            seg.setColor(c);
-            seg.drawSegment(graph);
-        }
-        
-        shape.drawTurtleBody(graph, c, t);
-        //Champ de vision
+    protected void drawMore(Graphics graph) {
         drawRadar((Graphics2D) graph);
     }
 

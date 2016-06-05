@@ -9,7 +9,6 @@ import LogoRefacto.model.PopulationTortue;
 import LogoRefacto.model.MovePatterns.MovePattern;
 import LogoRefacto.model.Tortue;
 import LogoRefacto.model.TortueFlocking;
-import LogoRefacto.model.World;
 import java.util.HashMap;
 import java.util.Observer;
 import java.util.logging.Level;
@@ -17,6 +16,7 @@ import java.util.logging.Logger;
 
 /**
  * Contrôleur principal de l'application
+ *
  * @author Vlad & Hassane
  */
 public class MainController extends AbstractController {

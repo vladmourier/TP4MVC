@@ -14,72 +14,94 @@ import java.util.Observable;
  *
  * @author Vlad & Hassane
  */
-public abstract class AbstractController extends Observable{
-    
+public abstract class AbstractController extends Observable {
+
     /**
      * Intitialise la population de tortue du controleur
      */
     public abstract void initializePopulation();
+
     /**
      * Crée une tortue pour la population de tortues courantes
-     * @param t 
+     *
+     * @param t
      */
     public abstract void addTortue(Tortue t);
+
     /**
      * Supprime une tortue de la population courante
-     * @param t 
+     *
+     * @param t
      */
     public abstract void removeTortue(Tortue t);
+
     /**
-     * Fait avancer la tortue donnée de la distance donnée, dans la direction de la tortue
+     * Fait avancer la tortue donnée de la distance donnée, dans la direction de
+     * la tortue
+     *
      * @param t
-     * @param v 
+     * @param v
      */
     public abstract void avancerTortue(Tortue t, int v);
+
     /**
      * Pivote la tortue vers la droite de v degrés
+     *
      * @param t
-     * @param v 
+     * @param v
      */
     public abstract void droiteTortue(Tortue t, int v);
+
     /**
      * Pivote la tortue donnée vers la gauche de v degrés
+     *
      * @param t
-     * @param v 
+     * @param v
      */
     public abstract void gaucheTortue(Tortue t, int v);
+
     /**
      * Ordone à la tortue donnée d'exécuter le MovePattern passé en paramètre
+     *
      * @param t
      * @param mp
-     * @throws Exception 
+     * @throws Exception
      */
     public abstract void doPatternTortue(Tortue t, MovePattern mp) throws Exception;
-    
+
     /**
      * Retourne la tortue courante de la population
-     * @return 
+     *
+     * @return
      */
     public abstract Tortue getTortueCourante();
+
     /**
      * Retourne la prochaine tortue de la population
-     * @return 
+     *
+     * @return
      */
     public abstract Tortue nextTortue();
+
     /**
      * Renvoie la population de tortues du contrôleur
-     * @return 
+     *
+     * @return
      */
     public abstract PopulationTortue getPopulation();
-    
+
     /**
-     * Renvoie la largeur du monde : zone dans laquelle la population de tortues se déplace
-     * @return 
+     * Renvoie la largeur du monde : zone dans laquelle la population de tortues
+     * se déplace
+     *
+     * @return
      */
     public abstract int getWorldWidth();
+
     /**
      * Renvoie la hauteur du monde
-     * @return 
+     *
+     * @return
      */
     public abstract int getWorldHeight();
 }

@@ -11,9 +11,7 @@ import LogoRefacto.model.Tortue;
 import LogoRefacto.model.TortueFlocking;
 import LogoRefacto.model.World;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
-import java.util.Random;
 
 /**
  *
@@ -52,13 +50,14 @@ public class FlockingMove extends RandomPattern{
     public int moveTurtle(Tortue t) {
         int dist = 0;
         List<Tortue> visibles = getTortueVisible(t);
-        
-        if(visibles.size()>0) {
+
+        if (visibles.size() > 0) {
             t.setDir(getDirMoyenneVisibles(visibles));
             dist = updateDistance(t, getVitesseMoyenneVisibles(visibles));
+        } else {
+            dist = super.moveTurtle(t, defaultDistance);
         }
-        else dist=super.moveTurtle(t, defaultDistance);
-        
+
         return dist;
     }
     
@@ -89,38 +88,37 @@ public class FlockingMove extends RandomPattern{
         }
         return visiblesTortues;
     }
-    
-    private int updateDistance(Tortue t, int vitesse)
-    {
+
+    private int updateDistance(Tortue t, int vitesse) {
         t.avancer(vitesse);
         return vitesse;
     }
-    
-    
-    
+
     public int getDirMoyenneVisibles(List<Tortue> visibles) {
         int sommeDir = 0;
         for (Tortue tf : visibles) {
             sommeDir += tf.getDir();
         }
-        return visibles.size()>0 ? sommeDir / visibles.size() : 0;
+        return visibles.size() > 0 ? sommeDir / visibles.size() : 0;
     }
 
     public int getVitesseMoyenneVisibles(List<Tortue> visibles) {
         int sommeVitesse = 0;
         for (Tortue tf : visibles) {
-            int vitesse=default_vitesse;
-            if(tf instanceof TortueFlocking) vitesse = ((TortueFlocking)tf).getVitesse();
+            int vitesse = default_vitesse;
+            if (tf instanceof TortueFlocking) {
+                vitesse = ((TortueFlocking) tf).getVitesse();
+            }
             sommeVitesse += vitesse;
         }
-        return visibles.size()>0 ? sommeVitesse / visibles.size() : 0;
+        return visibles.size() > 0 ? sommeVitesse / visibles.size() : 0;
     }
 
-    private boolean canSee(Tortue t, Tortue voisin) {
+    public boolean canSee(Tortue t, Tortue voisin) {
         if (voisin.equals(t)) {
             return false;
         }
-        
+
         boolean closeEnough = Position.getDistance(t.getPosition(), voisin.getPosition()) <= distance_vision;
 
         double angle = getAngleBetween(voisin,t);
@@ -133,30 +131,29 @@ public class FlockingMove extends RandomPattern{
         return closeEnough && correctAngle;
     }
 
-    private double getAngleBetween(Tortue vois, Tortue courant)
-    {
+    private double getAngleBetween(Tortue vois, Tortue courant) {
         //Coordonnées de la tortue relaves à this
-        int x = courant.getX()-vois.getX();
+        int x = courant.getX() - vois.getX();
         int y = courant.getY() - vois.getY();
-        if(x==0 && y==0) return 0;
-        if(x==0)
-        {
-            if(y>0)
+        if (x == 0 && y == 0) {
+            return 0;
+        }
+        if (x == 0) {
+            if (y > 0) {
                 return 270;
-            else 
+            } else {
                 return 90;
-        }else {
-            double quotient = ((double)y)/((double)x);
+            }
+        } else {
+            double quotient = ((double) y) / ((double) x);
             double angle = Math.atan(quotient);
-            if(x<0)
-            {
+            if (x < 0) {
                 angle += Math.PI;
             }
-            if(angle<0)
-            {
-                angle += 2*Math.PI;
+            if (angle < 0) {
+                angle += 2 * Math.PI;
             }
-            return 180*angle/Math.PI;
+            return 180 * angle / Math.PI;
         }
     }
 }

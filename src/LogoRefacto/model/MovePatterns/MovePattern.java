@@ -5,7 +5,6 @@
  */
 package LogoRefacto.model.MovePatterns;
 
-import LogoRefacto.Controller.AbstractController;
 import LogoRefacto.model.Tortue;
 
 /**
@@ -13,15 +12,12 @@ import LogoRefacto.model.Tortue;
  * @author Vlad & Hassane
  */
 public abstract class MovePattern {
+
     public static final String CARRE = "CARRE";
     public static final String POLYGONE = "POLYGONE";
     public static final String SPIRALE = "SPIRALE";
     public static final String FLOCKING = "FLOCKING";
-    
-    
-    
-    
+
     public abstract int moveTurtle(Tortue t);
 
-    
 }
