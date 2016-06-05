@@ -6,6 +6,8 @@
 package LogoRefacto.model;
 
 import LogoRefacto.model.MovePatterns.MovePattern;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * L'espace dans lequel évolue la population de tortues
@@ -56,5 +58,20 @@ public class World {
 
     public int getHeight() {
         return worldHeight;
+    }
+
+    /**
+     * returne la liste des tortues de la map ainsi que leur images dans le plan
+     * Dans le cas d'une map circulaire, les tortues sont ainsi dupliquées à 
+     * l'extérieur de la map pour simuler l'effet circulaire
+     * @return Population de tortues
+     */
+    public PopulationTortue getAllReflectPopulation() {
+        //Map infini donc on retourne directement la population
+        return getPopulation();
+    }
+
+    public void addTortue(Tortue t) {
+        habitants.addTortue(t);
     }
 }

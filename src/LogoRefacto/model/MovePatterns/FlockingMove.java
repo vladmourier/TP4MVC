@@ -9,6 +9,7 @@ import LogoRefacto.model.PopulationTortue;
 import LogoRefacto.model.Position;
 import LogoRefacto.model.Tortue;
 import LogoRefacto.model.TortueFlocking;
+import LogoRefacto.model.World;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,22 +17,35 @@ import java.util.List;
  *
  * @author Hassane
  */
-public class FlockingMove extends RandomPattern {
-
-    private final int distance_safe_space = 50;//Distance à respecter avec les autres tortues
-    private final int distance_vision = 200; // distance en pixel jusqu'oÃ¹ la tortue peut voir
-    private final int angle_vision = 50; // en degrÃ©s
+public class FlockingMove extends RandomPattern{
+    
+    private int distance_safe_space = 50;//Distance à respecter avec les autres tortues
+    private int distance_vision = 50; // distance en pixel jusqu'oÃ¹ la tortue peut voir
+    private int angle_vision = 50; // en degrÃ©s
     private int vitesse = 0;// en nombre de pixels
-    private PopulationTortue population;
     private int distance; //distance à parcourir
-    private int default_vitesse = 50;
-
-    public FlockingMove(PopulationTortue population) {
+    private int default_vitesse=50;
+    private TortueFlocking defaultTortue;
+    private World world;
+    
+    public FlockingMove(World world)
+    {
         super();
-        this.population = new PopulationTortue(population);
-
+        this.world=world; 
+        defaultTortue = null;
+        vitesse = 0;
     }
-
+    
+    public FlockingMove(TortueFlocking t, World world)
+    {
+        this(world);
+        this.defaultTortue = new TortueFlocking(t);
+        distance_vision = t.getDistance_vision();
+        vitesse = t.getVitesse();
+    }
+    
+    
+    
     @Override
     public int moveTurtle(Tortue t) {
         int dist = 0;
@@ -46,11 +60,29 @@ public class FlockingMove extends RandomPattern {
 
         return dist;
     }
-
+    
+    public int moveDefault() {
+        int dist = 0;
+        List<Tortue> visibles = getTortueVisible(defaultTortue);
+        
+        if(visibles.size()>0) {
+            defaultTortue.setDir(getDirMoyenneVisibles(visibles));
+            dist = updateDistance(defaultTortue, getVitesseMoyenneVisibles(visibles));
+        }
+        else dist=super.moveTurtle(defaultTortue, defaultDistance);
+        
+        return dist;
+    }
+    
+    
     private List<Tortue> getTortueVisible(Tortue t) {
         ArrayList<Tortue> visiblesTortues = new ArrayList<>();
-        for (Tortue voisin : population) {
-            if (canSee(t, voisin)) {
+        List<Tortue> p = world.getPopulation().getList();
+        for(int i=0; i<p.size(); i++)
+        {
+            Tortue voisin = p.get(i);
+            if(canSee(t, voisin))
+            {
                 visiblesTortues.add(voisin);
             }
         }
@@ -89,14 +121,12 @@ public class FlockingMove extends RandomPattern {
 
         boolean closeEnough = Position.getDistance(t.getPosition(), voisin.getPosition()) <= distance_vision;
 
-        //double tan = (((double) t.getY() - (double) getY()) / ((double) t.getX() - (double) getX()));
-        //int angle = (int) (Math.atan(tan) / ratioDegRad);
-        double angle = getAngleBetween(voisin, t);
-        boolean correctAngle = Math.abs(angle - t.getDir()) % 180 < angle_vision / 2;
+        double angle = getAngleBetween(voisin,t);
+        boolean correctAngle = Math.abs(angle-t.getDir())% 180<angle_vision/2;
         if (!(closeEnough && correctAngle)) {
             System.out.println("La tortue " + t.getLabel() + " ne peut voir" + " la tortue " + voisin.getLabel());
         } else {
-            System.out.println("La tortue " + t.getLabel() + " peut voir" + " la tortue " + voisin.getLabel());
+                System.out.println("La tortue " + t.getLabel() + " peut voir" + " la tortue " + voisin.getLabel());
         }
         return closeEnough && correctAngle;
     }

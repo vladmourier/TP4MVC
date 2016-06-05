@@ -122,4 +122,8 @@ public abstract class AbstractPopulationController extends AbstractController {
     public int getWorldHeight() {
         return peuple.getHeight();
     }
+    
+    public World getWorld() {
+        return peuple;
+    }
 }

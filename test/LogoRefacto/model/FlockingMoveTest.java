@@ -16,20 +16,20 @@ import static org.junit.Assert.*;
 public class FlockingMoveTest {
 
     FlockingMove move;
-    PopulationTortue pop;
+    World map;
     TortueFlocking t;
 
     public FlockingMoveTest() {
         t = new TortueFlocking(5, 5, 0);
-        pop = new PopulationTortue();
-        pop.addTortue(t);
-        move = new FlockingMove(pop);
+        map = new World(500,900);
+        map.addTortue(t);
+        move = new FlockingMove(map);
     }
 
     @Test
     public void testcanSee() {
         TortueFlocking t2 = new TortueFlocking(4, 5, 0);
-        pop.addTortue(t2);
+        map.addTortue(t2);
 
         assertTrue(move.canSee(t2, t));
         assertFalse(move.canSee(t, t2));
@@ -38,7 +38,7 @@ public class FlockingMoveTest {
     @Test
     public void testcanSeeLimit() {
         TortueFlocking t2 = new TortueFlocking(205, 5, 0);
-        pop.addTortue(t2);
+        map.addTortue(t2);
 
         assertTrue(move.canSee(t2, t));
     }

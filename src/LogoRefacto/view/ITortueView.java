@@ -22,7 +22,6 @@ import java.util.List;
 public abstract class ITortueView {
 
     Color c = Color.BLACK;
-    protected ArrayList<Segment> listSegments; // Trace de la tortue
     protected static final int rp = 10, rb = 5; // Taille de la pointe et de la base de la fleche
     protected ITurtleShape shape;
 
@@ -30,7 +29,6 @@ public abstract class ITortueView {
     static final Color[] defaultsColors = {Color.BLACK, Color.BLUE, Color.CYAN, Color.GRAY, Color.GREEN, Color.ORANGE, Color.ORANGE, Color.PINK, Color.RED};
 
     public ITortueView() {
-        listSegments = new ArrayList<>();
         c = defaultsColors[indexColor++ % defaultsColors.length];
     }
 
@@ -53,19 +51,14 @@ public abstract class ITortueView {
                     new Point(chemin.getOrigine().getX(), chemin.getOrigine().getY()),
                     new Point(chemin.getDestination().getX(), chemin.getDestination().getY()));
             seg.setColor(c);
-            listSegments.add(seg);
-        }
-        // Dessine les segments
-        for (Iterator it = listSegments.iterator(); it.hasNext();) {
-            Segment seg = (Segment) it.next();
             seg.drawSegment(graph);
         }
+        
     }
 
     public abstract void updatePosition(int newX, int newY, int dir);
 
     public void reset() {
-        listSegments.clear();
     }
 
     public void setColor(Color c) {
