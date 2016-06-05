@@ -19,7 +19,10 @@ import java.util.Observer;
 import javax.swing.JPanel;
 
 /**
- * De la même manière qu'une PopulationTortue gère un ensemble de tortues, la PopulationView gère un ensemble de TortueView, les représentations des tortues dans cette vue
+ * De la même manière qu'une PopulationTortue gère un ensemble de tortues, la
+ * PopulationView gère un ensemble de TortueView, les représentations des
+ * tortues dans cette vue
+ *
  * @author Vlad & Hassane
  */
 public class PopulationView extends JPanel implements Observer {

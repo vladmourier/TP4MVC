@@ -241,10 +241,10 @@ public class MainView extends JFrame {
 
         ManualCommandsListener mcl = new ManualCommandsListener(mainController, this);
 
-        for(Component c : menuItems){
-            ((JMenuItem)c).addActionListener(sc);
+        for (Component c : menuItems) {
+            ((JMenuItem) c).addActionListener(sc);
         }
-        
+
         for (Component c : getToolBar().getComponents()) {
             if (c instanceof JButton) {
                 ((JButton) c).addActionListener(mcl);

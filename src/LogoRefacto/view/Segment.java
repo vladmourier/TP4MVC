@@ -43,8 +43,6 @@ public class Segment {
     public void setPtEnd(Point ptEnd) {
         this.ptEnd = ptEnd;
     }
-    
-    
 
     public void drawSegment(Graphics graph) {
         if (graph == null) {

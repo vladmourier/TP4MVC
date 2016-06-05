@@ -6,7 +6,9 @@
 package LogoRefacto.model;
 
 /**
- * Un chemin représente un segment : un point d'origine et un point de destination
+ * Un chemin représente un segment : un point d'origine et un point de
+ * destination
+ *
  * @author Vlad & Hassane
  */
 public class Chemin {

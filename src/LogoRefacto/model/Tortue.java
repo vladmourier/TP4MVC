@@ -119,7 +119,7 @@ public class Tortue {
     }
 
     public int drawPattern(MovePattern mp) {
-       return mp.moveTurtle(this);
+        return mp.moveTurtle(this);
     }
 
     public int getX() {
@@ -153,8 +153,8 @@ public class Tortue {
     }
 
     public void setDir(int dir) {
-        
-        this.dir = ((dir%360)+360)%360;
+
+        this.dir = ((dir % 360) + 360) % 360;
     }
 
     public ArrayList<Chemin> getTrace() {

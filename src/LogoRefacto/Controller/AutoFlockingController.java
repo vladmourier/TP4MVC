@@ -26,7 +26,7 @@ public class AutoFlockingController extends AutoController {
         TortueFlocking t = new TortueFlocking();
         t.setPosition(500 / 2, 400 / 2);
         getPopulation().addTortue(t);
-        if(this.thread==null || !this.thread.isAlive()) {
+        if (this.thread == null || !this.thread.isAlive()) {
             thread = new Thread(this);
             thread.start();
         }
@@ -35,16 +35,13 @@ public class AutoFlockingController extends AutoController {
 
     @Override
     public void autoAction() {
-         //Create new population to avoid multiple access from other threads
+        //Create new population to avoid multiple access from other threads
         PopulationTortue tortues = new PopulationTortue(getPopulation());
 
-        for (Tortue t : tortues)
-        {
+        for (Tortue t : tortues) {
             doPatternTortue(t, new FlockingMove(peuple.getPopulation()));
 
         }
     }
-    
-    
-    
+
 }

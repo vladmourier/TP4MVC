@@ -16,7 +16,6 @@ public class TortueFlocking extends Tortue {
     private final int angle_vision = 100; // en degrÃ©s
     private int vitesse = 0;// en nombre de pixels
 
-
     public TortueFlocking(int x, int y, int dir) {
         super(x, y, dir);
     }
@@ -24,18 +23,17 @@ public class TortueFlocking extends Tortue {
     public TortueFlocking(TortueFlocking t) {
         super(t);
         this.vitesse = t.vitesse;
-       
+
     }
 
     public TortueFlocking() {
         super();
     }
- 
-    private void updateVitesse(int v){
+
+    private void updateVitesse(int v) {
         this.vitesse = v;
     }
 
-    
     public int getDistance_vision() {
         return distance_vision;
     }
@@ -47,7 +45,6 @@ public class TortueFlocking extends Tortue {
     public int getVitesse() {
         return vitesse;
     }
-
 
     @Override
     public void avancer(int dist) {

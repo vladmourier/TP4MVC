@@ -84,7 +84,8 @@ public abstract class AbstractPopulationController extends AbstractController {
 
     /**
      * Informe l'affichage avec un paramètre
-     * @param object 
+     *
+     * @param object
      */
     protected void notifyView(Object object) {
         setChanged();
@@ -103,11 +104,11 @@ public abstract class AbstractPopulationController extends AbstractController {
     /**
      * Réinitialise la population de tortues du controleur
      */
-    public void clearPopulation(){
+    public void clearPopulation() {
         getPopulation().clear();
         notifyView();
     }
-    
+
     @Override
     public PopulationTortue getPopulation() {
         return peuple.getPopulation();

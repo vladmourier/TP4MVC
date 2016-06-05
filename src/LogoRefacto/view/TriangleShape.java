@@ -48,6 +48,7 @@ public class TriangleShape implements ITurtleShape {
 
         arrow.addPoint(p2.x, p2.y);
         graph.setColor(c);
-        graph.fillPolygon(arrow);    }
-    
+        graph.fillPolygon(arrow);
+    }
+
 }

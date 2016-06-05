@@ -8,7 +8,6 @@ package LogoRefacto.view;
 import LogoRefacto.model.Tortue;
 import java.awt.Graphics;
 
-
 /**
  *
  * @author Vlad & Hassane
@@ -28,8 +27,7 @@ public class TortueView extends ITortueView {
         this.t = new Tortue(t);
         shape = new TriangleShape();
     }
-    
-    
+
     @Override
     public void reset() {
         super.reset();

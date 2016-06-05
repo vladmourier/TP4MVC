@@ -6,8 +6,8 @@ import LogoRefacto.view.MainView;
 
 import javax.swing.*;
 
-
-/** ***********************************************************************
+/**
+ * ***********************************************************************
  *
  * Un petit Logo minimal qui devra etre ameliore par la suite
  *
@@ -19,23 +19,21 @@ import javax.swing.*;
  * @date 25/09/
  *
  *
- ************************************************************************* */
+ *************************************************************************
+ */
 public class Application {
 
-   
     /**
      * @param args
      */
     public static void main(String[] args) {
         SwingUtilities.invokeLater(new Runnable() {
             public void run() {
-                
-                MainController mc = new MainController(600,400);
-                
-                
+
+                MainController mc = new MainController(600, 400);
+
                 MainView mv = new MainView(mc);
-                
-                
+
                 mv.setVisible(true);
             }
         });

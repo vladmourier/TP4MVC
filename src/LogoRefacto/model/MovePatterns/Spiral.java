@@ -13,11 +13,13 @@ import LogoRefacto.model.Tortue;
  */
 public class Spiral extends MovePattern {
 
-    private int  n0, k, a;
-    private static int n=-1;
+    private int n0, k, a;
+    private static int n = -1;
 
     public Spiral(int n, int k, int a) {
-        if(this.n==-1) this.n = n;
+        if (this.n == -1) {
+            this.n = n;
+        }
         this.n0 = n;
         this.k = k;
         this.a = a;
@@ -26,14 +28,13 @@ public class Spiral extends MovePattern {
     @Override
     public int moveTurtle(Tortue t) {
         t.avancer(n);
-        t.droite(360/a);
-        n = n + 1;   
-        return n-1;
+        t.droite(360 / a);
+        n = n + 1;
+        return n - 1;
     }
 
-    public void reset()
-    {
-        this.n= n0;
+    public void reset() {
+        this.n = n0;
     }
-            
+
 }

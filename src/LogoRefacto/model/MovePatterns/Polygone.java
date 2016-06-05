@@ -11,7 +11,7 @@ import LogoRefacto.model.Tortue;
  *
  * @author Vlad & Hassane
  */
-public class Polygone extends MovePattern{
+public class Polygone extends MovePattern {
 
     private int n, a;
 
@@ -19,13 +19,12 @@ public class Polygone extends MovePattern{
         this.n = n;
         this.a = a;
     }
-    
+
     @Override
     public int moveTurtle(Tortue t) {
         t.avancer(n);
-        t.droite(360/a);
+        t.droite(360 / a);
         return n;
     }
 
-    
 }

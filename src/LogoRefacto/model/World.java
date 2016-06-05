@@ -9,43 +9,43 @@ import LogoRefacto.model.MovePatterns.MovePattern;
 
 /**
  * L'espace dans lequel évolue la population de tortues
+ *
  * @author Hassane
  */
 public class World {
- 
+
     PopulationTortue habitants;
     int worldWidth;
     int worldHeight;
-    
-    public World(PopulationTortue p, int width, int height)
-    {
+
+    public World(PopulationTortue p, int width, int height) {
         this.habitants = p;
         this.worldHeight = height;
         this.worldWidth = width;
     }
-    
+
     public World(int width, int height) {
         this(new PopulationTortue(), width, height);
     }
-    
-    public void avancerTortue(Tortue t, int dist){
+
+    public void avancerTortue(Tortue t, int dist) {
         habitants.getTortue(t).avancer(dist);
-        
+
     }
-    
-    public void gaucheTortue(Tortue t, int ang){
+
+    public void gaucheTortue(Tortue t, int ang) {
         habitants.getTortue(t).gauche(ang);
     }
-    
-    public void droiteTortue(Tortue t, int ang){
+
+    public void droiteTortue(Tortue t, int ang) {
         habitants.getTortue(t).droite(ang);
-        
+
     }
-    
-    public void drawPatternTortue(Tortue t, MovePattern mp){
+
+    public void drawPatternTortue(Tortue t, MovePattern mp) {
         habitants.getTortue(t).drawPattern(mp);
     }
-    
+
     public PopulationTortue getPopulation() {
         return habitants;
     }

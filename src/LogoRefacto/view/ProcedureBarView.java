@@ -16,10 +16,11 @@ import javax.swing.JPanel;
  * @author Vlad & Hassane
  */
 public class ProcedureBarView extends JPanel {
+
     private JButton b20;
     private JButton b21;
     private JButton b22;
-    
+
     public ProcedureBarView(LayoutManager layout) {
         super(layout);
     }

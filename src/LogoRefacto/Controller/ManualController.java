@@ -7,12 +7,13 @@ package LogoRefacto.Controller;
 
 /**
  * Contrôleur gérant le déplacement manuel des tortues
+ *
  * @author Vlad & Hassane
  */
 public class ManualController extends AbstractPopulationController {
-    
+
     public ManualController(int width, int height) {
         super(width, height);
     }
-    
+
 }

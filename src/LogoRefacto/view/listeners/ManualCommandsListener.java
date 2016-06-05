@@ -16,10 +16,10 @@ import javax.swing.JComboBox;
 
 /**
  * Classe écoutant la barre d'outils
+ *
  * @author Vlad & Hassane
  */
-public class ManualCommandsListener extends CommandListener implements KeyEventDispatcher{
-
+public class ManualCommandsListener extends CommandListener implements KeyEventDispatcher {
 
     public ManualCommandsListener(MainController mainController, MainView mainView) {
         super(mainController, mainView);
@@ -28,14 +28,13 @@ public class ManualCommandsListener extends CommandListener implements KeyEventD
         manager.addKeyEventDispatcher(this);
     }
 
-   @Override
+    @Override
     public void actionPerformed(ActionEvent e) {
         super.actionPerformed(e);
         if (e.getActionCommand().equals(ManualCommandsView.CMD_COLORLIST)) {
             mainView.setCurrentTortueColor(((JComboBox) e.getSource()).getSelectedIndex());
         }
     }
-
 
     @Override
     public boolean dispatchKeyEvent(KeyEvent e) {
@@ -48,11 +47,11 @@ public class ManualCommandsListener extends CommandListener implements KeyEventD
             gaucheTortueCourante();
         } else if (e.getKeyCode() == KeyEvent.VK_UP) {
             avancerTortueCourante();
-        }else if (e.getKeyCode() == KeyEvent.VK_TAB) {
+        } else if (e.getKeyCode() == KeyEvent.VK_TAB) {
             //next tortue;
             mainController.nextTortue();
         }
-        
+
         return true;
     }
 }
