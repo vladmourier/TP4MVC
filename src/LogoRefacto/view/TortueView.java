@@ -55,14 +55,9 @@ public class TortueView extends ITortueView {
                     new Point(chemin.getOrigine().getX(), chemin.getOrigine().getY()),
                     new Point(chemin.getDestination().getX(), chemin.getDestination().getY()));
             seg.setColor(c);
-            listSegments.add(seg);
-        }
-        // Dessine les segments
-        for (Iterator it = listSegments.iterator(); it.hasNext();) {
-            Segment seg = (Segment) it.next();
             seg.drawSegment(graph);
         }
-
+        
         shape.drawTurtleBody(graph, c, t);
     }
 

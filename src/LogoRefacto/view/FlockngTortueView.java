@@ -44,20 +44,15 @@ public class FlockngTortueView extends ITortueView {
         }
 
         //Crée les segments
-        for (Chemin chemin : t.getTrace()) {
-
+        for (int i=0; i<t.getTrace().size(); i++) {
+            Chemin chemin = t.getTrace().get(i);
             Segment seg = new Segment(
                     new Point(chemin.getOrigine().getX(), chemin.getOrigine().getY()),
                     new Point(chemin.getDestination().getX(), chemin.getDestination().getY()));
             seg.setColor(c);
-            listSegments.add(seg);
-        }
-        // Dessine les segments
-        for (Iterator it = listSegments.iterator(); it.hasNext();) {
-            Segment seg = (Segment) it.next();
             seg.drawSegment(graph);
         }
-
+        
         shape.drawTurtleBody(graph, c, t);
         //Champ de vision
         drawRadar((Graphics2D) graph);

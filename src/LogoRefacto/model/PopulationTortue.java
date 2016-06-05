@@ -94,6 +94,10 @@ public class PopulationTortue implements Iterable<Tortue> {
     public void setCourante(Tortue courante) {
         this.courante = courante;
     }
+
+    public List<Tortue> getList() {
+        return tortues;
+    }
     
     
 }

@@ -9,8 +9,6 @@ import LogoRefacto.model.MovePatterns.FlockingMove;
 import LogoRefacto.model.PopulationTortue;
 import LogoRefacto.model.Tortue;
 import LogoRefacto.model.TortueFlocking;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  *
@@ -32,19 +30,23 @@ public class AutoFlockingController extends AutoController {
             thread = new Thread(this);
             thread.start();
         }
-        notifyView();
+        
     }
+    
+    
 
     @Override
     public void autoAction() {
          //Create new population to avoid multiple access from other threads
         PopulationTortue tortues = new PopulationTortue(getPopulation());
-
+       
         for (Tortue t : tortues)
         {
-            doPatternTortue(t, new FlockingMove(peuple.getPopulation()));
+            TortueFlocking tF = (TortueFlocking) t;
+            doPatternTortue(t, new FlockingMove(tF, peuple));
 
         }
+        
     }
     
     

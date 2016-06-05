@@ -6,6 +6,7 @@
 package LogoRefacto.view;
 
 import LogoRefacto.Controller.AbstractController;
+import LogoRefacto.Controller.AutoFlockingController;
 import LogoRefacto.model.PopulationTortue;
 import LogoRefacto.model.Tortue;
 import LogoRefacto.model.TortueFlocking;
@@ -74,16 +75,18 @@ public class PopulationView extends JPanel implements Observer {
     }
 
     public void showTurtles(Graphics g) {
-        for (ITortueView t : tortuesView) {
-            t.drawTurtle(g);
+        for (int i =0; i<tortuesView.size(); i++) {
+            tortuesView.get(i).drawTurtle(g);
         }
     }
 
     @Override
-    public void update(Observable o, Object argTortue) {
+    public synchronized void update(Observable o, Object argTortue) {
         AbstractController controller = (AbstractController) o;
         updatePopulation(controller.getPopulation());
-
+        
+        
+        
     }
 
     public void updatePopulation(PopulationTortue p) {

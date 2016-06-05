@@ -65,7 +65,7 @@ public class AutoController extends AbstractPopulationController implements Runn
                 autoAction();
                 Thread.sleep(200); 
             } catch (Exception ex) {
-                System.err.println(ex.getLocalizedMessage());
+                ex.printStackTrace();
                 ok = false;
             }
         }
