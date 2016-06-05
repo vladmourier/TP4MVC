@@ -12,8 +12,8 @@ package LogoRefacto.model;
 public class TortueFlocking extends Tortue {
 
     private final int distance_safe_space = 50;//Distance à respecter avec les autres tortues
-    private final int distance_vision = 50; // distance en pixel jusqu'oÃ¹ la tortue peut voir
-    private final int angle_vision = 100; // en degrÃ©s
+    private final int distance_vision = 200; // distance en pixel jusqu'oÃ¹ la tortue peut voir
+    private final int angle_vision = 170; // en degrÃ©s
     private int vitesse = 0;// en nombre de pixels
 
     public TortueFlocking(int x, int y, int dir) {
@@ -52,4 +52,10 @@ public class TortueFlocking extends Tortue {
         super.avancer(dist);
 
     }
+
+    @Override
+    public String toString() {
+        return super.toString() + "TortueFlocking{" + "distance_safe_space=" + distance_safe_space + ", distance_vision=" + distance_vision + ", angle_vision=" + angle_vision + ", vitesse=" + vitesse + '}';
+    }
+    
 }

@@ -77,7 +77,7 @@ public class FlockingMove extends RandomPattern{
     
     private List<Tortue> getTortueVisible(Tortue t) {
         ArrayList<Tortue> visiblesTortues = new ArrayList<>();
-        List<Tortue> p = world.getPopulation().getList();
+        List<Tortue> p = world.getAllReflectPopulation().getList();
         for(int i=0; i<p.size(); i++)
         {
             Tortue voisin = p.get(i);

@@ -5,6 +5,10 @@
  */
 package LogoRefacto.model;
 
+import org.junit.After;
+import org.junit.AfterClass;
+import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
@@ -19,7 +23,6 @@ public class TortueFlockingTest {
     public TortueFlockingTest() {
     }
 
-    @Test
     public void testUpdateVitesse() {
         t = new TortueFlocking(0, 0, 0);
         t.avancer(5);
