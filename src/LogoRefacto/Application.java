@@ -30,7 +30,7 @@ public class Application {
         SwingUtilities.invokeLater(new Runnable() {
             public void run() {
 
-                MainController mc = new MainController(600, 400);
+                MainController mc = new MainController(1200, 720);
 
                 MainView mv = new MainView(mc);
 

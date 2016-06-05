@@ -37,10 +37,19 @@ public class FlockingMoveTest {
 
     @Test
     public void testcanSeeLimit() {
-        TortueFlocking t2 = new TortueFlocking(205, 5, 0);
+        TortueFlocking t2 = new TortueFlocking(55, 5, 0);
         map.addTortue(t2);
-
-        assertTrue(move.canSee(t2, t));
+        assertTrue(move.canSee(t, t2));
     }
     
+     @Test
+    public void testcanSeeToroidale() {
+        TortueFlocking t2 = new TortueFlocking(75, 50, 0);
+        TortueFlocking t3 = new TortueFlocking(10, 50, 0);
+        map = new ScrappingWorld(100, 100);
+        map.addTortue(t2);
+        map.addTortue(t3);
+        move = new FlockingMove(map);
+        assertTrue(move.getTortueVisible(t2).size()==1);
+    }
 }
