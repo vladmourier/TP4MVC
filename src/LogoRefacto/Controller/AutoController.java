@@ -55,7 +55,7 @@ public class AutoController extends AbstractPopulationController implements Runn
         while (ok) {
             try {
                 autoAction();
-                Thread.sleep(200);
+                Thread.sleep(40);
             } catch (Exception ex) {
                 ex.printStackTrace();
                 ok = false;

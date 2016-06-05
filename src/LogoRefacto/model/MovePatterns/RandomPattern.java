@@ -14,8 +14,8 @@ import java.util.Random;
  */
 public class RandomPattern extends MovePattern {
 
-    int defaultDistance = 25;
-    int angle = 100;
+    int defaultDistance = 10;
+    int angle = 80;
 
     @Override
     public int moveTurtle(Tortue t) {

@@ -19,12 +19,10 @@ import java.util.List;
  */
 public class FlockingMove extends RandomPattern{
     
-    private int distance_safe_space = 50;//Distance à respecter avec les autres tortues
-    private int distance_vision = 50; // distance en pixel jusqu'oÃ¹ la tortue peut voir
-    private int angle_vision = 50; // en degrÃ©s
-    private int vitesse = 0;// en nombre de pixels
-    private int distance; //distance à parcourir
-    private int default_vitesse=50;
+    private int distance_safe_space = 30;//Distance à respecter avec les autres tortues
+    private int default_distance_vision = 50; // distance en pixel jusqu'oÃ¹ la tortue peut voir
+    private int default_angle_vision = 170; // en degrÃ©s
+    private int default_vitesse=1;
     private TortueFlocking defaultTortue;
     private World world;
     
@@ -33,15 +31,13 @@ public class FlockingMove extends RandomPattern{
         super();
         this.world=world; 
         defaultTortue = null;
-        vitesse = 0;
     }
     
     public FlockingMove(TortueFlocking t, World world)
     {
         this(world);
         this.defaultTortue = new TortueFlocking(t);
-        distance_vision = t.getDistance_vision();
-        vitesse = t.getVitesse();
+        default_distance_vision = t.getDistance_vision();
     }
     
     
@@ -52,8 +48,9 @@ public class FlockingMove extends RandomPattern{
         List<Tortue> visibles = getTortueVisible(t);
 
         if (visibles.size() > 0) {
-            t.setDir(getDirMoyenneVisibles(visibles));
-            dist = updateDistance(t, getVitesseMoyenneVisibles(visibles));
+            t.setDir(getDirMoyenneVisibles(visibles, t));
+            int vit = getVitesseMoyenneVisibles(visibles, (TortueFlocking) t);
+            dist = updateDistance(t, vit);
         } else {
             dist = super.moveTurtle(t, defaultDistance);
         }
@@ -61,21 +58,9 @@ public class FlockingMove extends RandomPattern{
         return dist;
     }
     
-    public int moveDefault() {
-        int dist = 0;
-        List<Tortue> visibles = getTortueVisible(defaultTortue);
-        
-        if(visibles.size()>0) {
-            defaultTortue.setDir(getDirMoyenneVisibles(visibles));
-            dist = updateDistance(defaultTortue, getVitesseMoyenneVisibles(visibles));
-        }
-        else dist=super.moveTurtle(defaultTortue, defaultDistance);
-        
-        return dist;
-    }
+   
     
-    
-    private List<Tortue> getTortueVisible(Tortue t) {
+    public List<Tortue> getTortueVisible(Tortue t) {
         ArrayList<Tortue> visiblesTortues = new ArrayList<>();
         List<Tortue> p = world.getAllReflectPopulation().getList();
         for(int i=0; i<p.size(); i++)
@@ -94,7 +79,7 @@ public class FlockingMove extends RandomPattern{
         return vitesse;
     }
 
-    public int getDirMoyenneVisibles(List<Tortue> visibles) {
+    public int getDirMoyenneVisibles(List<Tortue> visibles, Tortue t) {
         int sommeDir = 0;
         for (Tortue tf : visibles) {
             sommeDir += tf.getDir();
@@ -102,27 +87,46 @@ public class FlockingMove extends RandomPattern{
         return visibles.size() > 0 ? sommeDir / visibles.size() : 0;
     }
 
-    public int getVitesseMoyenneVisibles(List<Tortue> visibles) {
+    public int getVitesseMoyenneVisibles(List<Tortue> visibles, TortueFlocking t) {
         int sommeVitesse = 0;
+        Tortue proche = null;
+        int distance_min = Integer.MAX_VALUE;
         for (Tortue tf : visibles) {
+            int distance = (int) Position.getDistance(tf.getPosition(), t.getPosition());
+            if(proche == null || distance<distance_min )
+            {
+             proche = tf;
+             distance_min = distance;
+            }
+//            double coeff = 1.0;
             int vitesse = default_vitesse;
             if (tf instanceof TortueFlocking) {
                 vitesse = ((TortueFlocking) tf).getVitesse();
             }
             sommeVitesse += vitesse;
         }
-        return visibles.size() > 0 ? sommeVitesse / visibles.size() : 0;
+        int s =visibles.size() > 0 ? (sommeVitesse / visibles.size()) : 0;
+        if(s>(distance_min-distance_safe_space)){
+            s = distance_min - distance_safe_space;
+        } else if (distance_min>3*t.getDistance_vision()/4){
+            s += s/4;
+        }
+        return s;
     }
 
     public boolean canSee(Tortue t, Tortue voisin) {
         if (voisin.equals(t)) {
             return false;
         }
+        if(voisin.getPosition().equals(t.getPosition())){
+            return false;
+        }
+        boolean closeEnough = Position.getDistance(t.getPosition(), voisin.getPosition()) <= default_distance_vision;
 
-        boolean closeEnough = Position.getDistance(t.getPosition(), voisin.getPosition()) <= distance_vision;
-
-        double angle = getAngleBetween(voisin,t);
-        boolean correctAngle = Math.abs(angle-t.getDir())% 180<angle_vision/2;
+        double a = getAngleBetween(voisin,t);
+        double c = Math.abs(a-t.getDir());
+        if(c>180) c = 360 - c; 
+        boolean correctAngle = c<default_angle_vision/2;
         if (!(closeEnough && correctAngle)) {
             System.out.println("La tortue " + t.getLabel() + " ne peut voir" + " la tortue " + voisin.getLabel());
         } else {
@@ -133,13 +137,13 @@ public class FlockingMove extends RandomPattern{
 
     private double getAngleBetween(Tortue vois, Tortue courant) {
         //Coordonnées de la tortue relaves à this
-        int x = courant.getX() - vois.getX();
-        int y = courant.getY() - vois.getY();
+        int x = vois.getX() - courant.getX();
+        int y = vois.getY() - courant.getY();
         if (x == 0 && y == 0) {
             return 0;
         }
         if (x == 0) {
-            if (y > 0) {
+            if (y < 0) {
                 return 270;
             } else {
                 return 90;

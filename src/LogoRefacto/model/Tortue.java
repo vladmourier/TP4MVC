@@ -42,6 +42,13 @@ public class Tortue {
      */
     private static int index = 0;
 
+    protected int vitesse = 0;// en nombre de pixels
+
+    public Tortue(int x, int y, int dir, int vitesse) {
+        this(x, y, dir);
+        this.vitesse = vitesse;
+    }
+
     public Tortue(int x, int y, int dir) {
         trace = new ArrayList<>();
         position = new Position(x, y);
@@ -57,7 +64,7 @@ public class Tortue {
         int y = t.getY();
         int dir = t.getDir();
         position = new Position(x, y);
-
+        vitesse = t.vitesse;
         this.dir = dir;
         this.label = t.label;
     }
@@ -100,6 +107,7 @@ public class Tortue {
         int newX = (int) Math.round(position.x + dist * Math.cos(ratioDegRad * dir));
         int newY = (int) Math.round(position.y + dist * Math.sin(ratioDegRad * dir));
         addtoTrace(newX, newY);
+        vitesse = dist;
         position = new Position(newX, newY);
     }
 
@@ -165,9 +173,13 @@ public class Tortue {
         return label;
     }
 
+    public int getVitesse() {
+        return vitesse;
+    }
+
     @Override
     public String toString() {
         return "Tortue{" + "position=" + position + ", dir=" + dir + ", label=" + label + '}';
     }
-    
+
 }

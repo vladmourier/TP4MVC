@@ -14,12 +14,15 @@ public class TortueFlocking extends Tortue {
     private final int distance_safe_space = 50;//Distance à respecter avec les autres tortues
     private final int distance_vision = 200; // distance en pixel jusqu'oÃ¹ la tortue peut voir
     private final int angle_vision = 170; // en degrÃ©s
-    private int vitesse = 0;// en nombre de pixels
+
+    public TortueFlocking(int x, int y, int dir, int vitesse) {
+        super(x, y, dir, vitesse);
+    }
 
     public TortueFlocking(int x, int y, int dir) {
         super(x, y, dir);
-    }
-
+    }    
+    
     public TortueFlocking(TortueFlocking t) {
         super(t);
         this.vitesse = t.vitesse;
@@ -51,6 +54,10 @@ public class TortueFlocking extends Tortue {
         this.vitesse = dist;
         super.avancer(dist);
 
+    }
+
+    public void setVitesse(int vitesse) {
+        this.vitesse = vitesse;
     }
 
     @Override

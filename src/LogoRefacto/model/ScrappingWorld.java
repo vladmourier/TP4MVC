@@ -71,18 +71,18 @@ public class ScrappingWorld extends World {
         {
             p.addTortue(t);
             //Position de la tortue au dessus de la map :
-            p.addTortue(new TortueFlocking(t.getX(), t.getY()-worldHeight, t.getDir()));
+            p.addTortue(new TortueFlocking(t.getX(), t.getY()-worldHeight, t.getDir(), t.getVitesse()));
             //duplication de la tortue au dessous de la map :
-            p.addTortue(new TortueFlocking(t.getX(), t.getY()+worldHeight, t.getDir()));
+            p.addTortue(new TortueFlocking(t.getX(), t.getY()+worldHeight, t.getDir(), t.getVitesse()));
             //duplication de la tortue a droite de la map :
-            p.addTortue(new TortueFlocking(t.getX()+worldWidth, t.getY(), t.getDir()));
+            p.addTortue(new TortueFlocking(t.getX()+worldWidth, t.getY(), t.getDir(), t.getVitesse()));
             //duplication de la tortue a gauche de la map :
-            p.addTortue(new TortueFlocking(t.getX()-worldWidth, t.getY(), t.getDir()));
+            p.addTortue(new TortueFlocking(t.getX()-worldWidth, t.getY(), t.getDir(), t.getVitesse()));
             //duplication de la tortue aux diagonales de la map :
-            p.addTortue(new TortueFlocking(t.getX()+worldWidth, t.getY()+worldHeight, t.getDir()));
-            p.addTortue(new TortueFlocking(t.getX()-worldWidth, t.getY()-worldHeight, t.getDir()));
-            p.addTortue(new TortueFlocking(t.getX()+worldWidth, t.getY()-worldHeight, t.getDir()));
-            p.addTortue(new TortueFlocking(t.getX()-worldWidth, t.getY()+worldHeight, t.getDir()));
+            p.addTortue(new TortueFlocking(t.getX()+worldWidth, t.getY()+worldHeight, t.getDir(), t.getVitesse()));
+            p.addTortue(new TortueFlocking(t.getX()-worldWidth, t.getY()-worldHeight, t.getDir(), t.getVitesse()));
+            p.addTortue(new TortueFlocking(t.getX()+worldWidth, t.getY()-worldHeight, t.getDir(), t.getVitesse()));
+            p.addTortue(new TortueFlocking(t.getX()-worldWidth, t.getY()+worldHeight, t.getDir(), t.getVitesse()));
             
         }
         return p;

@@ -86,6 +86,7 @@ public class PopulationView extends JPanel implements Observer {
     @Override
     public synchronized void update(Observable o, Object argTortue) {
         AbstractController controller = (AbstractController) o;
+//        updatePopulation(((AutoFlockingController)controller).getWorld().getAllReflectPopulation());
         updatePopulation(controller.getPopulation());
         
         
