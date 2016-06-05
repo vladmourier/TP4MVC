@@ -82,7 +82,7 @@ public class FlockingMove extends RandomPattern {
         return visibles.size() > 0 ? sommeVitesse / visibles.size() : 0;
     }
 
-    private boolean canSee(Tortue t, Tortue voisin) {
+    public boolean canSee(Tortue t, Tortue voisin) {
         if (voisin.equals(t)) {
             return false;
         }
